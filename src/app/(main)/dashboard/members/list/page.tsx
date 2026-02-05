@@ -4,6 +4,7 @@
 import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMyChurch, useChurchMembers } from '@/hooks/use-dashboard';
+import type { ChurchSummary } from '@/lib/types/dashboard';
 
 import { Button } from '@/components/ui/forms';
 import MemberListTable from '@/components/dashboard/MemberListTable/MemberListTable';
@@ -15,8 +16,9 @@ import styles from './page.module.scss';
 export default function MemberListPage() {
   const router = useRouter();
   const { data: churchData } = useMyChurch();
-  const churchId = churchData?.church?.id;
-  const { data: membersData, isLoading: membersLoading } = useChurchMembers(churchId);
+  const church = (churchData as { church?: ChurchSummary } | undefined)?.church;
+  const churchId = church?.id;
+  const { data: membersData, isLoading: membersLoading } = useChurchMembers(churchId ?? null);
   
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
@@ -25,8 +27,8 @@ export default function MemberListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const inviteUrl = churchData?.church?.inviteCode 
-    ? `https://bedieningenprofiel.nl/join-church/${churchData.church.inviteCode}`
+  const inviteUrl = church?.inviteCode 
+    ? `https://bedieningenprofiel.nl/join-church/${church.inviteCode}`
     : 'https://bedieningenprofiel.nl/join-church/Zwz_ykyRC_';
 
   // Transform members data for the table

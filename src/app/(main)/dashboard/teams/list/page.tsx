@@ -13,7 +13,7 @@ import CreateTeamModal from '@/components/dashboard/CreateTeamModal/CreateTeamMo
 import TeamSuccessModal from '@/components/dashboard/TeamSuccessModal/TeamSuccessModal';
 import AddMemberModal from '@/components/dashboard/AddMemberModal/AddMemberModal';
 
-import type { UserTeams, TeamsArray } from '@/lib/types/dashboard';
+import type { ChurchSummary, UserTeams, TeamsArray } from '@/lib/types/dashboard';
 import styles from './page.module.scss';
 
 export default function TeamListPage() {
@@ -21,6 +21,7 @@ export default function TeamListPage() {
   const { user } = useAuth();
   const { data: teamsData, isLoading: teamsLoading } = useUserTeams();
   const { data: churchData } = useMyChurch();
+  const church = (churchData as { church?: ChurchSummary } | undefined)?.church;
   const createTeamMutation = useCreateTeam();
   
 
@@ -62,7 +63,7 @@ export default function TeamListPage() {
 
   const handleCreateTeam = async (teamData: { name: string; description: string; url: string }) => {
     try {
-      if (!churchData?.church?.id) {
+      if (!church?.id) {
         console.error('Cannot create team: church ID is missing');
         alert('Kan team niet aanmaken: kerk ID ontbreekt. Zorg ervoor dat je bij een kerk hoort.');
         return;
@@ -70,7 +71,7 @@ export default function TeamListPage() {
       const response = await createTeamMutation.mutateAsync({
         name: teamData.name,
         description: teamData.description,
-        churchId: churchData.church.id,
+        churchId: church.id,
       });
       setCreatedTeamId(response.id.toString());
       setCreatedTeamName(response.name);

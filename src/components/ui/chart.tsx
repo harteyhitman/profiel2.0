@@ -45,7 +45,7 @@ function useChart() {
 
 export interface ChartContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   config: ChartConfig;
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 const ChartContainer = React.forwardRef<HTMLDivElement, ChartContainerProps>(
@@ -175,7 +175,7 @@ const ChartTooltipContent = React.forwardRef<
 );
 ChartTooltipContent.displayName = "ChartTooltipContent";
 
-export interface ChartTooltipProps extends TooltipProps<number, string> {
+export interface ChartTooltipProps extends Omit<TooltipProps<number, string>, 'content'> {
   content?: React.ReactNode;
 }
 
@@ -183,30 +183,27 @@ function ChartTooltip({
   content,
   ...props
 }: ChartTooltipProps) {
-  return (
-    <Tooltip
-      {...props}
-      content={
-        content === undefined
-          ? (tooltipProps: React.ComponentProps<typeof ChartTooltipContent>) => (
-              <ChartTooltipContent {...tooltipProps} />
-            )
-          : typeof content === "function"
-            ? content
-            : () => content
-      }
-    />
-  );
+  const resolvedContent: TooltipProps<number, string>['content'] =
+    content === undefined
+      ? (tooltipProps) => (
+          <ChartTooltipContent {...(tooltipProps as React.ComponentProps<typeof ChartTooltipContent>)} />
+        )
+      : typeof content === "function"
+        ? content as TooltipProps<number, string>['content']
+        : () => content;
+
+  return <Tooltip {...props} content={resolvedContent} />;
 }
 
 // -----------------------------------------------------------------------------
 // ChartLegend
 // -----------------------------------------------------------------------------
 
-export interface ChartLegendContentProps
-  extends React.ComponentPropsWithoutRef<typeof Legend>,
-    React.HTMLAttributes<HTMLDivElement> {
+/** Props for custom legend content. Kept separate from Legend to avoid type conflicts with HTMLAttributes. */
+export interface ChartLegendContentProps extends React.HTMLAttributes<HTMLDivElement> {
   nameKey?: string;
+  payload?: Array<{ value?: unknown; dataKey?: unknown; name?: string; [key: string]: unknown }>;
+  formatter?: (value: unknown, name: unknown, item: unknown, index?: number) => React.ReactNode;
 }
 
 const ChartLegendContent = React.forwardRef<
@@ -229,15 +226,22 @@ const ChartLegendContent = React.forwardRef<
         {...props}
       >
         {payload.map((item) => {
-          const key = nameKey ?? item.dataKey ?? item.value ?? "value";
-          const configItem = config[key as string];
+          const rawKey = nameKey ?? item.dataKey ?? item.value ?? "value";
+          const keyStr = typeof rawKey === "string" || typeof rawKey === "number" ? String(rawKey) : "item";
+          const configItem = config[keyStr];
           const value =
             typeof formatter === "function"
               ? formatter(item.value, item.name, item)
               : item.value;
+          const displayValue: React.ReactNode =
+            value == null || value === ""
+              ? null
+              : typeof value === "object" && !React.isValidElement(value)
+                ? String(value)
+                : (value as React.ReactNode);
           return (
             <div
-              key={item.value ?? key}
+              key={keyStr}
               className="flex items-center gap-2 text-sm"
             >
               {configItem?.color && (
@@ -251,11 +255,11 @@ const ChartLegendContent = React.forwardRef<
                 />
               )}
               <span className="text-muted-foreground">
-                {configItem?.label ?? key}
+                {configItem?.label ?? keyStr}
               </span>
-              {value != null && value !== "" && (
-                <span className="font-medium">{value}</span>
-              )}
+              {displayValue != null && displayValue !== "" ? (
+                <span className="font-medium">{displayValue}</span>
+              ) : null}
             </div>
           );
         })}
@@ -265,11 +269,12 @@ const ChartLegendContent = React.forwardRef<
 );
 ChartLegendContent.displayName = "ChartLegendContent";
 
-function ChartLegend({
-  content,
-  ...props
-}: LegendProps &
-  React.ComponentPropsWithoutRef<typeof ChartLegendContent>) {
+type ChartLegendProps = Omit<
+  LegendProps & React.ComponentPropsWithoutRef<typeof ChartLegendContent>,
+  'ref'
+>;
+
+function ChartLegend({ content, ...props }: ChartLegendProps) {
   return (
     <Legend
       {...props}

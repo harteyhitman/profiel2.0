@@ -8,8 +8,8 @@ interface RolePercentagesProps {
   scores?: RoleScores | null;
 }
 
-const ROLE_ORDER = [
-  { key: 'apostle' as const, label: 'Apostle' },
+const ROLE_ORDER: { key: keyof RoleScores; label: string }[] = [
+  { key: 'apostle', label: 'Apostle' },
   { key: 'prophet', label: 'prophet' },
   { key: 'evangelist', label: 'evangelist' },
   { key: 'herder', label: 'shepherd' },
@@ -24,7 +24,7 @@ export default function RolePercentages({ scores }: RolePercentagesProps) {
     const total = (scores.apostle || 0) + (scores.prophet || 0) + (scores.evangelist || 0) +
       (scores.herder || 0) + (scores.teacher || 0);
     return ROLE_ORDER.map(({ key, label }) => {
-      const value = key === 'herder' ? (scores.herder || 0) : (scores[key] || 0);
+      const value = scores[key] ?? 0;
       const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
       return { label, percentage };
     });

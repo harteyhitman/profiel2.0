@@ -31,8 +31,8 @@ export default function DashboardLoadingSkeleton() {
             gap: 24,
           }}
         >
-          <div style={{ height: 200, borderRadius: 14, ...skeletonBlock }} />
-          <div style={{ height: 200, borderRadius: 14, ...skeletonBlock }} />
+          <div style={{ ...skeletonBlock, height: 200, borderRadius: 14 }} />
+          <div style={{ ...skeletonBlock, height: 200, borderRadius: 14 }} />
         </div>
       </div>
     </div>

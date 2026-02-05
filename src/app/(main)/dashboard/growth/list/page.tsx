@@ -26,7 +26,7 @@ export default function GrowthListPage() {
 
   const { data: churchData } = useMyChurch();
   const churchId = (churchData as { church?: ChurchSummary } | undefined)?.church?.id;
-  const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(churchId);
+  const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(churchId ?? null);
   const effectiveDashboardData = dashboardData ?? (dashboardLoading ? null : generateDummyDashboardData());
 
   const handleExportCSV = () => {

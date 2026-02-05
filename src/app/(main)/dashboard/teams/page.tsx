@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useMyChurch, useChurchDashboard, useCreateTeam } from '@/hooks/use-dashboard';
+import type { ChurchSummary } from '@/lib/types/dashboard';
 import { generateDummyDashboardData } from '@/lib/utils/dummyData';
 
 import { Button } from '@/components/ui/forms';
@@ -26,7 +27,8 @@ export default function TeamsPage() {
   const router = useRouter();
 
   const { data: churchData } = useMyChurch();
-  const churchId = churchData?.church?.id;
+  const church = (churchData as { church?: ChurchSummary } | undefined)?.church;
+  const churchId = church?.id;
   // For team dashboard, we might want to show aggregated data from all teams
   // or a specific team. For now, we'll use church dashboard data
   const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(
@@ -51,8 +53,8 @@ export default function TeamsPage() {
   const [createdTeamId, setCreatedTeamId] = useState<string | null>(null);
   const [createdTeamName, setCreatedTeamName] = useState<string>('');
 
-  const inviteUrl = churchData?.church?.inviteCode
-    ? `${typeof window !== 'undefined' ? window.location.origin : 'https://bedieningenprofiel.nl'}/join-church/${churchData.church.inviteCode}`
+  const inviteUrl = church?.inviteCode
+    ? `${typeof window !== 'undefined' ? window.location.origin : 'https://bedieningenprofiel.nl'}/join-church/${church.inviteCode}`
     : '';
 
 
@@ -65,7 +67,7 @@ export default function TeamsPage() {
 
   const handleCreateTeam = async (teamData: { name: string; description: string; url: string }) => {
     try {
-      if (!churchData?.church?.id) {
+      if (!church?.id) {
         console.error('Cannot create team: church ID is missing');
         alert('Kan team niet aanmaken: kerk ID ontbreekt. Zorg ervoor dat je bij een kerk hoort.');
         return;
@@ -73,7 +75,7 @@ export default function TeamsPage() {
       const response = await createTeamMutation.mutateAsync({
         name: teamData.name,
         description: teamData.description,
-        churchId: churchData.church.id,
+        churchId: church.id,
       });
       setCreatedTeamId(response.id.toString());
       setCreatedTeamName(response.name);
@@ -111,7 +113,7 @@ export default function TeamsPage() {
 
   const handleExportReport = () => {
     const exportData = {
-      church: churchData?.church,
+      church: church,
       dashboard: effectiveDashboardData,
       exportDate: new Date().toISOString(),
     };

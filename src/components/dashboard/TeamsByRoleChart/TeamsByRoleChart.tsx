@@ -48,14 +48,14 @@ export default function TeamsByRoleChart({ dashboardData }: TeamsByRoleChartProp
       Innovator: 0,
     };
 
-    dashboardData.teams.forEach((team: { roleDistribution?: Record<string, number> }) => {
+    dashboardData.teams.forEach((team) => {
       const roleDist = team.roleDistribution;
       if (roleDist) {
         const roles = [
-          { name: 'Leider', value: roleDist.apostle || 0 },
-          { name: 'Ondersteuner', value: roleDist.herder || 0 },
-          { name: 'Strategist', value: roleDist.teacher || 0 },
-          { name: 'Innovator', value: roleDist.evangelist || 0 },
+          { name: 'Leider', value: roleDist.apostle ?? 0 },
+          { name: 'Ondersteuner', value: roleDist.herder ?? 0 },
+          { name: 'Strategist', value: roleDist.teacher ?? 0 },
+          { name: 'Innovator', value: roleDist.evangelist ?? 0 },
         ];
         const dominant = roles.reduce((max, role) => (role.value > max.value ? role : max));
         roleCounts[dominant.name as keyof typeof roleCounts]++;

@@ -24,16 +24,6 @@ export function useUserResults() {
     queryFn: () => dashboardAPI.getUserResults(),
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: false,
-    onError: (error: any) => {
-      // Silently handle errors - getUserResults already returns empty results on error
-      // Only log unexpected errors in development
-      if (process.env.NODE_ENV === 'development') {
-        const status = error?.response?.status;
-        if (status !== 401 && status !== 403 && status !== 404) {
-          console.warn('Error fetching user results:', status, error?.message);
-        }
-      }
-    },
   });
 }
 
@@ -43,9 +33,6 @@ export function useUserTeams() {
     queryFn: () => teamsApi.getCurrentUserTeams(),
     staleTime: 5 * 60 * 1000,
     retry: false,
-    onError: () => {
-      // Silently handle 404 - endpoint may not exist
-    },
   });
 }
 
@@ -194,17 +181,6 @@ export function useChurchStats(churchId?: number | null) {
     enabled: !!churchId, // Only fetch when churchId is provided (matches client folder)
     staleTime: 5 * 60 * 1000,
     retry: false,
-    onError: (error: any) => {
-      // Silently handle 400 - user doesn't have a church or endpoint requires different parameters
-      // This is expected for users without a church
-      const status = error?.response?.status;
-      if (status !== 400 && status !== 404) {
-        // Only log non-expected errors
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Error fetching church stats:', error?.response?.status, error?.message);
-        }
-      }
-    },
   });
 }
 
@@ -217,14 +193,6 @@ export function useMyChurches() {
     enabled: !!user && user.role === 'teamleader', // Only fetch for team leaders (matches client folder)
     staleTime: 5 * 60 * 1000,
     retry: false,
-    onError: (error: any) => {
-      // Silently handle 403 - user is not a team leader
-      if (error?.response?.status !== 403) {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Error fetching my churches:', error?.response?.status, error?.message);
-        }
-      }
-    },
   });
 }
 
@@ -237,13 +205,6 @@ export function useMyChurch() {
     enabled: !!user && user.role === 'teamleader', // Only fetch for team leaders (matches client folder)
     staleTime: 5 * 60 * 1000,
     retry: false,
-    onError: (error: any) => {
-      // Silently handle 403 - user is not a team leader and doesn't have a church
-      // This is expected for regular users
-      if (error?.response?.status !== 403) {
-        console.error('Error fetching my church:', error);
-      }
-    },
   });
 }
 

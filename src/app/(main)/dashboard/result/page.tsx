@@ -8,6 +8,7 @@ import FullScoreBreakdown from '@/components/dashboard/FullScoreBreakdown/FullSc
 import CoreControl from '@/components/dashboard/CoreControl/CoreControl';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserResults } from '@/hooks/use-dashboard';
+import type { UserResults } from '@/lib/types/dashboard';
 import { profileAPI } from '@/lib/api/profile';
 import { calculatePrimaryRole } from '@/lib/utils/roleCalculations';
 import styles from './page.module.scss';
@@ -16,8 +17,9 @@ export default function ResultPage() {
   const { user } = useAuth();
   const userId = user?.id != null ? Number(user.id) : null;
   const { data: userResults, isLoading: resultsLoading } = useUserResults();
+  const results = userResults as UserResults | undefined;
 
-  const scores = userResults?.scores ?? null;
+  const scores = results?.scores ?? null;
   const roleProfile = scores ? calculatePrimaryRole(scores) : null;
   const hasResults = scores && roleProfile?.totalScore != null && roleProfile.totalScore > 0;
 

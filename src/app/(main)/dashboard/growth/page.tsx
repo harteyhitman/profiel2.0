@@ -7,6 +7,7 @@ import StageOverviewChart from '@/components/dashboard/StageOverviewChart/StageO
 import TopGrowthAreasChart from '@/components/dashboard/TopGrowthAreasChart/TopGrowthAreasChart';
 import DistributionOfServicesChart from '@/components/dashboard/DistributionOfServicesChart/DistributionOfServicesChart';
 import { useMyChurch, useChurchDashboard } from '@/hooks/use-dashboard';
+import type { ChurchSummary } from '@/lib/types/dashboard';
 import { generateDummyDashboardData, getDummyDominantRole } from '@/lib/utils/dummyData';
 
 import { downloadCSV } from '@/lib/utils/export';
@@ -14,8 +15,8 @@ import styles from './page.module.scss';
 
 export default function GrowthPage() {
   const { data: churchData } = useMyChurch();
-  const churchId = churchData?.church?.id;
-  const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(churchId);
+  const churchId = (churchData as { church?: ChurchSummary } | undefined)?.church?.id;
+  const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(churchId ?? null);
 
   // Use dummy data if API doesn't return data
   const effectiveDashboardData = useMemo(() => {

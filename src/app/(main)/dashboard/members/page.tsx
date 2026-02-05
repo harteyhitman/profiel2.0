@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { useMyChurch, useChurchMembers, useChurchDashboard } from '@/hooks/use-dashboard';
 import { generateDummyDashboardData, getDummyDominantRole } from '@/lib/utils/dummyData';
-import type { ChurchSummary } from '@/lib/types/dashboard';
+import type { ChurchSummary, RoleScores } from '@/lib/types/dashboard';
 import MetricCard from '@/components/dashboard/MetricCard/MetricCard';
 import ControlsDistributionChart from '@/components/dashboard/ControlsDistributionChart/ControlsDistributionChart';
 import AverageScoresChart from '@/components/dashboard/AverageScoresChart/AverageScoresChart';
@@ -212,12 +212,13 @@ export default function MembersPage() {
   );
 }
 
-function getDominantRole(scores: Record<string, number> | undefined): string {
+const ROLE_KEYS: (keyof RoleScores)[] = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
+
+function getDominantRole(scores: RoleScores | undefined): string {
   if (!scores) return '';
-  const roles = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
-  let maxRole = roles[0];
-  let maxScore = scores[roles[0]] ?? 0;
-  roles.forEach((role) => {
+  let maxRole = ROLE_KEYS[0];
+  let maxScore = scores[ROLE_KEYS[0]] ?? 0;
+  ROLE_KEYS.forEach((role) => {
     const v = scores[role] ?? 0;
     if (v > maxScore) {
       maxScore = v;
@@ -227,12 +228,11 @@ function getDominantRole(scores: Record<string, number> | undefined): string {
   return maxRole.charAt(0).toUpperCase() + maxRole.slice(1);
 }
 
-function getLowestService(scores: Record<string, number> | undefined): string {
+function getLowestService(scores: RoleScores | undefined): string {
   if (!scores) return '';
-  const roles = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
-  let minRole = roles[0];
-  let minScore = scores[roles[0]] ?? Infinity;
-  roles.forEach((role) => {
+  let minRole = ROLE_KEYS[0];
+  let minScore = scores[ROLE_KEYS[0]] ?? Infinity;
+  ROLE_KEYS.forEach((role) => {
     const v = scores[role] ?? 0;
     if (v < minScore) {
       minScore = v;
