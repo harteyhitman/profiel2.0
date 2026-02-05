@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -150,7 +151,7 @@
   }
 
   &:hover {
-    background-color: darken($accent-green, 5%);
+    background-color: color.adjust($accent-green, $lightness: -5%);
   }
 }
 
@@ -206,7 +207,7 @@
     font-weight: $font-weight-medium;
 
     &:hover {
-      background-color: darken($accent-green, 5%);
+      background-color: color.adjust($accent-green, $lightness: -5%);
     }
   }
 }

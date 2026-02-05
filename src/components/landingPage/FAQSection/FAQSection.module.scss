@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -227,12 +228,12 @@
   overflow: hidden;
 
   &:hover {
-    border-color: darken($border-color, 10%);
+    border-color: color.adjust($border-color, $lightness: -10%);
     background-color: $background-light;
   }
 
   &.questionItemOpen {
-    border-color: darken($border-color, 20%);
+    border-color: color.adjust($border-color, $lightness: -20%);
     background-color: $background-light;
   }
 
@@ -434,7 +435,7 @@
   font-family: $font-family-primary;
 
   &:hover {
-    background-color: darken(#52b787, 10%);
+    background-color: color.adjust(#52b787, $lightness: -10%);
     box-shadow: $shadow-md;
     transform: translateY(-1px);
   }

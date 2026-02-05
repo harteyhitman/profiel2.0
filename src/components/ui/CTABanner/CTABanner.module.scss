@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -5,9 +6,9 @@
   padding: $spacing-4xl 0;
   background: linear-gradient(360deg, 
     $dark-green 0%, 
-    mix($dark-green, $accent-green, 70%) 25%,
+    color.mix($dark-green, $accent-green, 70%) 25%,
     $accent-green 50%,
-    mix($dark-green, $accent-green, 70%) 75%,
+    color.mix($dark-green, $accent-green, 70%) 75%,
     $dark-green 100%
   );
   color: $secondary-color;
@@ -57,7 +58,7 @@
   transition: all $transition-base $transition-ease;
 
   &:hover {
-    background-color: darken($accent-green, 5%);
+    background-color: color.adjust($accent-green, $lightness: -5%);
     transform: translateY(-2px);
     box-shadow: $shadow-lg;
   }

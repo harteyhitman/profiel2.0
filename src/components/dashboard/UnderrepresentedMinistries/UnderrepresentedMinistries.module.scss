@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -57,7 +58,7 @@
   flex-shrink: 0;
 
   &:hover {
-    background-color: darken(#0F3728, 5%);
+    background-color: color.adjust(#0F3728, $lightness: -5%);
   }
 }
 
