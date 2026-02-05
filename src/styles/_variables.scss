@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Color Variables - Matching Design
 $primary-color: #000000;
 $secondary-color: #ffffff;
@@ -26,8 +28,8 @@ $pastel-yellow: rgb(247, 247, 224);
 $light-mint: #E0F7E0; // Light green for Fivefold section background
 
 // Gradient Variables - Update with exact Figma values
-$gradient-hero: linear-gradient(135deg, $dark-green 0%, darken($dark-green, 5%) 100%);
-$gradient-button: linear-gradient(135deg, $accent-green 0%, darken($accent-green, 10%) 100%);
+$gradient-hero: linear-gradient(135deg, $dark-green 0%, color.adjust($dark-green, $lightness: -5%) 100%);
+$gradient-button: linear-gradient(135deg, $accent-green 0%, color.adjust($accent-green, $lightness: -10%) 100%);
 $gradient-card: linear-gradient(135deg, $background-white 0%, $background-light 100%);
 $gradient-section: linear-gradient(180deg, $background-white 0%, $background-light 100%);
 
