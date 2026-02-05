@@ -1,0 +1,65 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.chartCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  border: $border-width-thin solid $border-color;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.chartHeader {
+  margin-bottom: $spacing-lg;
+}
+
+.chartTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-xs 0;
+  font-family: $font-family-heading;
+}
+
+.chartSubtitle {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.chartContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chartArea {
+  width: 100%;
+  min-width: 500px;
+
+  @include mobile {
+    min-width: 400px;
+  }
+}
+
+.chartSvg {
+  width: 100%;
+  height: 250px;
+  display: block;
+}
+
+.axisLabel {
+  @include body-small;
+  fill: $text-secondary;
+  font-size: $font-size-xs;
+}
+
+.highlightText {
+  @include body-small;
+  fill: $text-primary;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-xs;
+}
+

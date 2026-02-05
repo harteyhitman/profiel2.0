@@ -1,0 +1,153 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.testimonials {
+  padding: $spacing-4xl 0;
+  background-color: #F5F5F5; // Very light grey background
+
+  @include tablet {
+    padding: $spacing-4xl 0;
+  }
+
+  @include mobile {
+    padding: $spacing-3xl 0;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-4xl;
+
+  @include tablet {
+    margin-bottom: $spacing-3xl;
+  }
+
+  @include mobile {
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.title {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-xl;
+  font-family: sans-serif;
+  @include tablet {
+    font-size: $font-size-3xl;
+  }
+
+  @include mobile {
+    font-size: $font-size-2xl;
+  }
+}
+
+.divider {
+  @include flex-center;
+  align-items: center;
+  gap: $spacing-md;
+  margin: 0 auto;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(156, 156, 165, 0.1), rgba(60, 60, 63, 1));
+}
+
+.dividerStar {
+  @include flex-center;
+  flex-shrink: 0;
+  background-color: #F5F5F5;
+  padding: 0 4px;
+
+  svg {
+    width: 41px;
+    height: 41px;
+  }
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-2xl;
+  row-gap: $spacing-2xl;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xl;
+    row-gap: $spacing-xl;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.testimonialCard {
+  @include flex-column;
+  padding: $spacing-2xl;
+  border-radius: 8px;
+  background-color: #E8E8E8; // Slightly darker light grey for cards
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all $transition-base $transition-ease;
+  justify-content: space-between;
+  min-height: 240px;
+
+  @include tablet {
+    padding: $spacing-xl;
+    min-height: 220px;
+  }
+
+  @include mobile {
+    padding: $spacing-lg;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: auto;
+  }
+}
+
+.content {
+  @include body-base;
+  color: $text-primary;
+  line-height: 1.6;
+  margin-bottom: $spacing-xl;
+  flex: 1;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  font-family: sans-serif;
+
+  @include mobile {
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-lg;
+    line-height: 1.5;
+  }
+}
+
+.author {
+  @include flex-column;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.authorName {
+  font-size: $font-size-base;
+  color: $text-primary;
+  font-weight: $font-weight-bold;
+  font-family: sans-serif;
+}
+
+.authorRole {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  font-weight: $font-weight-normal;
+  font-family: sans-serif;
+}

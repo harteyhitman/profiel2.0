@@ -1,0 +1,68 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.logoSection {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.logoLabel {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-md;
+  }
+}
+
+.logoPlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: $border-radius-full;
+  background-color: $background-light;
+  @include flex-center;
+  color: $text-secondary;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.logoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: $border-radius-full;
+}
+
+.logoText {
+  flex: 1;
+}
+
+.uploadText {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.uploadButtonContainer {
+  flex-shrink: 0;
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+

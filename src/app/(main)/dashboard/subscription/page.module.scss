@@ -1,0 +1,55 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.headerSection {
+  margin-bottom: $spacing-2xl;
+}
+
+.headerText {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+}
+
+
+.toggleContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $spacing-2xl;
+}
+
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+  align-items: stretch;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}

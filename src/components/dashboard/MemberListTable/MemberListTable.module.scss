@@ -1,0 +1,165 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.tableContainer {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  border: $border-width-thin solid $border-color;
+  overflow-x: auto;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    border-radius: $border-radius-md;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; // Ensure table doesn't get too compressed
+
+  @include mobile {
+    min-width: 500px;
+  }
+}
+
+.tableHeader {
+  padding: $spacing-md $spacing-lg;
+  text-align: left;
+  @include body-base;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  background-color: $background-light;
+  border-bottom: $border-width-thin solid $border-color;
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+.tableRow {
+  border-bottom: $border-width-thin solid $border-color;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tableCell {
+  padding: $spacing-md $spacing-lg;
+  @include body-base;
+  color: $text-primary;
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+}
+
+.memberName {
+  font-weight: $font-weight-medium;
+}
+
+.email {
+  @include body-base;
+  color: $text-secondary;
+}
+
+.role {
+  @include body-base;
+  color: $text-primary;
+  text-transform: capitalize;
+}
+
+.primaryControl {
+  text-transform: capitalize;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-full;
+  @include body-small;
+  font-weight: $font-weight-medium;
+
+  &.completed {
+    background-color: $accent-green;
+    color: $background-white;
+  }
+
+  &.pending {
+    background-color: #F59E0B;
+    color: $background-white;
+  }
+}
+
+.actionsCell {
+  position: relative;
+}
+
+.actionsButton {
+  width: 32px;
+  height: 32px;
+  @include flex-center;
+  background: none;
+  border: none;
+  border-radius: $border-radius-md;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+    color: $text-primary;
+  }
+}
+
+.actionsMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: $spacing-xs;
+  background-color: $background-white;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  z-index: $z-index-dropdown;
+  min-width: 160px;
+  @include flex-column;
+  overflow: hidden;
+}
+
+.menuItem {
+  padding: $spacing-sm $spacing-md;
+  @include body-base;
+  color: $text-primary;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  &:not(:last-child) {
+    border-bottom: $border-width-thin solid $border-color;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: $text-secondary;
+  }
+}
+

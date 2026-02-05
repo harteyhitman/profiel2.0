@@ -1,0 +1,162 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-2xl;
+  gap: $spacing-lg;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+.headerText {
+  @include flex-column;
+  gap: $spacing-sm;
+  flex: 1;
+}
+
+.exportButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+  font-family: $font-family-heading;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.chartSection {
+  margin-bottom: $spacing-2xl;
+}
+
+.chartCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.chartTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-md 0;
+  font-family: $font-family-heading;
+}
+
+.filtersSection {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.searchContainer {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-secondary;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: $spacing-md $spacing-md $spacing-md 44px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  @include body-base;
+  color: $text-primary;
+  background-color: $background-white;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+  }
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+.filtersContainer {
+  display: flex;
+  gap: $spacing-md;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.filterSelect {
+  padding: $spacing-md;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  @include body-base;
+  color: $text-primary;
+  background-color: $background-white;
+  cursor: pointer;
+  min-width: 150px;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+  }
+
+  @include mobile {
+    flex: 1;
+  }
+}
+
+.tableSection {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+  overflow-x: auto;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+

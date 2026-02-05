@@ -1,0 +1,58 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.dashboardLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  position: relative;
+}
+
+.sidebarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: $z-index-modal-backdrop;
+  display: none;
+
+  @include tablet-down {
+    display: block;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 280px; // Sidebar width
+  min-height: 100vh;
+  width: calc(100% - 280px);
+  position: relative;
+  background-color: var(--bg-page);
+
+  @include tablet-down {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.contentArea {
+  flex: 1;
+  padding: $spacing-xl;
+  overflow-y: auto;
+  margin-top: 100px; // Header height + padding
+
+  @include tablet {
+    padding: $spacing-lg;
+    margin-top: 80px; // Match tablet header height
+  }
+
+  @include mobile {
+    padding: $spacing-md;
+    margin-top: 70px; // Match mobile header height
+  }
+}
+

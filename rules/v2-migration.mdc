@@ -1,0 +1,23 @@
+---
+description: Use same APIs, endpoints, and business logic when building or migrating to v2.0 (Next.js + module SCSS)
+globs: "**/*.ts","**/*.tsx"
+alwaysApply: false
+---
+
+# V2.0 API and Logic Parity
+
+When implementing or migrating features for **version 2.0** (Next.js + module SCSS):
+
+1. **Use the same APIs and endpoints** as the current Vite/React app. Do not invent new paths or change request/response shapes.
+2. **Reuse the same business logic** for auth, questionnaire flow, scoring, role calculations, teams, churches, and subscription.
+3. **Reference these docs** (in this repo):
+   - `docs/V2_MIGRATION_GUIDE.md` — API config, full endpoint list, logic flows, shared types/constants, and copy-paste **Cursor prompts** for each feature.
+   - `docs/API_REFERENCE.md` — Compact endpoint table.
+
+**Key sources in this codebase:**
+- API client: `client/src/lib/queryClient.ts` (base URL, apiRequest, credentials).
+- Auth: `client/src/hooks/use-auth.tsx`.
+- Questionnaire: `client/src/components/questionnaire/question-form.tsx`; scoring: `client/src/utils/questionnaireScoring.ts`; roles: `client/src/utils/roleCalculations.ts`.
+- Shared data: `shared/schema.ts`, `shared/constants.ts`, `shared/types.ts`.
+
+If the v2 project lives in another repo, copy or link `docs/V2_MIGRATION_GUIDE.md` and `docs/API_REFERENCE.md` there and point this rule at them.

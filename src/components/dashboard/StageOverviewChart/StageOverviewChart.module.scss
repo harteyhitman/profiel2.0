@@ -1,0 +1,104 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.chart {
+  padding: $spacing-lg 0;
+  position: relative;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $spacing-xs;
+  min-height: 200px;
+  height: 200px;
+  position: relative;
+  padding: 0 $spacing-xs;
+
+  /* Subtle horizontal grid lines */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      $border-color 0,
+      $border-color 1px,
+      transparent 1px,
+      transparent 25%
+    );
+    opacity: 0.35;
+    pointer-events: none;
+    border-radius: $border-radius-md;
+  }
+}
+
+.barColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  min-width: 80px;
+  max-width: 180px;
+  position: relative;
+  z-index: 1;
+}
+
+.barWrapper {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.bar {
+  min-height: 24px;
+  width: 100%;
+  border-radius: $border-radius-md $border-radius-md 0 0;
+  transition: height 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stageNameInBar {
+  @include body-small;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  text-align: center;
+  padding: 0 $spacing-xs;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.percentage {
+  @include body-small;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+@include mobile {
+  .bars {
+    height: 160px;
+    min-height: 160px;
+  }
+
+  .barWrapper {
+    height: 160px;
+  }
+
+  .stageNameInBar {
+    font-size: $font-size-xs;
+  }
+}

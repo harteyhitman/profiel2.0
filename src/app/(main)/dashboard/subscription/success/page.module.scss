@@ -1,0 +1,106 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.card {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-2xl;
+  max-width: 600px;
+  width: 100%;
+
+  @include mobile {
+    padding: $spacing-xl;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $spacing-lg;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.content {
+  @include flex-column;
+  gap: $spacing-xl;
+}
+
+.message {
+  @include body-large;
+  color: $text-secondary;
+  text-align: center;
+  margin: 0;
+}
+
+.receipt {
+  background-color: #f9fafb;
+  border-radius: $border-radius-md;
+  padding: $spacing-xl;
+}
+
+.receiptTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-lg 0;
+  font-family: $font-family-heading;
+}
+
+.receiptDetails {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.receiptRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: $spacing-sm;
+  border-bottom: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.receiptLabel {
+  @include body-base;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.receiptValue {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.backButton {
+  width: 100%;
+  margin-top: $spacing-lg;
+}
+

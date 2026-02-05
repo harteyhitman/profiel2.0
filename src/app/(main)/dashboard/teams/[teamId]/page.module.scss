@@ -1,0 +1,145 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.goBackButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: none;
+  border: none;
+  @include body-base;
+  color: $text-secondary;
+  cursor: pointer;
+  padding: $spacing-sm 0;
+  margin-bottom: $spacing-lg;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    color: $accent-green;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include tablet-down {
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+}
+
+.headerText {
+  flex: 1;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+  font-family: $font-family-heading;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.filterContainer {
+  position: relative;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  background-color: $background-white;
+  color: $text-primary;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+    border-color: $accent-green;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: $spacing-xs;
+  background-color: $background-white;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  z-index: $z-index-dropdown;
+  min-width: 180px;
+  padding: $spacing-xs;
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+.filterOption {
+  padding: $spacing-sm $spacing-md;
+  @include body-base;
+  color: $text-primary;
+  cursor: pointer;
+  border-radius: $border-radius-sm;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.addMemberButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

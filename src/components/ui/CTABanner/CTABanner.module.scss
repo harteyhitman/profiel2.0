@@ -1,0 +1,78 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.ctaBanner {
+  padding: $spacing-4xl 0;
+  background: linear-gradient(360deg, 
+    $dark-green 0%, 
+    mix($dark-green, $accent-green, 70%) 25%,
+    $accent-green 50%,
+    mix($dark-green, $accent-green, 70%) 75%,
+    $dark-green 100%
+  );
+  color: $secondary-color;
+
+  @include tablet {
+    padding: $spacing-3xl 0;
+  }
+
+  @include mobile {
+    padding: $spacing-2xl 0;
+  }
+}
+
+.container {
+  @include container;
+  text-align: center;
+}
+
+.heading {
+  @include heading-medium;
+  color: $secondary-color;
+  margin-bottom: $spacing-lg;
+}
+
+.description {
+  @include body-large;
+  color: rgba($secondary-color, 0.9);
+  margin-bottom: $spacing-2xl;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-2xl;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $secondary-color;
+  background-color: $button-light;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: darken($accent-green, 5%);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.arrowIcon{
+  background-color: #000;
+  padding: 5px;
+border-radius: 6px;
+angle: -90 deg;
+opacity: 1;
+
+}

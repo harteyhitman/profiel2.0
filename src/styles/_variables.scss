@@ -1,0 +1,107 @@
+// Color Variables - Matching Design
+$primary-color: #000000;
+$secondary-color: #ffffff;
+$button-light: hsl(161, 100%, 36%);
+$button-dark: #009C87;
+$accent-green: #0F3728;        // Vibrant green for buttons, logo, chart bars
+$dark-green:  #05130C;         // Dark green background for hero
+$light-green: #0F4E39;
+$orange-accent: #FF9500;      // Orange for line graph
+$text-primary: #000000;
+$text-secondary: #666666;
+$text-light: #999999;
+$background-light: #f5f5f5;
+$background-white: #ffffff;
+$border-color: #e0e0e0;
+$card-shadow: rgba(0, 0, 0, 0.1);
+$dark-bg: #000000; // For subscription and footer
+
+
+// Pastel colors for Fivefold Ministry cards
+$pastel-blue: rgb(224, 242, 247);
+$pastel-purple: rgb(240, 230, 247);
+$pastel-red: rgb(247, 224, 224);
+$pastel-green: rgb(224, 247, 224);
+$pastel-yellow: rgb(247, 247, 224);
+$light-mint: #E0F7E0; // Light green for Fivefold section background
+
+// Gradient Variables - Update with exact Figma values
+$gradient-hero: linear-gradient(135deg, $dark-green 0%, darken($dark-green, 5%) 100%);
+$gradient-button: linear-gradient(135deg, $accent-green 0%, darken($accent-green, 10%) 100%);
+$gradient-card: linear-gradient(135deg, $background-white 0%, $background-light 100%);
+$gradient-section: linear-gradient(180deg, $background-white 0%, $background-light 100%);
+
+// Typography Variables
+$font-family-primary: var(--font-work-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$font-family-heading: var(--font-sansita), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 3.75rem;   // 60px
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Spacing Variables
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// Breakpoint Variables
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-large: 1280px;
+$breakpoint-xl: 1536px;
+
+// Z-index Variables
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// Border Variables
+$border-radius-sm: 0.25rem;   // 4px
+$border-radius-md: 0.5rem;    // 8px
+$border-radius-lg: 0.75rem;   // 12px
+$border-radius-xl: 1rem;      // 16px
+$border-radius-full: 9999px;
+
+$border-width-thin: 1px;
+$border-width-medium: 2px;
+$border-width-thick: 3px;
+
+// Shadow Variables
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Transition Variables
+$transition-fast: 150ms;
+$transition-base: 300ms;
+$transition-slow: 500ms;
+$transition-ease: ease-in-out;
+

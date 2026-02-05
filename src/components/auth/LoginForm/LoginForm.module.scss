@@ -1,0 +1,50 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.form {
+  @include flex-column;
+  gap: $spacing-xl;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.formGroup {
+  @include flex-column;
+  gap: $spacing-sm;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.forgotPassword {
+  @include body-small;
+  color: $button-light;
+  text-decoration: none;
+  margin-top: $spacing-sm;
+  align-self: flex-start;
+  transition: color $transition-base $transition-ease;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    color: darken($button-light, 15%);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: darken($button-light, 20%);
+  }
+}
+
+.errorMessage {
+  padding: $spacing-md;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: $border-radius-md;
+  color: #EF4444;
+  @include body-small;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+

@@ -1,0 +1,158 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modal {
+  :global([data-modal-body]) {
+    padding: 0;
+  }
+}
+
+.content {
+  @include flex-column;
+  gap: $spacing-xl;
+  padding: $spacing-lg $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md $spacing-lg;
+    gap: $spacing-lg;
+  }
+}
+
+.toggleWrap {
+  display: flex;
+  align-items: stretch;
+  border-radius: $border-radius-lg;
+  border: $border-width-thin solid $border-color;
+  overflow: hidden;
+  background: $background-light;
+}
+
+.toggleInactive,
+.toggleActive {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  cursor: pointer;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  transition: background-color $transition-base $transition-ease, color $transition-base $transition-ease;
+  background: $background-white;
+  color: $text-secondary;
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.toggleActive {
+  background: $accent-green;
+  color: $secondary-color;
+}
+
+.section {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.title {
+  @include heading-small;
+  color: $accent-green;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.titleIcon {
+  display: inline-flex;
+  color: $accent-green;
+}
+
+.subtitle {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.linkRow {
+  display: flex;
+  align-items: stretch;
+  gap: $spacing-sm;
+  margin-top: $spacing-xs;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.linkInput {
+  flex: 1;
+  min-width: 0;
+  padding: $spacing-md $spacing-lg;
+  border: $border-width-thin solid $light-green;
+  border-radius: $border-radius-md;
+  background: $light-mint;
+  color: $accent-green;
+  @include body-base;
+  font-family: inherit;
+
+  &::placeholder {
+    color: $text-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+  }
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: 0 $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  background: $accent-green;
+  color: $secondary-color;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: opacity $transition-base $transition-ease, transform $transition-fast $transition-ease;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.95;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @include mobile {
+    justify-content: center;
+  }
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  background: $light-mint;
+  border-radius: $border-radius-md;
+  border: $border-width-thin solid rgba($accent-green, 0.2);
+}
+
+.tipIcon {
+  color: $text-secondary;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tipText {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+  line-height: $line-height-relaxed;
+}

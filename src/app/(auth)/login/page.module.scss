@@ -1,0 +1,89 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.loginPage {
+  min-height: 100vh;
+  background-color: $background-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.content {
+  width: 100%;
+  // max-width: 500px;
+  @include flex-column;
+  align-items: center;
+}
+
+.card {
+  background-color: $background-white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-3xl $spacing-2xl;
+  width: 100%;
+  box-shadow: $shadow-xl;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include mobile {
+    padding: $spacing-2xl $spacing-xl;
+    max-width: 100%;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $spacing-md;
+
+  @include mobile {
+    justify-content: center;
+  }
+}
+
+.logoBox {
+  width: 60px;
+  height: 60px;
+  background-color: $light-mint;
+  border-radius: $border-radius-md;
+  @include flex-center;
+  @include body-small;
+  color: $accent-green;
+  font-weight: $font-weight-medium;
+}
+
+.title {
+  @include heading-medium;
+  color: $text-primary;
+  text-align: center;
+  margin-top: $spacing-3xl;
+  margin-bottom: $spacing-3xl;
+}
+
+.signupLink {
+  margin-top: $spacing-xl;
+  text-align: center;
+  @include body-base;
+  color: $text-secondary;
+
+  a {
+    color: $accent-green;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: opacity $transition-base $transition-ease;
+
+    &:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
+  }
+}
+

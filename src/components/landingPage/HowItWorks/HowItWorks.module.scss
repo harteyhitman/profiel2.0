@@ -1,0 +1,144 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.howItWorks {
+  padding: $spacing-4xl 0;
+  background-color: $background-light;
+
+  @include tablet {
+    padding: $spacing-3xl 0;
+  }
+
+  @include mobile {
+    padding: $spacing-2xl 0;
+  }
+}
+
+/* MAIN CONTAINER */
+.container {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-2xl;
+
+  @include tablet {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-xl;
+    text-align: center;
+  }
+}
+
+/* HEADER SECTION */
+.header {
+  max-width: 500px;
+
+  @include tablet {
+    margin-bottom: $spacing-3xl;
+    text-align: center;
+  }
+
+  @include mobile {
+    margin-bottom: $spacing-2xl;
+    text-align: center;
+  }
+}
+
+.title {
+  @include heading-medium;
+  color: $text-primary;
+  margin-bottom: $spacing-lg;
+  font-family: 'Work Sans';
+  font-weight: 500;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-primary;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: $line-height-relaxed;
+
+  @include mobile {
+    font-size: $font-size-base;
+    max-width: 100%;
+  }
+}
+
+/* STEPS GRID */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-xl;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-lg;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+/* STEP CARD */
+.step {
+  @include flex-column;
+  width: 100%; /* responsive width */
+  padding: $spacing-xl;
+  border-radius: $border-radius-lg;
+  background-color: #FCFBFF;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+
+  @include tablet {
+    padding: $spacing-lg;
+  }
+
+  @include mobile {
+    padding: $spacing-lg;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.icon {
+  font-size: $font-size-4xl;
+  margin-bottom: $spacing-md;
+
+  @include mobile {
+    font-size: $font-size-3xl;
+  }
+}
+
+.stepTitle {
+  @include heading-small;
+  color: $button-light;
+  margin-bottom: $spacing-md;
+
+  @include mobile {
+    font-size: $font-size-lg;
+  }
+}
+
+.stepDescription {
+  @include body-base;
+  color: $text-primary;
+  line-height: $line-height-relaxed;
+
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}

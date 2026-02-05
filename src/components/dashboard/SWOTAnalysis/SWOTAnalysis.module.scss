@@ -1,0 +1,82 @@
+@import '../../../styles/mixins';
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.swotCard {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100px;
+  text-align: left;
+  transition: opacity 0.2s ease;
+  box-shadow: var(--shadow-card);
+
+  &:hover {
+    opacity: 0.95;
+  }
+
+  @include mobile {
+    padding: var(--space-md);
+    min-height: 88px;
+  }
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  min-width: 0;
+}
+
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-primary);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.arrowButton {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  color: var(--text-primary);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}

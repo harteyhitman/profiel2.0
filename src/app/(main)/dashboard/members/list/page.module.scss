@@ -1,0 +1,239 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.goBackButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: none;
+  border: none;
+  @include body-base;
+  color: $text-secondary;
+  cursor: pointer;
+  padding: $spacing-sm 0;
+  margin-bottom: $spacing-lg;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    color: $accent-green;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.headerSection {
+  margin-bottom: $spacing-lg;
+}
+
+.headerText {
+  flex: 1;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+  font-family: $font-family-heading;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.actionsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+
+  @include tablet-down {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.leftActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @include mobile {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.inviteButton {
+  flex-shrink: 0;
+}
+
+.urlContainer {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: center;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  background-color: $background-white;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.urlInput {
+  flex: 1;
+  padding: $spacing-md $spacing-lg;
+  border: none;
+  background-color: transparent;
+  @include body-base;
+  color: $text-primary;
+  font-family: monospace;
+  outline: none;
+  min-width: 300px;
+
+  @include mobile {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+.copyButton {
+  flex-shrink: 0;
+  white-space: nowrap;
+  border-radius: 0;
+  border-left: $border-width-thin solid $border-color;
+
+  @include mobile {
+    width: 100%;
+    border-left: none;
+    border-top: $border-width-thin solid $border-color;
+  }
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.searchContainer {
+  position: relative;
+  min-width: 250px;
+
+  @include mobile {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-secondary;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: $spacing-md $spacing-md $spacing-md $spacing-3xl;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  @include body-base;
+  color: $text-primary;
+  background-color: $background-white;
+  outline: none;
+  transition: all $transition-base $transition-ease;
+
+  &:focus {
+    border-color: $accent-green;
+    box-shadow: 0 0 0 2px rgba($accent-green, 0.2);
+  }
+
+  &::placeholder {
+    color: $text-light;
+  }
+}
+
+.filterContainer {
+  position: relative;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  background-color: $background-white;
+  color: $text-primary;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+    border-color: $accent-green;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: $spacing-xs;
+  background-color: $background-white;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  z-index: $z-index-dropdown;
+  min-width: 180px;
+  padding: $spacing-xs;
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+.filterOption {
+  padding: $spacing-sm $spacing-md;
+  @include body-base;
+  color: $text-primary;
+  cursor: pointer;
+  border-radius: $border-radius-sm;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+

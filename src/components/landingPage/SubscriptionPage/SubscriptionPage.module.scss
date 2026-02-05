@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.subscriptionPage {
+  min-height: 100vh;
+  background-color: #fff;
+}
+.subscriptionPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px ;
+
+  // justify-content: center;
+}
+// .BrandLogo1{
+//   width: 100%;
+//   height: auto;
+// }
+

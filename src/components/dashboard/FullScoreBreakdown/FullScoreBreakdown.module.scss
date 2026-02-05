@@ -1,0 +1,171 @@
+@import '../../../styles/mixins';
+
+.container {
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: var(--font-semibold);
+  color: #333;
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+
+  @include tablet-down {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+}
+
+.scoreItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  padding: 0 var(--space-lg);
+
+  @include tablet-down {
+    padding: 0;
+  }
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.divider {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-right: 1px dashed #d3d3d3;
+
+  @include tablet-down {
+    display: none;
+  }
+}
+
+.scoreContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.roleInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  gap: var(--space-sm);
+}
+
+.roleLabel {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: var(--font-regular);
+  color: #333;
+  text-align: left;
+}
+
+.maxScoreText {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: var(--font-bold);
+  color: #333;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.scoreValue {
+  font-family: var(--font-ui);
+  font-size: 30px;
+  font-weight: var(--font-semibold);
+  color: #4caf50;
+  line-height: 1;
+  text-align: left;
+  margin-top: var(--space-xs);
+
+  @include mobile {
+    font-size: 28px;
+  }
+}
+
+/* Cards variant (Result page): list of white cards with progress bars */
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.scoreCard {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-subtle);
+  transition: box-shadow 0.2s ease;
+
+  &.scoreCardHighlight {
+    outline: 2px dashed #3b82f6;
+    outline-offset: -1px;
+  }
+}
+
+.scoreCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.scoreCardRole {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.scoreCardScore {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+
+  strong {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--green-primary);
+  }
+}
+
+.scoreCardBarTrack {
+  height: 8px;
+  background-color: var(--bg-progress-track);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.scoreCardBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--progress-fill-start), var(--progress-fill-end));
+  border-radius: var(--radius-full);
+  transition: width 0.2s ease-out;
+}

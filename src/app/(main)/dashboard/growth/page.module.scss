@@ -1,0 +1,108 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-2xl;
+  gap: $spacing-lg;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+.headerText {
+  @include flex-column;
+  gap: $spacing-sm;
+  flex: 1;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.exportButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.metricsSection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+  margin-bottom: $spacing-2xl;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartsSection {
+  @include flex-column;
+  gap: $spacing-xl;
+}
+
+.twoColRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.chartTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-md 0;
+  font-family: $font-family-heading;
+}
+
+.chartSubtitle {
+  @include body-small;
+  color: $text-secondary;
+  margin: 0 0 $spacing-lg 0;
+}
+

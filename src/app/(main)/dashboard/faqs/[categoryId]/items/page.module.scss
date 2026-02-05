@@ -1,0 +1,62 @@
+@import '../../../../../../styles/variables';
+@import '../../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.breadcrumbWrap {
+  @include mobile {
+    display: none;
+  }
+}
+
+.backButton {
+  display: none;
+  align-items: center;
+  gap: $spacing-sm;
+  background: none;
+  border: none;
+  @include body-base;
+  color: $text-primary;
+  cursor: pointer;
+  padding: 0 0 $spacing-md 0;
+  font-family: $font-family-heading;
+  margin-bottom: $spacing-sm;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.headerSection {
+  margin-bottom: $spacing-xl;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-lg 0;
+  font-family: $font-family-heading;
+}
+
+.faqList {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.emptyState {
+  text-align: center;
+  padding: $spacing-2xl;
+  @include body-base;
+  color: $text-secondary;
+}
+

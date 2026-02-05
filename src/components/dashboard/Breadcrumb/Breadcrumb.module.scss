@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xl;
+  @include body-base;
+}
+
+.link {
+  color: $accent-green;
+  text-decoration: none;
+  transition: opacity $transition-base $transition-ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.current {
+  color: $text-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.separator {
+  color: $text-secondary;
+}
+

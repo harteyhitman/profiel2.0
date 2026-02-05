@@ -1,0 +1,78 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.fieldSection {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.fieldLabel {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.fieldContent {
+  width: 100%;
+}
+
+.viewMode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-md;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+}
+
+.fieldValue {
+  @include body-base;
+  color: $text-primary;
+  flex: 1;
+}
+
+.editButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.editMode {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.editInput {
+  width: 100%;
+}
+
+.editActions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.saveButton,
+.cancelButton {
+  min-width: 100px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+

@@ -1,0 +1,143 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modalContent {
+  padding: $spacing-2xl;
+  @include flex-column;
+  gap: $spacing-xl;
+
+  @include mobile {
+    padding: $spacing-lg;
+    gap: $spacing-lg;
+  }
+}
+
+.uploadArea {
+  border: 2px dashed $border-color;
+  border-radius: $border-radius-lg;
+  padding: $spacing-3xl;
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  background-color: $background-white;
+  min-height: 300px;
+  position: relative;
+
+  &:hover {
+    border-color: $accent-green;
+    background-color: $background-light;
+  }
+
+  &.dragging {
+    border-color: $accent-green;
+    background-color: rgba($accent-green, 0.05);
+  }
+
+  @include mobile {
+    padding: $spacing-xl;
+    min-height: 250px;
+  }
+}
+
+.previewSection {
+  @include flex-center;
+  padding: $spacing-xl 0;
+}
+
+.circularPreview {
+  width: 200px;
+  height: 200px;
+  border-radius: $border-radius-full;
+  overflow: hidden;
+  background-color: $background-light;
+  @include flex-center;
+  position: relative;
+
+  @include mobile {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadIcon {
+  color: $text-secondary;
+  @include flex-center;
+
+  svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadText {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-xs;
+  text-align: center;
+}
+
+.instructionText {
+  @include body-base;
+  color: $text-primary;
+  margin: 0;
+}
+
+.clickText {
+  color: $accent-green;
+  cursor: pointer;
+  font-weight: $font-weight-medium;
+}
+
+.fileInfo {
+  @include body-small;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.errorMessage {
+  padding: $spacing-md;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: $border-radius-md;
+  color: #EF4444;
+  @include body-small;
+  text-align: center;
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding-top: $spacing-lg;
+  border-top: $border-width-thin solid $border-color;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.cancelButton,
+.uploadButton,
+.saveButton,
+.changePhotoButton {
+  width: 100%;
+  min-width: 120px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+

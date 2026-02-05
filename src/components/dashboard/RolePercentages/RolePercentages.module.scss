@@ -1,0 +1,48 @@
+@import '../../../styles/mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.roleItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.roleLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--text-secondary);
+  min-width: 88px;
+  flex-shrink: 0;
+}
+
+.progressBar {
+  flex: 1;
+  height: 12px;
+  min-width: 0;
+  background-color: var(--bg-progress-track);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--score-bar-fill-start) 0%, var(--score-bar-fill-end) 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.rolePercentage {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: #374151;
+  min-width: 44px;
+  text-align: right;
+  flex-shrink: 0;
+}

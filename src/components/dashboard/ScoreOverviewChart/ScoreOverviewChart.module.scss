@@ -1,0 +1,98 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.chart {
+  padding: $spacing-lg 0;
+}
+
+.chartContainer {
+  display: flex;
+  gap: $spacing-md;
+  height: 300px;
+  position: relative;
+}
+
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: $spacing-md;
+  min-width: 30px;
+}
+
+.yAxisLabel {
+  @include body-small;
+  color: $text-secondary;
+  text-align: right;
+  height: 37.5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.barsContainer {
+  display: flex;
+  gap: $spacing-md;
+  align-items: flex-end;
+  flex: 1;
+  position: relative;
+}
+
+.gridLines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gridLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: $border-color;
+  opacity: 0.6;
+}
+
+.barGroup {
+  flex: 1;
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-sm;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.barWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: $border-radius-sm $border-radius-sm 0 0;
+  transition: height $transition-base $transition-ease;
+}
+
+.xAxisLabel {
+  @include body-small;
+  color: $text-secondary;
+  text-align: center;
+  margin-top: $spacing-xs;
+}
+
+@include mobile {
+  .chartContainer {
+    height: 250px;
+  }
+
+  .xAxisLabel {
+    font-size: $font-size-xs;
+  }
+}
+

@@ -1,0 +1,13 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.dashboard {
+  position: relative;
+}
+
+.dashboard.blurred {
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+}
+

@@ -1,0 +1,76 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.floatingLabel {
+  position: absolute;
+  left: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-light;
+  font-size: $font-size-base;
+  pointer-events: none;
+  transition: all $transition-base $transition-ease;
+  background-color: $background-white;
+  padding: 0 $spacing-xs;
+  z-index: 1;
+
+  &.active {
+    top: 0;
+    transform: translateY(-50%) scale(0.875);
+    color: $accent-green;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.input {
+  width: 100%;
+  min-width: 500px;
+  @include mobile {
+    min-width: 100%;
+  }
+  @include tablet {
+    min-width: 400px;
+  }
+  padding: $spacing-md;
+  border: $border-width-thin solid $border-color;
+  border-radius: 12px;
+  font-size: $font-size-base;
+  color: $text-primary;
+  transition: all $transition-base $transition-ease;
+  font-family: inherit;
+  background-color: $background-white;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+    box-shadow: 0 0 0 3px rgba($accent-green, 0.1);
+  }
+
+  &::placeholder {
+    color: transparent;
+    transition: color $transition-base $transition-ease;
+  }
+
+  &:focus::placeholder {
+    color: $text-light;
+  }
+
+  &:disabled {
+    background-color: $background-light;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

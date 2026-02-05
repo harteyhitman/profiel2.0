@@ -1,0 +1,68 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modalContent {
+  padding: 22px 32px;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.categorySection {
+  @include flex-column;
+  gap: $spacing-lg;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.categoryIcon {
+  width: 24px;
+  height: 24px;
+  @include flex-center;
+  color: $accent-green;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.categoryTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.itemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @include flex-column;
+  gap: $spacing-md;
+  padding-left: $spacing-md;
+}
+
+.listItem {
+  @include body-base;
+  color: $text-primary;
+  line-height: $line-height-relaxed;
+  position: relative;
+  padding-left: $spacing-lg;
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    line-height: 1;
+  }
+}
+

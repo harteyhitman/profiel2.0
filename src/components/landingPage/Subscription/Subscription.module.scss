@@ -1,0 +1,184 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.subscription {
+  padding: $spacing-4xl 0;
+  background: rgba(15, 30, 25, 1);
+  color: $secondary-color;
+
+  @include tablet {
+    padding: $spacing-3xl 0;
+  }
+
+  @include mobile {
+    padding: $spacing-2xl 0;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10rem;
+
+  @include tablet {
+    margin-bottom: $spacing-3xl;
+  }
+
+  @include mobile {
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.title {
+  @include heading-medium;
+  color: $secondary-color;
+  margin-bottom: $spacing-lg;
+}
+
+.subtitle {
+  @include body-large;
+  color: rgba($secondary-color, 0.9);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto $spacing-2xl;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.planCard {
+  @include flex-column;
+  padding: $spacing-2xl;
+  border-radius: $border-radius-xl;
+  border: 1px solid rgba(223, 223, 223, 0.25);
+  background-color: rgba(28, 28, 28, 0.5);
+  color: $text-primary;
+  transition: all $transition-base $transition-ease;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-4px);
+    border: 2px solid rgba(93, 255, 201, 1);
+    box-shadow: rgba(223, 223, 223, 0.25);
+  }
+
+  &.popular {
+    background: linear-gradient(180deg, rgba(93, 255, 201, 0.4), rgba(8, 39, 29, 1));
+    color: $secondary-color;    
+    box-shadow: rgba(23, 248, 173, 1);
+   position: relative;
+   bottom: 80px;
+
+     @include mobile {
+    bottom: 0;
+  }
+  }
+  
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: $spacing-lg;
+  background-color: $accent-green;
+  color: $secondary-color;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+}
+
+.planName {
+  @include heading-small;
+  color: $secondary-color;
+  margin-bottom: $spacing-lg;
+}
+
+.price {
+  @include flex-start;
+  align-items: baseline;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xl;
+  color: $secondary-color;
+}
+
+.priceAmount {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  color: rgba($secondary-color, 0.8);
+}
+
+.pricePeriod {
+  @include body-base;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 $spacing-xl 0;
+  @include flex-column;
+  gap: $spacing-md;
+  flex: 1;
+  color: rgba(185, 185, 185, 1);
+}
+
+.feature {
+  @include flex-start;
+  gap: $spacing-sm;
+  @include body-base;
+  color: inherit;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.ctaButton {
+  @include button-primary;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 183, 126, 1);
+  color: $secondary-color;
+  margin-top: auto;
+
+  &:hover {
+    background-color: rgba(0, 183, 126, 1);
+
+  }
+}
+
+.footerText {
+  text-align: center;
+  @include body-base;
+  color: rgba($secondary-color, 0.8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+.desc{
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Work Sans';
+font-weight: 400;
+font-style: Regular;
+font-size: 18px;
+margin-bottom: 20px;
+color: rgba($secondary-color, 0.8);
+}

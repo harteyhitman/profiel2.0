@@ -1,0 +1,60 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.chart {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+  padding: $spacing-lg 0;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+}
+
+.legend {
+  @include flex-column;
+  gap: $spacing-md;
+  flex: 1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: $border-radius-sm;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  @include body-base;
+  color: $text-primary;
+}
+
+.pieContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+}
+
+.pieSegment {
+  transition: opacity $transition-base $transition-ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+

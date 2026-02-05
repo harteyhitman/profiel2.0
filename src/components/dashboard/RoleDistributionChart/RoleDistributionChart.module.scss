@@ -1,0 +1,97 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.chartCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  border: $border-width-thin solid $border-color;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.chartHeader {
+  margin-bottom: $spacing-lg;
+}
+
+.chartTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-xs 0;
+  font-family: $font-family-heading;
+
+  @include mobile {
+    font-size: $font-size-lg;
+  }
+}
+
+.chartSubtitle {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}
+
+.chartContainer {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-xl;
+}
+
+.donutContainer {
+  @include flex-center;
+}
+
+.donutSvg {
+  width: 200px;
+  height: 200px;
+
+  @include mobile {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+.centerText {
+  @include heading-large;
+  fill: #374151;
+  font-weight: $font-weight-bold;
+  font-size: 48px;
+
+  @include mobile {
+    font-size: 36px;
+  }
+}
+
+
+.legend {
+  @include flex-column;
+  gap: $spacing-md;
+  width: 100%;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.legendDot {
+  width: 16px;
+  height: 16px;
+  border-radius: $border-radius-full;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+

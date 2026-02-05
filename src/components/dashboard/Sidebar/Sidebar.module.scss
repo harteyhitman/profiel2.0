@@ -1,0 +1,238 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 100px; // Start below header
+  width: 280px;
+  height: calc(100vh - 100px); // Full height minus header
+  background-color: $background-white;
+  border-right: $border-width-thin solid $border-color;
+  display: flex;
+  flex-direction: column;
+  z-index: $z-index-dropdown;
+  transition: transform $transition-base $transition-ease;
+  overflow-y: auto;
+
+  @include tablet-down {
+    top: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: $z-index-modal;
+    
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}
+
+.sidebarHeader {
+  display: none;
+  padding: $spacing-lg;
+  border-bottom: $border-width-thin solid $border-color;
+  @include flex-between;
+  display: none;
+  align-items: center;
+
+  @include tablet-down {
+    display: flex;
+  }
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  @include flex-center;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: $spacing-xs;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  background: none;
+  border: none;
+  border-radius: $border-radius-md;
+  color: $text-primary;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.sidebarContent {
+  padding: $spacing-xl 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  flex: 1;
+}
+
+.navBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.navItem,
+.navItemActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-md;
+  text-decoration: none;
+  color: $text-primary;
+  transition: all $transition-base $transition-ease;
+  cursor: default;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.navLinkContent {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.chevronButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs;
+  margin: -$spacing-xs;
+  border: none;
+  background: none;
+  border-radius: $border-radius-sm;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color $transition-base $transition-ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.navItemActive .chevronButton:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navItemActive {
+  background-color: rgba(2, 97, 47, 1);
+  color: $background-white;
+
+  .navIcon {
+    color: $background-white;
+  }
+
+  .dropdownIcon {
+    color: $background-white;
+  }
+
+  &:hover {
+    background-color: darken($accent-green, 5%);
+  }
+}
+
+.navIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: $text-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLabel {
+  @include body-base;
+  font-weight: $font-weight-medium;
+  flex: 1;
+}
+
+.dropdownIcon {
+  color: $text-secondary;
+  flex-shrink: 0;
+  transition: transform $transition-base $transition-ease;
+
+  &.expanded {
+    transform: rotate(90deg);
+  }
+}
+
+.dropdownMenu {
+  @include flex-column;
+  gap: $spacing-xs;
+  padding-left: $spacing-3xl;
+  margin-top: $spacing-xs;
+}
+
+.dropdownItem {
+  @include body-base;
+  color: $text-secondary;
+  text-decoration: none;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $border-radius-sm;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+    color: $text-primary;
+  }
+
+  &.dropdownItemActive {
+    background-color: $accent-green;
+    color: $background-white;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      background-color: darken($accent-green, 5%);
+    }
+  }
+}
+
+.logoutSection {
+  margin-top: auto;
+  padding-top: $spacing-lg;
+  border-top: $border-width-thin solid $border-color;
+}
+
+.logoutItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-md;
+  text-decoration: none;
+  color: $text-primary;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  .navIcon {
+    color: $text-primary;
+  }
+}
+

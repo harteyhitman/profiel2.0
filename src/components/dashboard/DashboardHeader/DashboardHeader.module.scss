@@ -1,0 +1,386 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.header {
+  background-color: $background-white;
+  border-bottom: $border-width-thin solid $border-color;
+  padding: $spacing-lg $spacing-xl;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-xl;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-index-sticky;
+  width: 100%;
+  height: 100px;
+
+  @include tablet {
+    padding: $spacing-md $spacing-lg;
+    gap: $spacing-lg;
+    height: 80px;
+  }
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+    gap: $spacing-sm;
+    height: 70px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-shrink: 0;
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+}
+
+.menuButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  background: none;
+  border: none;
+  border-radius: $border-radius-md;
+  color: $text-primary;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+
+  // Show only on mobile and tablet, hide on desktop and large screens
+  @include tablet-down {
+    display: flex;
+  }
+
+  @include desktop {
+    display: none !important;
+  }
+
+  @include large {
+    display: none !important;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.logoContainer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @include tablet-down {
+    display: none;
+  }
+
+  h2 {
+    font-family: Work Sans;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 20px;
+    letter-spacing: -2%;
+    color: $text-primary;
+
+    @include tablet {
+      font-size: 18px;
+    }
+  }
+}
+
+.logoMobile {
+  display: none;
+  flex-shrink: 0;
+
+  @include tablet-down {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background-color: $light-mint;
+  @include flex-center;
+  border-radius: $border-radius-sm;
+  padding: $spacing-xs;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.searchContainer {
+  flex: 1;
+  min-width: 0; // Allow flex item to shrink below content size
+  max-width: 576px;
+
+  @include tablet {
+    max-width: 400px;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.searchButtonMobile {
+  display: none;
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  background: none;
+  border: none;
+  border-radius: $border-radius-md;
+  color: $text-primary;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  flex-shrink: 0;
+
+  @include mobile {
+    display: flex;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.searchInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  background-color: $background-light;
+  border-radius: $border-radius-md;
+  border: $border-width-thin solid $border-color;
+  width: 100%;
+
+  @include tablet {
+    padding: $spacing-sm $spacing-md;
+  }
+
+  svg {
+    color: $text-secondary;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+
+    @include tablet {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    @include body-base;
+    color: $text-primary;
+    font-size: $font-size-sm;
+
+    @include tablet {
+      font-size: $font-size-xs;
+    }
+
+    &::placeholder {
+      color: $text-light;
+    }
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  flex-shrink: 0;
+
+  @include tablet {
+    gap: $spacing-md;
+  }
+
+  @include mobile {
+    gap: $spacing-sm;
+  }
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  background: none;
+  border: none;
+  border-radius: $border-radius-md;
+  color: $text-primary;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  flex-shrink: 0;
+
+  @include tablet {
+    width: 36px;
+    height: 36px;
+  }
+
+  @include mobile {
+    width: 32px;
+    height: 32px;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.dropdownContainer {
+  position: relative;
+
+  @include mobile {
+    display: none;
+  }
+
+  @include tablet {
+    // Keep visible on tablet but make more compact
+  }
+}
+
+.dropdownButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: none;
+  border: none;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  cursor: pointer;
+  border-radius: $border-radius-md;
+  border: 1px solid $border-color;
+  transition: all $transition-base $transition-ease;
+
+  @include tablet {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+    gap: $spacing-xs;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  svg {
+    color: $text-secondary;
+    width: 20px;
+    height: 20px;
+
+    @include tablet {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.userContainer {
+  position: relative;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: $border-radius-md;
+  transition: all $transition-base $transition-ease;
+
+  @include tablet {
+    gap: $spacing-xs;
+    padding: $spacing-xs;
+  }
+
+  @include mobile {
+    gap: 0;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  .userDropdownIcon {
+    color: $text-secondary;
+
+    @include mobile {
+      display: none;
+    }
+
+    @include tablet {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  svg {
+    @include mobile {
+      display: none;
+    }
+
+    @include tablet {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: $border-radius-full;
+  background-color: rgba(230, 255, 246, 1);
+  @include flex-center;
+  @include body-small;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  border: 1px solid $border-color;
+
+  @include tablet {
+    width: 36px;
+    height: 36px;
+    font-size: $font-size-xs;
+  }
+
+  @include mobile {
+    width: 32px;
+    height: 32px;
+    font-size: $font-size-xs;
+  }
+}
+

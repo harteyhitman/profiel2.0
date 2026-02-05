@@ -1,0 +1,89 @@
+/**
+ * Distribution of services — card with horizontal progress rows.
+ * Visual match: soft gradient card, slim pill bars, left→right green gradient fill.
+ */
+
+@import '../../../styles/mixins';
+
+/* Card: subtle soft gradient (cool white → white), no border, generous padding */
+.card {
+  background: linear-gradient(90deg, #fafbfc 0%, #ffffff 50%, #ffffff 100%);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-lg);
+  padding-top: 28px;
+
+  @include mobile {
+    padding: var(--space-lg) var(--space-md);
+    padding-top: 24px;
+  }
+}
+
+.header {
+  margin-bottom: var(--space-lg);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--font-semibold);
+  color: #374151;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.subtitle {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Each row: label | progress bar | percentage — grid-aligned */
+.row {
+  display: grid;
+  grid-template-columns: 100px 1fr 44px;
+  align-items: center;
+  gap: 16px;
+  min-height: 24px;
+}
+
+.label {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.track {
+  height: 10px;
+  background-color: #e5e7eb;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #6cc76d 0%, #0f4e20 100%);
+  transition: width 0.3s ease;
+  min-width: 0;
+}
+
+.percentage {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: #374151;
+  text-align: right;
+  min-width: 44px;
+}

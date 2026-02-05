@@ -1,0 +1,514 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+$navy: #1a1a2e;
+$muted: #5a5a6e;
+$softGreen: #52b787;
+$softGreenBg: rgba(82, 183, 135, 0.12);
+$borderLight: #e8e8ec;
+
+.aboutPage {
+  background: #fff;
+  min-height: 100vh;
+  padding: 100px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Show only the top part of the first image; hide the bottom (same content as second image)
+.firstImageWrap {
+  overflow: hidden;
+  // width: 100%;
+  // max-width: 100%;
+  // Restrict height so only top ~55–60% of image is visible; adjust to taste
+  max-height: 50vh;
+  display: flex;
+  justify-content: center;
+}
+
+.firstImageWrap .BrandLogo1 {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sectionDisclaimer {
+  padding: 5rem 0;
+}
+
+.disclaimerContent {
+  background: $softGreenBg;
+  border-radius: 20px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+}
+
+.disclaimerTitle {
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-weight: 800;
+  color: $navy;
+  margin: 0 0 1.25rem;
+  font-family: $font-family-heading;
+  letter-spacing: -0.02em;
+}
+
+.disclaimerIntro {
+  max-width: 1400px;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: $muted;
+}
+.disclaimerIntro1{
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid $borderLight;
+  padding: 2.25rem;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  text-align: start;
+  color: #000;
+}
+.accordionContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.accordionCard {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid $borderLight;
+  overflow: hidden;
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  color: $navy;
+  font-family: $font-family-primary;
+}
+
+.accordionTitle {
+  flex: 1;
+}
+
+.accordionChevron {
+  flex-shrink: 0;
+  color: $muted;
+  transition: transform 0.2s ease;
+
+  &.accordionOpen {
+    transform: rotate(180deg);
+  }
+}
+
+.accordionBody {
+  padding: 0 1.5rem 1.125rem;
+
+  p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: $muted;
+    margin: 0;
+  }
+}
+
+.finalCard {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid $borderLight;
+  padding: 2.25rem;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+.finalStatement {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: $navy;
+  margin: 0 0 0.75rem;
+  font-family: $font-family-heading;
+}
+
+.finalSupport {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: $muted;
+  margin: 0;
+}
+
+// // ——— Section 1 — De aanleiding ———
+// .introGrid {
+//   display: grid;
+//   grid-template-columns: 1.65fr 1fr;
+//   gap: 4rem;
+//   align-items: center;
+
+//   @include tablet-down {
+//     grid-template-columns: 1fr;
+//     gap: 2.5rem;
+//   }
+// }
+
+// .introTextCol {
+//   min-width: 0;
+// }
+
+// .introTitle {
+//   font-size: clamp(2rem, 4vw, 2.75rem);
+//   font-weight: 800;
+//   color: $navy;
+//   margin: 0 0 1.5rem;
+//   line-height: 1.15;
+//   font-family: $font-family-heading;
+//   letter-spacing: -0.02em;
+
+//   @include tablet {
+//     font-size: 2rem;
+//   }
+
+//   @include mobile {
+//     font-size: 1.75rem;
+//   }
+// }
+
+// .introParagraphs {
+//   max-width: 480px;
+
+//   p {
+//     font-size: 1rem;
+//     line-height: 1.7;
+//     color: $muted;
+//     margin: 0 0 1rem;
+
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//   }
+
+//   @include mobile {
+//     max-width: 100%;
+//   }
+// }
+
+// .introLogoCol {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   min-height: 220px;
+
+//   @include mobile {
+//     min-height: 180px;
+//     order: -1;
+//   }
+// }
+
+// .brandLogo {
+//   width: 100%;
+//   max-width: 200px;
+//   height: auto;
+//   object-fit: contain;
+// }
+
+// // ——— Section 2 — Productontwikkeling ———
+// .sectionProduct {
+//   padding: 5rem 0 6rem;
+// }
+
+// .productWrap {
+//   position: relative;
+// }
+
+// .greenBrush {
+//   position: absolute;
+//   inset: -3rem -5rem 25% -5rem;
+//   background: $softGreenBg;
+//   border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%;
+//   z-index: 0;
+//   pointer-events: none;
+// }
+
+// .productContent {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// .sectionTitle {
+//   font-size: clamp(1.75rem, 3vw, 2.25rem);
+//   font-weight: 800;
+//   color: $navy;
+//   margin: 0 0 1rem;
+//   text-align: center;
+//   font-family: $font-family-heading;
+//   letter-spacing: -0.02em;
+// }
+
+// .productIntro {
+//   max-width: 680px;
+//   margin: 0 auto 2.5rem;
+//   text-align: center;
+//   font-size: 1rem;
+//   line-height: 1.7;
+//   color: $muted;
+// }
+
+// .developmentGrid {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 2.5rem;
+
+//   @include tablet-down {
+//     grid-template-columns: 1fr;
+//   }
+// }
+
+// .developmentCard {
+//   background: #fff;
+//   border-radius: 14px;
+//   padding: 2.5rem;
+//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+//   border: 1px solid $borderLight;
+//   text-align: center;
+// }
+
+// .cardIconCircle,
+// .cardImageCircle {
+//   width: 80px;
+//   height: 80px;
+//   border-radius: 50%;
+//   background: $softGreenBg;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 0 auto 1.5rem;
+// }
+
+// .cardTitle {
+//   font-size: 1.25rem;
+//   font-weight: 700;
+//   color: $navy;
+//   margin: 0 0 1rem;
+//   font-family: $font-family-heading;
+// }
+
+// .cardText {
+//   font-size: 0.9375rem;
+//   line-height: 1.65;
+//   color: $muted;
+//   margin: 0 0 1rem;
+// }
+
+// .documentationList {
+//   text-align: left;
+//   margin-top: 1.25rem;
+
+//   .docLabel {
+//     font-size: 0.875rem;
+//     font-weight: 600;
+//     color: $navy;
+//     margin: 0 0 0.5rem;
+//   }
+
+//   ol {
+//     margin: 0;
+//     padding-left: 1.25rem;
+//     font-size: 0.9375rem;
+//     line-height: 1.6;
+//     color: $muted;
+//   }
+
+//   .docLink {
+//     color: #2563eb;
+//     text-decoration: underline;
+//   }
+// }
+
+// ——— Section 3 — Disclaimer ———
+
+// // ——— Section 4 — Ontwikkelfasen ———
+// .phasesGrid {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 4rem;
+//   align-items: start;
+
+//   @include tablet-down {
+//     grid-template-columns: 1fr;
+//     gap: 2.5rem;
+//   }
+// }
+
+// .phasesTextCol {
+//   .sectionTitle {
+//     text-align: left;
+//   }
+
+//   p {
+//     font-size: 1rem;
+//     line-height: 1.7;
+//     color: $muted;
+//     margin: 0 0 1rem;
+
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+
+// .timelineCol {
+//   padding-left: 1rem;
+// }
+
+// .timeline {
+//   position: relative;
+//   padding-left: 1.75rem;
+//   border-left: 2px solid $borderLight;
+// }
+
+// .timelineItem {
+//   padding-bottom: 2.75rem;
+
+//   &:last-child {
+//     padding-bottom: 0;
+//   }
+// }
+
+// .timelineYear {
+//   font-size: 1.125rem;
+//   font-weight: 800;
+//   color: $navy;
+//   margin-bottom: 0.25rem;
+//   font-family: $font-family-heading;
+// }
+
+// .timelineDesc {
+//   font-size: 1rem;
+//   color: $muted;
+//   margin: 0 0 0.5rem;
+// }
+
+// .timelineDetail {
+//   font-size: 0.9375rem;
+//   line-height: 1.6;
+//   color: $muted;
+//   margin: 0;
+// }
+
+// // ——— Section 5 — Het team ———
+// .teamTitleWrap {
+//   text-align: center;
+//   margin-bottom: 0.5rem;
+// }
+
+// .teamTitle {
+//   font-size: clamp(1.75rem, 3vw, 2.25rem);
+//   font-weight: 800;
+//   color: $navy;
+//   margin: 0;
+//   display: block;
+//   font-family: $font-family-heading;
+//   letter-spacing: -0.02em;
+
+//   &::after {
+//     content: '';
+//     display: block;
+//     width: 56px;
+//     height: 4px;
+//     background: $softGreen;
+//     margin: 0.5rem auto 0;
+//     border-radius: 2px;
+//   }
+// }
+
+// .teamGrid {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   gap: 4rem;
+//   margin-top: 3rem;
+
+//   @include tablet-down {
+//     grid-template-columns: 1fr;
+//     gap: 2.5rem;
+//     margin-top: 2rem;
+//   }
+// }
+
+// .teamMember {
+//   text-align: center;
+//   max-width: 420px;
+//   margin: 0 auto;
+// }
+
+// .memberPhotoWrap {
+//   width: 150px;
+//   height: 150px;
+//   border-radius: 50%;
+//   overflow: hidden;
+//   margin: 0 auto 1.5rem;
+//   background: $softGreenBg;
+// }
+
+// .memberPhoto {
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+// }
+
+// .memberName {
+//   font-size: 1.25rem;
+//   font-weight: 700;
+//   color: $softGreen;
+//   margin: 0 0 0.25rem;
+//   font-family: $font-family-heading;
+// }
+
+// .memberRole {
+//   font-size: 0.9375rem;
+//   color: $muted;
+//   margin: 0 0 1rem;
+// }
+
+// .memberBio {
+//   font-size: 0.9375rem;
+//   line-height: 1.65;
+//   color: $muted;
+//   margin: 0 0 0.75rem;
+//   text-align: left;
+// }
+
+// .quoteMark {
+//   display: block;
+//   font-size: 3.5rem;
+//   line-height: 1;
+//   color: $softGreen;
+//   margin-top: 0.5rem;
+//   font-family: Georgia, serif;
+// }

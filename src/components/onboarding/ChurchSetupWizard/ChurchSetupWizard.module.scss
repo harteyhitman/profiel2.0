@@ -1,0 +1,171 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.wizardContent {
+  @include flex-column;
+  gap: $spacing-xl;
+}
+
+.welcomeSection {
+  background-color: $primary-color;
+  padding: 12px 32px;
+  position: relative;
+
+  @include mobile {
+    // padding: $spacing-xl;
+  }
+}
+
+.welcomeCard {
+  background-color: $background-light;
+  border-radius: $border-radius-md;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $spacing-2xl;
+  align-items: center;
+  width: 100%;
+  @include tablet {
+   display: flex;
+  }
+  @include mobile {
+    display: flex;
+    gap: $spacing-md;
+    padding: 12px;
+  }
+}
+
+.welcomeContent {
+  @include flex-column;
+  gap: $spacing-md;
+  padding: 22px;
+  @include mobile {
+    padding: 6px 0;
+  }
+}
+
+.welcomeTitle {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0;
+  font-weight: $font-weight-bold;
+}
+
+.welcomeText {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.progressContainer {
+  @include flex-between;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.progressText {
+  @include body-small;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.welcomeIllustration {
+  @include flex-center;
+  flex-shrink: 0;
+}
+
+
+.stepContent {
+  @include flex-column;
+  gap: $spacing-xl;
+  padding: 22px 32px;
+}
+
+.stepTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+}
+
+.stepDescription {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0 0 $spacing-xl 0;
+}
+
+.form {
+  @include flex-column;
+  gap: $spacing-lg;
+}
+
+.formGroup {
+  width: 100%;
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+.fieldLabel {
+  @include body-small;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.formInput {
+  :global(.inputWrapper) {
+    :global(.floatingLabel) {
+      display: none !important;
+    }
+
+    :global(input),
+    :global(select) {
+      padding-top: $spacing-md;
+      padding-bottom: $spacing-md;
+      min-width: 100% !important;
+      width: 100% !important;
+    }
+  }
+}
+
+.successContent {
+  @include flex-column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-xl;
+  padding: $spacing-2xl 0;
+}
+
+.successIllustration {
+  @include flex-center;
+  margin-bottom: $spacing-md;
+}
+
+.successTitle {
+  @include heading-large;
+  color: $text-primary;
+  font-size: 1.75rem;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.buttonGroupThree {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: $spacing-md;
+  align-items: center;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+}
+

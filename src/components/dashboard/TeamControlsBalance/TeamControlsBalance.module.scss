@@ -1,0 +1,124 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.section {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  border: $border-width-thin solid $border-color;
+  box-shadow: $shadow-sm;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.sectionHeader {
+  margin-bottom: $spacing-lg;
+}
+
+.sectionTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0 0 $spacing-xs 0;
+  font-family: $font-family-heading;
+}
+
+.sectionSubtitle {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  @include flex-column;
+  gap: 0;
+  background-color: $background-white;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  border: $border-width-thin solid $border-color;
+
+  box-shadow: $shadow-sm;
+  width: 100%;
+}
+
+.cardHeader {
+  height: 70px; // Just a colored bar, no text
+  min-height: 8px;
+  
+  &.cardHeaderGreen {
+    background-color: #D1FAE5; // Light green
+  }
+  
+  &.cardHeaderBlue {
+    background-color: #DBEAFE; // Light blue
+  }
+  
+  &.cardHeaderRed {
+    background-color: #FEE2E2; // Light red/pink
+  }
+
+}
+
+.cardBody {
+  padding: $spacing-lg;
+  @include flex-column;
+  gap: $spacing-sm;
+
+  text-align: center;
+  align-items: center;
+
+}
+
+.cardTitle {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-semibold;
+  margin: 0;
+
+  text-align: center;
+
+}
+
+.cardValue {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+
+}
+
+.cardSubtext {
+  @include body-small;
+  color: $text-secondary;
+  margin: 0;
+
+  text-align: center;
+  
+  &.cardSubtextBlue {
+    color: #3B82F6; // Blue
+  }
+  
+  &.cardSubtextRed {
+    color: #EF4444; // Red
+  }
+
+}
+

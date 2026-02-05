@@ -1,0 +1,177 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  padding-bottom: $spacing-4xl;
+  background: linear-gradient(90deg, #05130C, #0F3728, #0F4E39);
+
+  @include tablet {
+    padding-top: 100px;
+    padding-bottom: $spacing-3xl;
+    min-height: auto;
+  }
+
+  @include mobile {
+    padding-top: 80px;
+    padding-bottom: $spacing-2xl;
+    min-height: auto;
+    
+  }
+}
+
+.container {
+  @include container;
+  // padding: 3rem 2rem ;
+  width: 100%;
+}
+
+.content {
+  @include flex-between;
+  gap: $spacing-4xl;
+  align-items: center;
+
+  @include tablet {
+    flex-direction: column;
+    gap: $spacing-3xl;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-2xl;
+  }
+}
+
+.textContent {
+  flex: 1;
+  // max-width: 600px;
+
+  @include tablet {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  @include mobile {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+.heading {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  color: $secondary-color;
+  font-family: 'Work sans';
+  line-height: $line-height-tight;
+  margin-bottom: $spacing-xl;
+  animation: fadeInUp 0.8s $transition-ease;
+
+  @include tablet {
+    font-size: $font-size-4xl;
+    margin-bottom: $spacing-lg;
+  }
+
+  @include mobile {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.subheading {
+  @include body-large;
+  color: $secondary-color;
+  margin-bottom: $spacing-2xl;
+  max-width: 550px;
+  line-height: $line-height-relaxed;
+  animation: fadeInUp 0.8s $transition-ease 0.2s both;
+
+  @include tablet {
+    max-width: 100%;
+    margin-bottom: $spacing-xl;
+  }
+
+  @include mobile {
+    max-width: 100%;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-base;
+  }
+}
+
+.ctaButtons {
+  @include flex-start;
+  gap: $spacing-lg;
+  animation: fadeInUp 0.8s $transition-ease 0.4s both;
+
+  @include tablet {
+    @include flex-center;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.primaryButton {
+  @include body-base;
+  color: $secondary-color;
+  background: linear-gradient(180deg, $button-light, $button-dark);
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  padding: 18px 36px;
+  border-radius: 8px;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: darken($accent-green, 5%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  @include mobile {
+    width: 100%;
+    padding: $spacing-md $spacing-xl;
+  }
+}
+
+.cardContent {
+  flex: 1;
+  max-width: 600px;
+  animation: fadeInRight 0.8s $transition-ease 0.6s both;
+
+  @include tablet {
+    max-width: 100%;
+    width: 100%;
+    animation: fadeInUp 0.8s $transition-ease 0.6s both;
+  }
+
+  @include mobile {
+    max-width: 100%;
+    width: 100%;
+    animation: fadeInUp 0.8s $transition-ease 0.6s both;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,67 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.metricCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-card);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  @include mobile {
+    padding: var(--space-md);
+  }
+}
+
+.iconBox {
+  width: 48px;
+  height: 48px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  @include flex-center;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.iconContainer {
+  width: 24px;
+  height: 24px;
+  @include flex-center;
+  color: var(--text-primary);
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-primary);
+    fill: none;
+  }
+}
+
+.metricTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.metricValue {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.25;
+  font-family: var(--font-heading);
+}

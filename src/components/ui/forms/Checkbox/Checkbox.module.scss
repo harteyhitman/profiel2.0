@@ -1,0 +1,30 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.checkboxLabel {
+  @include flex-center;
+  gap: $spacing-md;
+  cursor: pointer;
+  align-items: center         ;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: $dark-green;
+  flex-shrink: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.checkboxText {
+  @include body-base;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+}
+

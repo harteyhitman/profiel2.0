@@ -1,0 +1,140 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.page {
+  min-height: 60vh;
+  padding: $spacing-xl $spacing-lg;
+  max-width: 720px;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-md;
+  }
+}
+
+.center {
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  min-height: 40vh;
+  text-align: center;
+}
+
+.header {
+  @include flex-column;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.title {
+  @include heading-medium;
+  color: $accent-green;
+  margin: 0;
+}
+
+.subtitle {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.message {
+  @include body-base;
+  color: $text-primary;
+  margin: 0;
+}
+
+.error {
+  @include body-base;
+  color: #b91c1c;
+  margin: 0;
+}
+
+.link {
+  @include body-base;
+  color: $accent-green;
+  font-weight: $font-weight-medium;
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.note {
+  @include body-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-sm 0;
+}
+
+.label {
+  @include flex-column;
+  gap: $spacing-xs;
+  @include body-base;
+  color: $text-primary;
+}
+
+.input {
+  padding: $spacing-sm $spacing-md;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  @include body-base;
+  color: $text-primary;
+  background: $background-white;
+
+  &::placeholder {
+    color: $text-secondary;
+  }
+}
+
+.cardWrap {
+  @include flex-column;
+  gap: $spacing-lg;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  padding: $spacing-sm $spacing-lg;
+  border: none;
+  border-radius: $border-radius-md;
+  background: $accent-green;
+  color: $secondary-color;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: opacity $transition-base $transition-ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.btnSecondary {
+  padding: $spacing-sm $spacing-lg;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  background: $background-white;
+  color: $text-primary;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: border-color $transition-base $transition-ease;
+
+  &:hover {
+    border-color: $accent-green;
+  }
+}

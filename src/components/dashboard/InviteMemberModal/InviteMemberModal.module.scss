@@ -1,0 +1,179 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modalContent {
+  @include flex-column;
+  gap: $spacing-xl;
+  padding: 22px 32px;
+
+  @include mobile {
+    padding: $spacing-lg $spacing-md;
+    gap: $spacing-lg;
+  }
+}
+
+.modalHeader {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.subtitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.description {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.form {
+  @include flex-column;
+  gap: $spacing-lg;
+}
+
+.formGroup {
+  @include flex-column;
+  gap: $spacing-xs;
+  position: relative;
+}
+
+.roleDropdown {
+  position: relative;
+  width: 100%;
+}
+
+.roleButton {
+  width: 100%;
+  padding: $spacing-md;
+  border: $border-width-thin solid $border-color;
+  border-radius: 12px;
+  background-color: $background-white;
+  @include flex-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  text-align: left;
+
+  &:hover {
+    border-color: $accent-green;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+  }
+}
+
+.roleButtonText {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.dropdownIcon {
+  color: $text-secondary;
+  transition: transform $transition-base $transition-ease;
+  flex-shrink: 0;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.roleDropdownMenu {
+  position: absolute;
+  top: calc(100% + $spacing-xs);
+  left: 0;
+  right: 0;
+  background-color: $background-white;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-lg;
+  z-index: $z-index-dropdown;
+  padding: $spacing-sm;
+  @include flex-column;
+  gap: $spacing-xs;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.roleOption {
+  padding: $spacing-sm;
+  border-radius: $border-radius-sm;
+  transition: background-color $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.inviteButton {
+  margin-top: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+}
+
+.confirmationContent {
+  @include flex-column;
+  gap: $spacing-xl;
+
+  @include mobile {
+    gap: $spacing-lg;
+    padding: $spacing-lg $spacing-md;
+  }
+}
+
+.confirmationHeader {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.confirmationTitle {
+  @include heading-medium;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+}
+
+.confirmationMessage {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.confirmationList {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.confirmationListTitle {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+  margin: 0;
+}
+
+.confirmationListItems {
+  @include flex-column;
+  gap: $spacing-sm;
+  margin: 0;
+  padding-left: $spacing-lg;
+  list-style: disc;
+
+  li {
+    @include body-base;
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+  }
+}
+
+.okButton {
+  margin-top: $spacing-md;
+}
+

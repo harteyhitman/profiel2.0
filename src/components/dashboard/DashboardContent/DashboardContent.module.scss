@@ -1,0 +1,124 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.dashboardContent {
+  @include flex-column;
+  gap: $spacing-xl;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-xl;
+
+  @include tablet-down {
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+}
+
+.headerText {
+  flex: 1;
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm 0;
+  font-size: 24px
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0;
+  font-size: 16px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  @include mobile {
+    width: 100%;
+    flex-direction: column;
+    gap: $spacing-sm;
+    
+    button,
+    :global(button) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-md;
+  border: $border-width-thin solid $border-color;
+  background-color: $background-white;
+  color: $text-primary;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  white-space: nowrap;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.actionButtonBlack {
+  background-color: #000000 !important;
+  color: $background-white !important;
+  &:hover {
+    background-color: #000000 !important;
+    color: $background-white !important;
+  }
+}
+
+.actionButtonGreen {
+  background-color: rgba(11, 172, 90, 1) !important;
+  color: $background-white !important;
+  border: none !important;
+  &:hover {
+    background-color: rgba(11, 172, 90, 0.9) !important;
+    color: $background-white !important;
+  }
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @include tablet-down {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+
+  @include tablet-down {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.infoNote {
+  background-color: #FEF3C7; // Light orange/brown
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  border: $border-width-thin solid #FCD34D;
+
+  @include mobile {
+    padding: $spacing-md;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.iconContainer {
+  width: 24px;
+  height: 24px;
+  @include flex-center;
+  color: #F59E0B; // Orange
+  flex-shrink: 0;
+}
+
+.noteText {
+  @include body-base;
+  color: #92400E; // Dark orange/brown
+  margin: 0;
+  line-height: $line-height-relaxed;
+  flex: 1;
+}
+

@@ -1,0 +1,464 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.faqSection {
+  padding: $spacing-4xl 0;
+  background-color: $background-white;
+  color: $text-primary;
+
+  @include tablet {
+    padding: $spacing-3xl 0;
+  }
+
+  @include mobile {
+    padding: $spacing-2xl 0;
+  }
+}
+
+.container {
+  @include container;
+  max-width: 1400px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-4xl;
+
+  @include tablet {
+    margin-bottom: $spacing-3xl;
+  }
+
+  @include mobile {
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.title {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-xl;
+  font-family: $font-family-heading;
+
+  @include tablet {
+    font-size: $font-size-4xl;
+  }
+
+  @include mobile {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-xl;
+  color: $text-secondary;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: $line-height-relaxed;
+
+  @include tablet {
+    font-size: $font-size-lg;
+  }
+
+  @include mobile {
+    font-size: $font-size-base;
+    padding: 0 $spacing-md;
+  }
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+  margin-bottom: $spacing-3xl;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-lg;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.faqCard {
+  background-color: $background-white;
+  border-radius: $border-radius-xl;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  transition: all $transition-base $transition-ease;
+  display: flex;
+  flex-direction: column;
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-2px);
+  }
+
+  @include mobile {
+    border-radius: $border-radius-lg;
+  }
+}
+
+.categoryHeader {
+  background-color: #52b787;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $border-color;
+
+  @include tablet {
+    padding: $spacing-lg;
+  }
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.categoryHeaderContent {
+  @include flex-start;
+  gap: $spacing-lg;
+
+  @include mobile {
+    gap: $spacing-md;
+  }
+}
+
+.iconWrapper {
+  @include flex-center;
+  width: 48px;
+  height: 48px;
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $transition-base $transition-ease;
+  flex-shrink: 0;
+
+  .faqCard:hover & {
+    box-shadow: $shadow-md;
+  }
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-md;
+  }
+}
+
+.icon {
+  font-size: $font-size-2xl;
+
+  @include mobile {
+    font-size: $font-size-xl;
+  }
+}
+
+.categoryInfo {
+  @include flex-column;
+  gap: $spacing-xs;
+  flex: 1;
+}
+
+.categoryTitleRow {
+  @include flex-start;
+  gap: $spacing-sm;
+  align-items: center;
+}
+
+.categoryBadge {
+  @include flex-center;
+  width: 24px;
+  height: 24px;
+  background-color: $text-primary;
+  color: $background-white;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  border-radius: $border-radius-sm;
+  flex-shrink: 0;
+}
+
+.categoryTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-primary;
+
+  @include mobile {
+    font-size: $font-size-base;
+  }
+}
+
+.questionCount {
+  font-size: $font-size-sm;
+  color: $background-white;
+  margin: 0;
+  font-weight: $font-weight-normal;
+
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.questionsList {
+  padding: $spacing-xl;
+  @include flex-column;
+  gap: $spacing-lg;
+  flex: 1;
+
+  @include tablet {
+    padding: $spacing-lg;
+    gap: $spacing-md;
+  }
+
+  @include mobile {
+    padding: $spacing-md;
+    gap: $spacing-md;
+  }
+}
+
+.questionItem {
+  border-radius: $border-radius-lg;
+  border: 1px solid $border-color;
+  transition: all $transition-base $transition-ease;
+  overflow: hidden;
+
+  &:hover {
+    border-color: darken($border-color, 10%);
+    background-color: $background-light;
+  }
+
+  &.questionItemOpen {
+    border-color: darken($border-color, 20%);
+    background-color: $background-light;
+  }
+
+  @include mobile {
+    border-radius: $border-radius-md;
+  }
+}
+
+.questionButton {
+  width: 100%;
+  text-align: left;
+  padding: $spacing-md;
+  @include flex-between;
+  align-items: flex-start;
+  gap: $spacing-md;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-base $transition-ease;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  @include mobile {
+    padding: $spacing-md;
+    gap: $spacing-sm;
+  }
+}
+
+.questionText {
+  flex: 1;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  font-family: $font-family-primary;
+
+  @include mobile {
+    font-size: $font-size-xs;
+    line-height: $line-height-normal;
+  }
+}
+
+.chevronIcon {
+  width: 16px;
+  height: 16px;
+  color: $text-secondary;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transform: rotate(0deg);
+  transition: transform $transition-base $transition-ease;
+
+  @include mobile {
+    width: 14px;
+    height: 14px;
+  }
+
+  &.chevronIconOpen {
+    transform: rotate(180deg);
+  }
+}
+
+.answerContainer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height $transition-base $transition-ease, opacity $transition-base $transition-ease;
+
+  &.answerContainerOpen {
+    max-height: 200px;
+    opacity: 1;
+  }
+}
+
+.answerWrapper {
+  padding: 0 $spacing-lg $spacing-lg;
+
+  @include mobile {
+    padding: 0 $spacing-md $spacing-md;
+  }
+}
+
+.answerText {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  border: 1px solid $border-color;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  margin: 0;
+  font-family: $font-family-primary;
+
+  @include mobile {
+    font-size: $font-size-xs;
+    padding: $spacing-sm;
+    border-radius: $border-radius-md;
+  }
+}
+
+.categoryFooter {
+  padding: $spacing-lg $spacing-xl;
+  background-color: $background-light;
+  border-top: 1px solid $border-color;
+  margin-top: auto;
+
+  @include tablet {
+    padding: $spacing-md $spacing-lg;
+  }
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md;
+  }
+}
+
+.footerText {
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  text-align: center;
+  margin: 0;
+  font-family: $font-family-primary;
+}
+
+.bottomCTA {
+  margin-top: $spacing-3xl;
+  text-align: center;
+
+  @include tablet {
+    margin-top: $spacing-2xl;
+  }
+
+  @include mobile {
+    margin-top: $spacing-xl;
+  }
+}
+
+.ctaCard {
+  background-color: $background-white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-2xl;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-lg;
+  max-width: 600px;
+  margin: 0 auto;
+
+  @include tablet {
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+  }
+
+  @include mobile {
+    padding: $spacing-lg;
+    margin: 0 $spacing-md;
+  }
+}
+
+.ctaTitle {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-lg;
+  font-family: $font-family-heading;
+
+  @include tablet {
+    font-size: $font-size-xl;
+  }
+
+  @include mobile {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.ctaText {
+  color: $text-secondary;
+  margin-bottom: $spacing-xl;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  font-family: $font-family-primary;
+
+  @include mobile {
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.ctaButton {
+  background-color: #52b787;
+  color: $background-white;
+  padding: $spacing-md $spacing-2xl;
+  border-radius: 6px;
+  font-weight: $font-weight-semibold;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  box-shadow: $shadow-sm;
+  font-size: $font-size-base;
+  font-family: $font-family-primary;
+
+  &:hover {
+    background-color: darken(#52b787, 10%);
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include mobile {
+    padding: $spacing-sm $spacing-xl;
+    font-size: $font-size-sm;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .faqCard,
+  .questionItem,
+  .chevronIcon,
+  .ctaButton {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.card {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  border: 1px solid $border-color;
+  @include flex-column;
+  gap: $spacing-md;
+  align-items: flex-start;
+  text-align: left;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+    border-color: $accent-green;
+  }
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  @include flex-center;
+  color: $accent-green;
+  flex-shrink: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.title {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0;
+  font-family: $font-family-heading;
+  font-weight: $font-weight-medium;
+}
+

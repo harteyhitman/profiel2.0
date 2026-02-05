@@ -1,0 +1,48 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+
+.page {
+  padding: $spacing-xl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.completionCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  padding: $spacing-3xl;
+  box-shadow: $shadow-md;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+
+  @include mobile {
+    padding: $spacing-2xl;
+  }
+}
+
+.title {
+  @include heading-large;
+  color: $text-primary;
+  margin: 0 0 $spacing-lg 0;
+  font-family: $font-family-heading;
+}
+
+.message {
+  @include body-large;
+  color: $text-secondary;
+  margin: 0 0 $spacing-2xl 0;
+  line-height: $line-height-relaxed;
+}
+
+.viewResultsButton {
+  min-width: 200px;
+  padding: $spacing-md $spacing-2xl;
+}
+

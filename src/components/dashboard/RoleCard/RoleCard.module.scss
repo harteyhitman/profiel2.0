@@ -1,0 +1,67 @@
+@import '../../../styles/mixins';
+
+.roleCard {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &.primary,
+  &.secondary {
+    background: transparent;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+  position: relative;
+}
+
+.roleBadge {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &.primary {
+    background: linear-gradient(90deg, var(--primary-badge-start) 0%, var(--primary-badge-end) 100%);
+  }
+
+  &.secondary {
+    background: linear-gradient(90deg, var(--secondary-badge-start) 0%, var(--secondary-badge-end) 100%);
+  }
+}
+
+.roleTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: #1f2937;
+  margin: 0;
+  padding-right: 5rem;
+}
+
+.roleDescription {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+  flex: 1;
+}

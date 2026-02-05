@@ -1,0 +1,52 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.alertBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  padding: $spacing-lg $spacing-xl;
+  background-color: #FFF4E6;
+  border-radius: $border-radius-md;
+  border: $border-width-thin solid #FFE0B2;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.alertContent {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex: 1;
+}
+
+.alertIcon {
+  color: #E65100;
+  flex-shrink: 0;
+}
+
+.alertText {
+  @include body-base;
+  color: $text-primary;
+  margin: 0;
+}
+
+.setupButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-shrink: 0;
+  background-color: #8B4513 !important;
+  color: $background-white !important;
+  border-color: #8B4513;
+
+  &:hover {
+    background-color: darken(#8B4513, 5%);
+    border-color: darken(#8B4513, 5%);
+  }
+}
+

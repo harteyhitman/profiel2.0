@@ -1,0 +1,15 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.label {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+  display: block;
+}
+
+.required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+

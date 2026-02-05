@@ -1,0 +1,218 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $background-white;
+  z-index: $z-index-sticky;
+  padding: $spacing-lg 0;
+  transition: all $transition-base $transition-ease;
+
+  @include mobile {
+    padding: $spacing-md 0;
+  }
+}
+
+.container {
+  @include container;
+  @include flex-between;
+  gap: $spacing-xl;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.logoText {
+  @include heading-small;
+  color: $primary-color;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+}
+
+.menuContent {
+  @include tablet-down {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: $background-white;
+    flex-direction: column;
+    box-shadow: $shadow-lg;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all $transition-base $transition-ease;
+    border-top: $border-width-thin solid $border-color;
+    max-height: 0;
+    overflow: hidden;
+
+    &.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      max-height: 1000px;
+    }
+  }
+}
+
+.navLinks {
+  @include flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: $spacing-xl;
+  flex: 1;
+  justify-content: center;
+
+  @include tablet-down {
+    flex-direction: column;
+    padding: $spacing-lg;
+    gap: 0;
+    width: 100%;
+  }
+
+  li {
+    a {
+      @include body-base;
+      color: $text-primary;
+      text-decoration: none;
+      font-weight: $font-weight-normal;
+      position: relative;
+      transition: color $transition-base $transition-ease;
+      padding: $spacing-xs 0;
+      white-space: nowrap;
+      // font-family: 'Work Sans';
+      font-style: Regular;
+      font-size: 16px;
+      line-height: 131%;
+      letter-spacing: -2%;
+
+      &:hover {
+        color: $accent-green;
+      }
+
+      @include tablet-down {
+        display: block;
+        padding: $spacing-md;
+        border-bottom: $border-width-thin solid $border-color;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+.authButtons {
+  @include flex-start;
+  gap: $spacing-md;
+  flex-shrink: 0;
+
+  @include tablet-down {
+    display: none;
+  }
+}
+
+.loginButton {
+  @include body-base;
+  color: $text-primary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  padding: $spacing-sm $spacing-lg;
+  transition: color $transition-base $transition-ease;
+  &:hover {
+    color: $accent-green;
+  }
+}
+
+.registerButton {
+  @include body-base;
+  color: $secondary-color;
+  background: linear-gradient(180deg, $button-light, $button-dark);
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  padding: 12px 36px;
+  border-radius: 8px;
+  transition: all $transition-base $transition-ease;
+
+  &:hover {
+    background-color: darken($accent-green, 5%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.mobileAuthButtons {
+  display: none;
+
+  @include tablet-down {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    padding: 0 $spacing-lg $spacing-lg;
+    width: 100%;
+
+    .loginButton,
+    .registerButton {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  z-index: $z-index-fixed;
+
+  @include tablet-down {
+    display: block;
+  }
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 24px;
+  height: 18px;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: $primary-color;
+    transition: all $transition-base $transition-ease;
+    transform-origin: center;
+
+    &.active {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+    }
+  }
+}

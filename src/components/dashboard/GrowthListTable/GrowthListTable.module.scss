@@ -1,0 +1,149 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  @include body-base;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+  text-align: left;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: $border-width-thin solid $border-color;
+}
+
+.tableRow {
+  border-bottom: $border-width-thin solid $border-color;
+  transition: background-color $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tableCell {
+  padding: $spacing-md $spacing-lg;
+  @include body-base;
+  color: $text-primary;
+}
+
+.memberName {
+  font-weight: $font-weight-medium;
+}
+
+.team,
+.currentAreas,
+.growthArea {
+  color: $text-primary;
+}
+
+.stageBadge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $border-radius-full;
+  @include body-small;
+  font-weight: $font-weight-medium;
+
+  &.completed {
+    background-color: rgba($accent-green, 0.1);
+    color: $accent-green;
+  }
+
+  &.pending {
+    background-color: rgba($orange-accent, 0.1);
+    color: $orange-accent;
+  }
+}
+
+.actionsCell {
+  position: relative;
+  text-align: right;
+}
+
+.actionsButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  color: $text-secondary;
+  @include flex-center;
+  transition: color $transition-base $transition-ease;
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.actionsMenu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 6px;
+  background-color: $background-white;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  min-width: 200px;
+  padding: $spacing-xs 0;
+  @include flex-column;
+  overflow: hidden;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-lg;
+  @include body-base;
+  color: $text-primary;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color $transition-base $transition-ease;
+
+  &:hover {
+    background-color: $background-light;
+  }
+}
+
+.actionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: $text-secondary;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@include mobile {
+  .table {
+    font-size: $font-size-sm;
+  }
+
+  .tableHeader,
+  .tableCell {
+    padding: $spacing-sm $spacing-md;
+  }
+}
+

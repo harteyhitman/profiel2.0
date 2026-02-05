@@ -1,0 +1,228 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.logoHeader {
+  @include flex-center;
+  gap: $spacing-sm;
+  align-items: center;
+  margin-bottom: $spacing-2xl;
+  
+  @include mobile {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.logoBox {
+  width: 40px;
+  height: 40px;
+  background-color: $light-mint;
+  border-radius: $border-radius-sm;
+  flex-shrink: 0;
+}
+
+.logoText {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.card {
+  background-color: $background-white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-3xl $spacing-2xl;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: $shadow-xl;
+
+  @include mobile {
+    padding: $spacing-2xl $spacing-xl;
+  }
+}
+
+.title {
+  @include heading-medium;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+}
+
+.form {
+  @include flex-column;
+  gap: $spacing-xl;
+  background: $background-white;
+  padding: $spacing-2xl;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-xl;
+  @include mobile {
+    padding: $spacing-xl;
+  }
+  @include tablet {
+    padding: $spacing-2xl;
+  }
+}
+
+.formGroup {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.label {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-md;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  font-size: $font-size-base;
+  color: $text-primary;
+  transition: all $transition-base $transition-ease;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+    box-shadow: 0 0 0 3px rgba($accent-green, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-light;
+  }
+}
+
+.passwordInput {
+  position: relative;
+  @include flex-between;
+  align-items: center;
+
+  .input {
+    padding-right: $spacing-3xl;
+  }
+}
+
+.eyeButton {
+  position: absolute;
+  right: $spacing-md;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  @include flex-center;
+  color: $text-secondary;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.dateInput {
+  position: relative;
+  @include flex-between;
+  align-items: center;
+
+  .input {
+    padding-right: $spacing-3xl;
+  }
+}
+
+.calendarButton {
+  position: absolute;
+  right: $spacing-md;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  @include flex-center;
+  color: $text-secondary;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.select {
+  width: 100%;
+  padding: $spacing-md;
+  border: $border-width-thin solid $border-color;
+  border-radius: $border-radius-md;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background-color: $background-white;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  padding-right: $spacing-3xl;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-green;
+    box-shadow: 0 0 0 3px rgba($accent-green, 0.1);
+  }
+
+  option {
+    color: $text-primary;
+  }
+}
+
+.registerButton {
+  width: 100%;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $border-radius-md;
+  border: none;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base $transition-ease;
+  margin-top: $spacing-md;
+
+  &.enabled {
+    background-color: $light-mint;
+    color: $accent-green;
+
+    &:hover {
+      background-color: darken($light-mint, 5%);
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+  }
+
+  &.disabled {
+    background-color: $light-mint;
+    color: rgba($accent-green, 0.5);
+    cursor: not-allowed;
+  }
+}
+
+.errorMessage {
+  padding: $spacing-md;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: $border-radius-md;
+  color: #EF4444;
+  @include body-small;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
