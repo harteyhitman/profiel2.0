@@ -1,4 +1,4 @@
-@import '../../../../styles/mixins';
+@use '../../../../styles/mixins' as *;
 
 .page {
   padding: var(--space-xl);

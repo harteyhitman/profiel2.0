@@ -1,5 +1,5 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .infoNote {
   background-color: #FEF3C7; // Light orange/brown

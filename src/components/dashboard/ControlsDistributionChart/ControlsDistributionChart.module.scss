@@ -3,7 +3,7 @@
  * Visual match: white card, flat pie (no strokes), exact colors, legend aligned with pie.
  */
 
-@import '../../../styles/mixins';
+@use '../../../styles/mixins' as *;
 
 .card {
   background-color: #ffffff;

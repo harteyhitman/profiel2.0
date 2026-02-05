@@ -3,7 +3,7 @@
  * Visual match: soft gradient card, slim pill bars, left→right green gradient fill.
  */
 
-@import '../../../styles/mixins';
+@use '../../../styles/mixins' as *;
 
 /* Card: subtle soft gradient (cool white → white), no border, generous padding */
 .card {
