@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import QuestionCard from '@/components/dashboard/QuestionCard/QuestionCard';
@@ -24,7 +24,7 @@ function buildInitialResponses(): QuestionResponse[] {
 
 type Step = 'info' | 'questions' | 'submitted';
 
-export default function GuestQuestionnairePage() {
+function GuestQuestionnaireContent() {
   const searchParams = useSearchParams();
   const inviteCode = searchParams?.get('inviteCode') ?? '';
 
@@ -249,5 +249,23 @@ export default function GuestQuestionnairePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function GuestQuestionnaireFallback() {
+  return (
+    <div className={styles.page}>
+      <div className={styles.center}>
+        <p className={styles.message}>Laden...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function GuestQuestionnairePage() {
+  return (
+    <Suspense fallback={<GuestQuestionnaireFallback />}>
+      <GuestQuestionnaireContent />
+    </Suspense>
   );
 }
