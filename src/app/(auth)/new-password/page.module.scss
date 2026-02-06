@@ -1,14 +1,16 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
 .newPasswordPage {
   min-height: 100vh;
-  background-color: $background-light;
+  background: linear-gradient(165deg, color.mix($background-white, $light-mint, 85%) 0%, $background-light 45%, color.mix($background-light, $light-mint, 92%) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: $spacing-xl;
+  box-sizing: border-box;
 
   @include mobile {
     padding: $spacing-md;
@@ -17,24 +19,22 @@
 
 .content {
   width: 100%;
-  // max-width: 500px;
   @include flex-column;
   align-items: center;
 }
 
 .card {
+  width: 100%;
+  max-width: 500px;
   background-color: $background-white;
   border-radius: $border-radius-xl;
   padding: $spacing-3xl $spacing-2xl;
-  // max-width: 500px;
-  width: 100%;
-  box-shadow: $shadow-xl;
+  box-shadow: $shadow-xl, 0 0 0 1px rgba($accent-green, 0.08);
+  border: 1px solid rgba($accent-green, 0.12);
   box-sizing: border-box;
-  overflow: hidden;
 
   @include mobile {
     padding: $spacing-2xl $spacing-xl;
-    max-width: 100%;
   }
 }
 
@@ -44,26 +44,24 @@
   align-items: center;
   justify-content: center;
   margin-bottom: $spacing-md;
-
-  @include mobile {
-    justify-content: center;
-  }
 }
 
 .logoBox {
   width: 60px;
   height: 60px;
-  background-color: $light-mint;
+  background: linear-gradient(145deg, $light-mint 0%, color.adjust($light-mint, $lightness: -3%) 100%);
   border-radius: $border-radius-md;
+  border: 2px solid rgba($accent-green, 0.2);
+  box-shadow: 0 4px 12px rgba($accent-green, 0.15);
   @include flex-center;
-  @include body-small;
   color: $accent-green;
   font-weight: $font-weight-medium;
+  overflow: hidden;
 }
 
 .title {
   @include heading-medium;
-  color: $text-primary;
+  color: $accent-green;
   text-align: center;
   margin-top: $spacing-3xl;
   margin-bottom: $spacing-3xl;

@@ -10,11 +10,20 @@ export interface ChurchFormData {
 }
 
 export interface RegistrationFormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  dateOfBirth: string;
-  sector: string;
+  acceptTerms: boolean;
+  isTeamLeader: boolean;
+  birthDate?: string;
+  birthYear?: string;
+  birthMonth?: string;
+  birthDay?: string;
+  currentSector?: string;
+  preferredSector?: string;
+  referralSource?: string;
+  inviteCode?: string;
 }
 
 export interface LoginFormData {

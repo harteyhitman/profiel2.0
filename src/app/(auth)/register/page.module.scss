@@ -1,68 +1,156 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
 .registerPage {
   min-height: 100vh;
-  background-color: $background-light; // Light grey background
+  background: linear-gradient(165deg, color.mix($background-white, $light-mint, 85%) 0%, $background-light 45%, color.mix($background-light, $light-mint, 92%) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-md $spacing-xl $spacing-xl;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: $spacing-sm $spacing-md $spacing-md;
+  }
+}
+
+.logoHeader {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto $spacing-xl;
+  background-color: rgba($accent-green, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xs;
+  gap: 0;
+  border: 1px solid rgba($accent-green, 0.15);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  @include body-base;
+  color: $text-secondary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: background-color $transition-base $transition-ease, color $transition-base $transition-ease;
+
+  &:hover {
+    color: $accent-green;
+  }
+}
+
+.tabActive {
+  background-color: $background-white;
+  color: $accent-green;
+  box-shadow: $shadow-sm;
+  cursor: default;
+  pointer-events: none;
+  font-weight: $font-weight-semibold;
+}
+
+.logo {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: $spacing-xl;
-  
-  @include mobile {
-    padding: $spacing-md;
-  }
-}
-
-.content {
-  width: 100%;
-  max-width: 600px;
-  @include flex-column;
-  align-items: center;
-}
-
-
-.logo {
- display: flex;
- flex-direction: column;
-  align-items: center;
-justify-content: center;
-  margin-bottom: $spacing-md;
-
-  @include mobile {
-    justify-content: center;
-  }
+  margin-bottom: $spacing-sm;
 }
 
 .logoBox {
   width: 60px;
   height: 60px;
-  background-color: $light-mint;
+  background: linear-gradient(145deg, $light-mint 0%, color.adjust($light-mint, $lightness: -3%) 100%);
   border-radius: $border-radius-md;
+  border: 2px solid rgba($accent-green, 0.2);
+  box-shadow: 0 4px 12px rgba($accent-green, 0.15);
   @include flex-center;
   @include body-small;
   color: $accent-green;
   font-weight: $font-weight-medium;
+  overflow: hidden;
 }
 
 .title {
   @include heading-medium;
-  color: $text-primary;
+  color: $accent-green;
   text-align: center;
-  margin-top: $spacing-3xl;
-  margin-bottom: $spacing-md;
+  margin: 0 0 $spacing-sm;
+  width: 100%;
 }
 
 .subtitle {
   @include body-large;
   color: $text-secondary;
   text-align: center;
-  margin-bottom: $spacing-3xl;
+  margin: 0 0 $spacing-2xl;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.card {
+  width: 100%;
+  background: $background-white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-3xl $spacing-2xl $spacing-2xl;
+  box-shadow: $shadow-lg, 0 0 0 1px rgba($accent-green, 0.08);
+  border: 1px solid rgba($accent-green, 0.12);
+  box-sizing: border-box;
+  position: relative;
+
+  @include mobile {
+    padding: $spacing-2xl $spacing-xl $spacing-xl;
+  }
+}
+
+.cardTopBar {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  left: $spacing-md;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.verifyLink {
+  @include body-small;
+  color: $accent-green;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .loginLink {
-  margin-top: $spacing-xl;
+  margin: $spacing-lg 0 0;
+  padding: 0;
   text-align: center;
   @include body-base;
   color: $text-secondary;
@@ -71,10 +159,8 @@ justify-content: center;
     color: $accent-green;
     text-decoration: none;
     font-weight: $font-weight-medium;
-    transition: opacity $transition-base $transition-ease;
 
     &:hover {
-      opacity: 0.7;
       text-decoration: underline;
     }
   }

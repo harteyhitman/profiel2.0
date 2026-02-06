@@ -1,41 +1,29 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
 .forgotPasswordPage {
   min-height: 100vh;
-  background-color: $background-light;
+  background: linear-gradient(165deg, color.mix($background-white, $light-mint, 85%) 0%, $background-light 45%, color.mix($background-light, $light-mint, 92%) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: $spacing-xl;
+  box-sizing: border-box;
 
   @include mobile {
     padding: $spacing-md;
   }
 }
 
-.content {
+.logoHeader {
   width: 100%;
-  // max-width: 500px;
-  @include flex-column;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-}
-
-.card {
-  background-color: $background-white;
-  border-radius: $border-radius-xl;
-  padding: $spacing-3xl $spacing-2xl;
-  // max-width: 500px;
-  width: 100%;
-  box-shadow: $shadow-xl;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  @include mobile {
-    padding: $spacing-2xl $spacing-xl;
-    max-width: 100%;
-  }
+  margin: 0 auto;
 }
 
 .logo {
@@ -43,67 +31,58 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: $spacing-md;
-
-  @include mobile {
-    justify-content: center;
-  }
+  margin-bottom: $spacing-sm;
 }
 
 .logoBox {
   width: 60px;
   height: 60px;
-  background-color: $light-mint;
+  background: linear-gradient(145deg, $light-mint 0%, color.adjust($light-mint, $lightness: -3%) 100%);
   border-radius: $border-radius-md;
+  border: 2px solid rgba($accent-green, 0.2);
+  box-shadow: 0 4px 12px rgba($accent-green, 0.15);
   @include flex-center;
-  @include body-small;
   color: $accent-green;
   font-weight: $font-weight-medium;
+  overflow: hidden;
 }
 
 .title {
   @include heading-medium;
-  color: $text-primary;
+  color: $accent-green;
   text-align: center;
-  margin-top: $spacing-3xl;
-  margin-bottom: $spacing-3xl;
+  margin: 0 0 $spacing-sm;
+  width: 100%;
 }
 
-.logo {
+.subtitle {
+  @include body-large;
+  color: $text-secondary;
+  text-align: center;
+  margin: 0 0 $spacing-2xl;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.content {
+  width: 100%;
   display: flex;
   flex-direction: column;
-   align-items: center;
- justify-content: center;
-   margin-bottom: $spacing-md;
- 
-   @include mobile {
-     justify-content: center;
-   }
- }
- 
- .logoBox {
-   width: 60px;
-   height: 60px;
-   background-color: $light-mint;
-   border-radius: $border-radius-md;
-   @include flex-center;
-   @include body-small;
-   color: $accent-green;
-   font-weight: $font-weight-medium;
- }
- 
- .title {
-   @include heading-medium;
-   color: $text-primary;
-   text-align: center;
-   margin-top: $spacing-3xl;
-   margin-bottom: $spacing-md;
- }
- 
- .subtitle {
-   @include body-large;
-   color: $text-secondary;
-   text-align: center;
-   margin-bottom: $spacing-3xl;
- }
- 
+  align-items: stretch;
+}
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: $background-white;
+  border-radius: $border-radius-xl;
+  padding: $spacing-3xl $spacing-2xl;
+  box-shadow: $shadow-xl, 0 0 0 1px rgba($accent-green, 0.08);
+  border: 1px solid rgba($accent-green, 0.12);
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: $spacing-2xl $spacing-xl;
+  }
+}

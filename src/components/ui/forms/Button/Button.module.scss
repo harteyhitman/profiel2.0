@@ -37,11 +37,11 @@
     }
 
     &.secondary {
-      background-color: rgba(11, 172, 90, 1);
+      background: linear-gradient(135deg, $accent-green 0%, color.adjust($accent-green, $lightness: 5%) 100%);
       color: $secondary-color;
 
       &:hover {
-        background-color: rgba(11, 172, 90, 1);
+        background: linear-gradient(135deg, color.adjust($accent-green, $lightness: -5%) 0%, $accent-green 100%);
         transform: translateY(-1px);
         box-shadow: $shadow-md;
       }

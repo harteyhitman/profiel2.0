@@ -12,14 +12,24 @@ export default function LoginPage() {
       <div className={styles.logoHeader}>
         <div className={styles.logo}>
           <div className={styles.logoBox}>
-            <Image src={Logo} alt='logo' />
+            <Image src={Logo} alt="Bedieningenprofiel" />
           </div>
         </div>
-        
-        <h1 className={styles.title}>Inloggen</h1>
-        
+        <h1 className={styles.title}>Bedieningenprofiel</h1>
+        <p className={styles.subtitle}>Log in op je account</p>
+        <div className={styles.tabs}>
+          <span className={`${styles.tab} ${styles.tabActive}`}>Inloggen</span>
+          <Link href="/register" className={styles.tab}>
+            Registreren
+          </Link>
+        </div>
         <div className={styles.content}>
           <div className={styles.card}>
+            <div className={styles.cardTopBar}>
+              <Link href="/verify-account" className={styles.verifyLink}>
+                Account verifiëren?
+              </Link>
+            </div>
             <LoginForm />
             <div className={styles.signupLink}>
               <span>Nog geen account? </span>

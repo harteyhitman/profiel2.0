@@ -2,76 +2,83 @@
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
-.logoHeader {
-  @include flex-center;
-  gap: $spacing-sm;
-  align-items: center;
-  margin-bottom: $spacing-2xl;
-  
-  @include mobile {
-    margin-bottom: $spacing-xl;
-  }
-}
-
-.logoBox {
-  width: 40px;
-  height: 40px;
-  background-color: $light-mint;
-  border-radius: $border-radius-sm;
-  flex-shrink: 0;
-}
-
-.logoText {
-  @include body-base;
-  color: $text-primary;
-  font-weight: $font-weight-medium;
-}
-
-.card {
-  background-color: $background-white;
-  border-radius: $border-radius-xl;
-  padding: $spacing-3xl $spacing-2xl;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: $shadow-xl;
-
-  @include mobile {
-    padding: $spacing-2xl $spacing-xl;
-  }
-}
-
-.title {
-  @include heading-medium;
-  color: $text-primary;
-  text-align: center;
-  margin-bottom: $spacing-md;
-}
-
-.subtitle {
-  @include body-large;
-  color: $text-secondary;
-  text-align: center;
-  margin-bottom: $spacing-3xl;
-}
-
 .form {
-  @include flex-column;
-  gap: $spacing-xl;
-  background: $background-white;
-  padding: $spacing-2xl;
-  border-radius: $border-radius-xl;
-  box-shadow: $shadow-xl;
-  @include mobile {
-    padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+  box-sizing: border-box;
+
+  input,
+  select {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  @include tablet {
-    padding: $spacing-2xl;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+  width: 100%;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
   }
 }
 
 .formGroup {
-  @include flex-column;
-  gap: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  @include body-base;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: $spacing-md 0 $spacing-sm;
+  padding: 0;
+  width: 100%;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.rowThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $spacing-md;
+  width: 100%;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.termsHint {
+  margin: 0;
+  margin-top: $spacing-xs;
+  padding-left: 0;
+  @include body-small;
+  color: $text-secondary;
+  line-height: 1.4;
+}
+
+.termsLink {
+  color: $accent-green;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .label {
@@ -196,7 +203,8 @@
   font-weight: $font-weight-medium;
   cursor: pointer;
   transition: all $transition-base $transition-ease;
-  margin-top: $spacing-md;
+  margin-top: $spacing-sm;
+  box-sizing: border-box;
 
   &.enabled {
     background-color: $light-mint;
@@ -217,6 +225,7 @@
 }
 
 .errorMessage {
+  width: 100%;
   padding: $spacing-md;
   background-color: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
@@ -224,6 +233,7 @@
   color: #EF4444;
   @include body-small;
   text-align: center;
-  margin-bottom: $spacing-md;
+  margin: 0;
+  box-sizing: border-box;
 }
 

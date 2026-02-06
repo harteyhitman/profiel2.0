@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../../styles/variables' as *;
 @use '../../../styles/mixins' as *;
 
@@ -7,7 +8,7 @@
   align-items: center;
   justify-content: center;
   padding: $spacing-xl;
-  background: linear-gradient(135deg, $background-light 0%, $background-white 100%);
+  background: linear-gradient(165deg, color.mix($background-white, $light-mint, 85%) 0%, $background-light 45%, color.mix($background-light, $light-mint, 92%) 100%);
 
   @include mobile {
     padding: $spacing-md;
@@ -17,8 +18,10 @@
 .logoHeader {
   width: 100%;
   max-width: 500px;
-  @include flex-column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  margin: 0 auto;
   gap: $spacing-lg;
 }
 
@@ -30,15 +33,17 @@
 .logoBox {
   width: 60px;
   height: 60px;
-  background-color: $light-mint;
-  border-radius: $border-radius-sm;
+  background: linear-gradient(145deg, $light-mint 0%, color.adjust($light-mint, $lightness: -3%) 100%);
+  border-radius: $border-radius-md;
+  border: 2px solid rgba($accent-green, 0.2);
+  box-shadow: 0 4px 12px rgba($accent-green, 0.15);
   @include flex-center;
   padding: $spacing-sm;
 }
 
 .title {
   @include heading-large;
-  color: $text-primary;
+  color: $accent-green;
   text-align: center;
   margin: 0;
   font-family: $font-family-heading;
@@ -59,7 +64,8 @@
   background-color: $background-white;
   border-radius: $border-radius-xl;
   padding: $spacing-3xl;
-  box-shadow: $shadow-xl;
+  box-shadow: $shadow-xl, 0 0 0 1px rgba($accent-green, 0.08);
+  border: 1px solid rgba($accent-green, 0.12);
   @include flex-column;
   align-items: center;
   gap: $spacing-lg;
@@ -89,8 +95,9 @@
 
 .successMessage {
   @include body-base;
-  color: #10B981;
+  color: $accent-green;
   margin: 0;
+  font-weight: $font-weight-medium;
 }
 
 .errorMessage {
@@ -124,5 +131,59 @@
 .backButton {
   margin-top: $spacing-md;
   min-width: 200px;
+}
+
+.inboxText {
+  @include body-base;
+  color: $text-primary;
+  text-align: center;
+  margin: 0 0 $spacing-lg;
+  line-height: 1.5;
+}
+
+.emailForm {
+  @include flex-column;
+  gap: $spacing-md;
+  width: 100%;
+  margin-bottom: $spacing-md;
+}
+
+.resendSuccess {
+  margin-bottom: $spacing-md;
+  text-align: center;
+
+  p {
+    margin: 0 0 $spacing-xs;
+    @include body-base;
+    color: $text-primary;
+  }
+}
+
+.resendLink {
+  @include body-small;
+  margin: $spacing-sm 0 0;
+
+  a {
+    color: $accent-green;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: $spacing-lg;
+  @include body-base;
+  color: $accent-green;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 

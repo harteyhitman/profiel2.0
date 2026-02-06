@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { authAPI, User } from '@/lib/api/auth';
 
 interface AuthContextType {
@@ -22,12 +22,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+  const isOnVerifyPage = pathname?.includes('verify-account') ?? false;
 
   useEffect(() => {
-    // Check for existing authenticated user on mount
     const initAuth = async () => {
+      if (typeof window === 'undefined') return;
+      if (isOnVerifyPage) {
+        setLoading(false);
+        return;
+      }
       try {
-        // Try to restore user from localStorage first (for quick UI update)
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
           try {
@@ -37,31 +42,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             localStorage.removeItem('user');
           }
         }
-
-        // Then verify with API
         const userData = await authAPI.getCurrentUser();
         if (userData) {
           setUser(userData);
           localStorage.setItem('user', JSON.stringify(userData));
         } else {
-          // Not authenticated, clear stored user
           localStorage.removeItem('user');
           setUser(null);
         }
-      } catch (error: any) {
-        // 401 or other error - not authenticated
-        if (error.response?.status === 401 || error.response?.status === 403) {
+      } catch (error: unknown) {
+        const ax = error as { response?: { status?: number } };
+        if (ax.response?.status === 401 || ax.response?.status === 403) {
           localStorage.removeItem('user');
           setUser(null);
         }
-        // Don't log other errors as they might be network issues
       } finally {
         setLoading(false);
       }
     };
 
     initAuth();
-  }, []);
+  }, [isOnVerifyPage]);
 
   const login = async (email: string, password: string) => {
     try {
@@ -76,43 +77,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const register = async (data: any) => {
+  const register = async (data: Record<string, unknown>) => {
     try {
-      // Map form fields to API RegisterData (docs/API_REFERENCE.md: firstName, lastName, email, password + optional)
       const nameParts = typeof data.name === 'string' ? data.name.trim().split(/\s+/) : [];
       const registerPayload = {
-        firstName: data.firstName ?? nameParts[0] ?? '',
-        lastName: data.lastName ?? (nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''),
-        email: data.email,
-        password: data.password,
-        ...(data.birthDate || data.dateOfBirth ? { birthDate: data.birthDate || data.dateOfBirth } : {}),
-        ...(data.country ? { country: data.country } : {}),
-        ...(data.city ? { city: data.city } : {}),
-        ...(data.currentSector || data.sector ? { currentSector: data.currentSector || data.sector } : {}),
-        ...(data.preferredSector ? { preferredSector: data.preferredSector } : {}),
-        ...(data.referralSource ? { referralSource: data.referralSource } : {}),
-        ...(data.isTeamLeader !== undefined ? { isTeamLeader: data.isTeamLeader } : {}),
-        ...(data.inviteCode ? { inviteCode: data.inviteCode } : {}),
-        ...(data.role ? { role: data.role } : {}),
-        ...(data.denomination ? { denomination: data.denomination } : {}),
-        ...(data.churchName ? { churchName: data.churchName } : {}),
-        ...(data.churchLocation ? { churchLocation: data.churchLocation } : {}),
+        firstName: (data.firstName as string) ?? nameParts[0] ?? '',
+        lastName: (data.lastName as string) ?? (nameParts.length > 1 ? nameParts.slice(1).join(' ') : ''),
+        email: data.email as string,
+        password: data.password as string,
+        ...(data.birthDate || data.dateOfBirth ? { birthDate: (data.birthDate || data.dateOfBirth) as string } : {}),
+        ...(data.country ? { country: data.country as string } : {}),
+        ...(data.city ? { city: data.city as string } : {}),
+        ...(data.currentSector || data.sector ? { currentSector: (data.currentSector || data.sector) as string } : {}),
+        ...(data.preferredSector ? { preferredSector: data.preferredSector as string } : {}),
+        ...(data.referralSource ? { referralSource: data.referralSource as string } : {}),
+        ...(data.isTeamLeader !== undefined ? { isTeamLeader: data.isTeamLeader as boolean } : {}),
+        ...(data.inviteCode ? { inviteCode: data.inviteCode as string } : {}),
+        ...(data.role ? { role: data.role as string } : {}),
+        ...(data.denomination ? { denomination: data.denomination as string } : {}),
+        ...(data.churchName ? { churchName: data.churchName as string } : {}),
+        ...(data.churchLocation ? { churchLocation: data.churchLocation as string } : {}),
       };
-      const response = await authAPI.register(registerPayload);
-      // After registration, redirect to verify account page
-      if (response.user) {
-        setUser(response.user);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        router.push('/dashboard');
-      } else {
-        router.push(`/verify-account?email=${encodeURIComponent(data.email)}`);
-      }
-    } catch (error: any) {
-      // Extract error message from API response
-      const errorMessage = error.response?.data?.message || 
-                          error.response?.data?.error ||
-                          error.message || 
-                          'Registratie mislukt. Controleer je gegevens en probeer het opnieuw.';
+      await authAPI.register(registerPayload);
+      localStorage.removeItem('user');
+      setUser(null);
+      router.push(`/verify-account?email=${encodeURIComponent((data.email as string) || '')}`);
+    } catch (error: unknown) {
+      const ax = error as { response?: { data?: { message?: string; error?: string } }; message?: string };
+      const errorMessage = ax.response?.data?.message
+        || ax.response?.data?.error
+        || ax.message
+        || 'Registratie mislukt. Controleer je gegevens en probeer het opnieuw.';
       throw new Error(errorMessage);
     }
   };
@@ -150,17 +145,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const verifyEmail = async (token: string) => {
     try {
       await authAPI.verifyEmail(token);
-      // After verification, fetch current user
-      const userData = await authAPI.getCurrentUser();
-      if (userData) {
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
-        router.push('/dashboard');
-      } else {
-        router.push('/login');
-      }
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || error.response?.data?.error || 'E-mailverificatie mislukt.');
+      localStorage.removeItem('user');
+      setUser(null);
+      router.replace('/login');
+    } catch (error: unknown) {
+      const ax = error as { response?: { data?: { message?: string; error?: string } }; message?: string };
+      throw new Error(ax.response?.data?.message || ax.response?.data?.error || 'E-mailverificatie mislukt.');
     }
   };
 
