@@ -16,10 +16,13 @@
   }
 
   @include mobile {
-    padding-top: 80px;
+    padding-top: 100px;
     padding-bottom: $spacing-2xl;
     min-height: auto;
-    
+  }
+
+  @include small-mobile {
+    padding-top: 100px;
   }
 }
 
@@ -77,6 +80,12 @@
   @include mobile {
     font-size: $font-size-3xl;
     margin-bottom: $spacing-md;
+    line-height: 1.2;
+  }
+
+  @include small-mobile {
+    font-size: $font-size-2xl;
+    word-break: break-word;
   }
 }
 
@@ -111,6 +120,7 @@
 
   @include mobile {
     width: 100%;
+    justify-content: center;
   }
 }
 
@@ -121,8 +131,12 @@
   text-decoration: none;
   font-weight: $font-weight-medium;
   padding: 18px 36px;
+  min-height: 48px;
   border-radius: 8px;
   transition: all $transition-base $transition-ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: color.adjust($accent-green, $lightness: -5%);

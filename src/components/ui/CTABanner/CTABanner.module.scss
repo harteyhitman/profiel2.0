@@ -31,6 +31,17 @@
   @include heading-medium;
   color: $secondary-color;
   margin-bottom: $spacing-lg;
+
+  @include mobile {
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-md;
+    line-height: 1.25;
+  }
+
+  @include small-mobile {
+    font-size: $font-size-xl;
+    word-break: break-word;
+  }
 }
 
 .description {
@@ -40,13 +51,20 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+
+  @include mobile {
+    font-size: $font-size-base;
+    margin-bottom: $spacing-xl;
+  }
 }
 
 .ctaButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: $spacing-sm;
   padding: $spacing-md $spacing-2xl;
+  min-height: 48px;
   font-size: $font-size-lg;
   font-weight: $font-weight-medium;
   color: $secondary-color;
@@ -61,6 +79,16 @@
     background-color: color.adjust($accent-green, $lightness: -5%);
     transform: translateY(-2px);
     box-shadow: $shadow-lg;
+  }
+
+  @include mobile {
+    width: 100%;
+    max-width: 320px;
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  @include small-mobile {
+    max-width: 100%;
   }
 
   svg {

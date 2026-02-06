@@ -79,7 +79,7 @@ export default function Subscription() {
                   </li>
                 ))}
               </ul>
-              <a href="#register" className={styles.ctaButton}>
+              <a href="/register" className={styles.ctaButton}>
                 Registreren
               </a>
             </div>

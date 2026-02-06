@@ -14,7 +14,7 @@ export default function Hero() {
               Bedieningenprofiel onthult de geestelijke gaven en leiderschapsbalans binnen je gemeente, waardoor je sterkere teams kunt opbouwen, wijs kunt coachen en met vertrouwen kunt leiden.
             </p>
             <div className={styles.ctaButtons}>
-              <a href="#register" className={styles.primaryButton}>
+              <a href="/login" className={styles.primaryButton}>
                 Start je profiel
               </a>
             </div>

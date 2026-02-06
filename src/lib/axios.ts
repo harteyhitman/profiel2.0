@@ -22,12 +22,14 @@ axiosInstance.interceptors.response.use(
     // Suppress console errors for endpoints that may not exist or return expected errors
     const url = error.config?.url || '';
     const status = error.response?.status;
-    const shouldSuppressError = 
+    const isUserEndpoint = url.includes('/user') && !url.includes('/users/');
+    const shouldSuppressError =
       (url.includes('/churches/stats') && (status === 400 || status === 404)) ||
       (url.includes('/churches/my') && status === 403) ||
       (url.includes('/churches/my-churches') && status === 403) ||
       (url.includes('/users/') && url.includes('/teams') && status === 404) ||
-      (url.includes('/users/') && url.includes('/profile') && status === 404);
+      (url.includes('/users/') && url.includes('/profile') && status === 404) ||
+      (isUserEndpoint && (status === 401 || status === 500));
 
     if (error.response?.status === 401) {
       // Unauthorized - clear user data only; do not auto-redirect to login

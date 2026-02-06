@@ -7,10 +7,11 @@ import Subscription from '@/components/landingPage/Subscription/Subscription';
 import Testimonials from '@/components/landingPage/Testimonials/Testimonials';
 import WhyChooseUs from '@/components/landingPage/WhyChooseUs/WhyChooseUs';
 import CTABanner from '@/components/ui/CTABanner/CTABanner';
+import styles from './HomePage.module.scss';
 
 const Features = () => {
   return (
-    <div>
+    <div className={styles.homePage}>
       <Hero />
       <HowItWorks />
       <FivefoldMinistry />

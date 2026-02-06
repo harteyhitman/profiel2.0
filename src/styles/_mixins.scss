@@ -8,6 +8,12 @@
   }
 }
 
+@mixin small-mobile {
+  @media (max-width: #{$breakpoint-small-mobile}) {
+    @content;
+  }
+}
+
 @mixin tablet {
   @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
     @content;
@@ -196,6 +202,10 @@
   }
 
   @include mobile {
+    padding: 0 $spacing-lg;
+  }
+
+  @include small-mobile {
     padding: 0 $spacing-md;
   }
 }
@@ -209,6 +219,10 @@
   }
 
   @include mobile {
+    padding: 0 $spacing-lg;
+  }
+
+  @include small-mobile {
     padding: 0 $spacing-md;
   }
 }

@@ -73,18 +73,24 @@
     transform: translateY(-4px);
     box-shadow: $shadow-lg;
   }
-    @include mobile {
+
+  @include mobile {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: $spacing-lg;
   }
 }
 
 .icon {
-font-size: 80px;
+  font-size: 80px;
   margin-bottom: $spacing-md;
   color: rgba(0, 214, 144, 1);
+
+  @include mobile {
+    font-size: 56px;
+  }
 }
 
 .featureTitle {
