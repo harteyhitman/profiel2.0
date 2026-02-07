@@ -48,7 +48,7 @@ function VerifyAccountContent() {
     const stored = typeof window !== 'undefined' ? sessionStorage.getItem(VERIFIED_KEY(token)) : null;
     if (stored === 'true') {
       verifiedRef.current = true;
-      router.replace('/login');
+      router.replace('/auth?activeTab=login');
       return;
     }
     const doVerify = async () => {
@@ -62,7 +62,7 @@ function VerifyAccountContent() {
           // ignore
         }
         setSuccess(true);
-        setTimeout(() => router.replace('/login'), 2000);
+        setTimeout(() => router.replace('/auth?activeTab=login'), 2000);
       } catch (err: unknown) {
         setError(mapVerifyError(err));
       } finally {
@@ -127,7 +127,7 @@ function VerifyAccountContent() {
               {isResending ? 'Bezig met verzenden...' : 'Verificatielink opnieuw verzenden'}
             </Button>
           )}
-          <Button variant="outline" type="button" onClick={() => router.replace('/login')} className={styles.backButton}>
+          <Button variant="outline" type="button" onClick={() => router.replace('/auth?activeTab=login')} className={styles.backButton}>
             Terug naar inloggen
           </Button>
         </div>

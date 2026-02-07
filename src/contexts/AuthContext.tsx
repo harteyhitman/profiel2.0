@@ -14,6 +14,7 @@ interface AuthContextType {
   forgotPassword: (email: string) => Promise<{ message: string; token: string }>;
   resetPassword: (token: string, newPassword: string) => Promise<void>;
   verifyEmail: (token: string) => Promise<void>;
+  resendVerification: (email: string) => Promise<{ message: string; code?: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -101,7 +102,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await authAPI.register(registerPayload);
       localStorage.removeItem('user');
       setUser(null);
-      router.push(`/verify-account?email=${encodeURIComponent((data.email as string) || '')}`);
+      router.push(`/auth?redirect=verify-email&email=${encodeURIComponent((data.email as string) || '')}`);
     } catch (error: unknown) {
       const ax = error as { response?: { data?: { message?: string; error?: string } }; message?: string };
       const errorMessage = ax.response?.data?.message
@@ -120,7 +121,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       localStorage.removeItem('user');
       setUser(null);
-      router.push('/login');
+      router.push('/auth');
     }
   };
 
@@ -136,7 +137,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const resetPassword = async (token: string, newPassword: string) => {
     try {
       await authAPI.resetPassword({ token, newPassword });
-      router.push('/login');
+      router.push('/auth?activeTab=login');
     } catch (error: any) {
       throw new Error(error.response?.data?.message || error.response?.data?.error || 'Wachtwoord resetten mislukt.');
     }
@@ -147,11 +148,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await authAPI.verifyEmail(token);
       localStorage.removeItem('user');
       setUser(null);
-      router.replace('/login');
+      router.replace('/auth?activeTab=login');
     } catch (error: unknown) {
       const ax = error as { response?: { data?: { message?: string; error?: string } }; message?: string };
       throw new Error(ax.response?.data?.message || ax.response?.data?.error || 'E-mailverificatie mislukt.');
     }
+  };
+
+  const resendVerification = async (email: string) => {
+    const result = await authAPI.resendVerification(email);
+    return result;
   };
 
   return (
@@ -166,6 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         forgotPassword,
         resetPassword,
         verifyEmail,
+        resendVerification,
       }}
     >
       {children}

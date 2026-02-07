@@ -99,7 +99,7 @@ export const authAPI = {
   },
 
   /** POST /api/resend-verification with body { email } */
-  resendVerification: async (email: string): Promise<{ message: string }> => {
+  resendVerification: async (email: string): Promise<{ message: string; code?: string }> => {
     const response = await axiosInstance.post('/resend-verification', { email });
     return response.data;
   },

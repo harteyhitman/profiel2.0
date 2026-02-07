@@ -21,10 +21,12 @@
 }
 
 .checkboxLabel {
-  @include  flex-center;
+  // @include  flex-center;
   gap: $spacing-md;
   cursor: pointer;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .checkbox {

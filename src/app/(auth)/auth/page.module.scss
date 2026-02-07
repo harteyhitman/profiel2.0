@@ -1,0 +1,292 @@
+@use 'sass:color';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+// Obvious green for links and accents (brighter than dark accent-green)
+$auth-green: $button-dark;
+
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.leftPanel {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  min-width: 0;
+  background: $background-white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-xl;
+  border: 1px solid rgba($auth-green, 0.35);
+  padding: $spacing-2xl;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include mobile {
+    padding: $spacing-xl;
+  }
+
+  form {
+    min-width: 0;
+    width: 100%;
+  }
+
+  input,
+  select {
+    min-width: 0 !important;
+    max-width: 100%;
+    // width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.cardHeader {
+  padding-bottom: $spacing-md;
+  padding-top: $spacing-2xl;
+}
+
+.cardTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  text-align: center;
+  margin: 0 0 $spacing-xs;
+}
+
+.cardDescription {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  text-align: center;
+  margin: 0;
+}
+
+.verifyLink {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  font-size: $font-size-sm;
+  color: $auth-green !important;
+  text-decoration: none;
+  font-weight: $font-weight-semibold;
+
+  &:visited,
+  &:focus,
+  &:hover {
+    color: $auth-green !important;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tabsList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-bottom: $spacing-lg;
+  background: rgba($auth-green, 0.12);
+  border-radius: $border-radius-lg;
+  padding: $spacing-xs;
+  border: 1px solid rgba($auth-green, 0.3);
+}
+
+.tabTrigger {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-base $transition-ease, color $transition-base $transition-ease;
+
+  &:hover {
+    color: $auth-green;
+  }
+
+  &.active {
+    background: $background-white;
+    color: $auth-green;
+    font-weight: $font-weight-semibold;
+    box-shadow: $shadow-sm;
+  }
+}
+
+.cardFooter {
+  margin-top: $spacing-lg;
+  padding-top: $spacing-md;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+}
+
+.footerLink {
+  color: $auth-green;
+  font-weight: $font-weight-semibold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.formLink {
+  color: $auth-green !important;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.sectionTitle {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-base;
+  margin: $spacing-md 0 $spacing-sm;
+  color: $text-primary;
+}
+
+.sectionDescription {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  margin: 0 0 $spacing-md;
+  line-height: 1.5;
+}
+
+.backToLoginWrap {
+  margin: 0;
+  margin-top: $spacing-sm;
+  text-align: center;
+}
+
+.borderBlock {
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.inviteNotice {
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  background: rgba($auth-green, 0.1);
+  margin-bottom: $spacing-md;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+  min-width: 0;
+  width: 100%;
+
+  > * {
+    min-width: 0;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formRowThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $spacing-sm;
+  min-width: 0;
+  width: 100%;
+
+  > * {
+    min-width: 0;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.verifyBox {
+  width: 100%;
+  padding: $spacing-lg;
+  background: $background-light;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-md;
+}
+
+.resendLink {
+  font-size: $font-size-sm;
+  color: $auth-green;
+  font-weight: $font-weight-semibold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.tokenLink {
+  margin-top: $spacing-md;
+  padding: $spacing-md;
+  background: $background-white;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-sm;
+
+  a {
+    color: $auth-green !important;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+
+    &:hover,
+    &:visited,
+    &:focus {
+      color: $auth-green !important;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.errorText {
+  font-size: $font-size-sm;
+  color: #dc2626;
+  margin-top: $spacing-sm;
+}

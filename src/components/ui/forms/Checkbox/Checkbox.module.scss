@@ -2,7 +2,10 @@
 @use '../../../../styles/mixins' as *;
 
 .checkboxLabel {
-  @include flex-center;
+  // @include flex-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
   gap: $spacing-md;
   cursor: pointer;
   align-items: center         ;
