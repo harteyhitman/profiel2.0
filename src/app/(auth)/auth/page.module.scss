@@ -47,12 +47,83 @@ $auth-green: $button-dark;
     width: 100%;
   }
 
+  label {
+    color: $text-primary !important;
+    font-size: $font-size-sm !important;
+    font-weight: $font-weight-semibold !important;
+    line-height: 1.4;
+  }
+
   input,
   select {
     min-width: 0 !important;
     max-width: 100%;
-    // width: 100%;
+    // width: 100% !important;
     box-sizing: border-box;
+    height: 3rem !important;
+    min-height: 3rem !important;
+    padding: 0.75rem 1rem !important;
+    font-size: $font-size-base !important;
+    line-height: 1.5;
+    color: $text-primary;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+    transition: border-color $transition-base $transition-ease, box-shadow $transition-base $transition-ease;
+
+    &::placeholder {
+      color: $text-secondary !important;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $auth-green;
+      box-shadow: 0 0 0 3px rgba($auth-green, 0.15);
+    }
+
+    &:disabled {
+      background-color: $background-light;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem !important;
+    cursor: pointer;
+  }
+
+  .relative input {
+    padding-right: 2.75rem !important;
+  }
+
+  [class*='floatingLabel'] {
+    color: $text-secondary !important;
+    font-weight: $font-weight-medium !important;
+
+    &[class*='active'] {
+      color: $auth-green !important;
+    }
+  }
+
+  form p:not([id*='form-item-message']) {
+    color: $text-primary;
+    font-size: $font-size-sm !important;
+    line-height: 1.5;
+  }
+
+  [id*='form-item-message'] {
+    font-size: $font-size-sm !important;
+    font-weight: $font-weight-medium;
+  }
+
+  [class*='checkboxText'] {
+    color: $text-primary !important;
+    font-size: $font-size-sm !important;
   }
 }
 
@@ -176,9 +247,23 @@ $auth-green: $button-dark;
 
 .sectionDescription {
   font-size: $font-size-sm;
-  color: $text-secondary;
+  color: $text-primary;
   margin: 0 0 $spacing-md;
   line-height: 1.5;
+}
+
+.sectionDescriptionSpaced {
+  margin-bottom: $spacing-lg;
+}
+
+.formNote {
+  font-size: $font-size-sm !important;
+  color: $text-secondary !important;
+  line-height: 1.5;
+}
+
+.termsNote {
+  margin-top: -0.5rem;
 }
 
 .backToLoginWrap {

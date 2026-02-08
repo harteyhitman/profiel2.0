@@ -470,7 +470,7 @@ function AuthPageContent() {
               {emailRedirectAddress ? (
                 <>
                   <h2 className="font-medium mb-2">Controleer je inbox</h2>
-                  <p className="text-sm text-gray-700 mb-4">
+                  <p className={`${styles.sectionDescription} ${styles.sectionDescriptionSpaced}`}>
                     Er is een verificatielink naar je e-mailadres gestuurd. Controleer je mailbox.
                   </p>
                   <button
@@ -556,7 +556,7 @@ function AuthPageContent() {
                   />
                 ) : (
                   <div className={styles.inviteNotice}>
-                    <p className="text-sm text-gray-700">
+                    <p className={styles.sectionDescription}>
                       Je registreert met een teamuitnodiging. Je wordt automatisch toegevoegd als teamlid.
                     </p>
                   </div>
@@ -868,7 +868,7 @@ function AuthPageContent() {
                         />
                       </FormControl>
                       {hasInviteCode && (
-                        <p className="text-xs text-gray-600 mt-1">Je wordt automatisch lid van het team na registratie</p>
+                        <p className={styles.formNote} style={{ marginTop: '0.25rem' }}>Je wordt automatisch lid van het team na registratie</p>
                       )}
                       <FormMessage />
                     </FormItem>
@@ -892,7 +892,7 @@ function AuthPageContent() {
                     </FormItem>
                   )}
                 />
-                <p className="text-xs text-gray-600 -mt-2">
+                <p className={`${styles.formNote} ${styles.termsNote}`}>
                   <Link href="/algemene-voorwaarden" className={styles.formLink} target="_blank">
                     Algemene Voorwaarden
                   </Link>

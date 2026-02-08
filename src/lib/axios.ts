@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-// docs/V2_MIGRATION_GUIDE.md: dev = relative /api (proxy to backend), prod = BACKEND_URL (no trailing slash).
-// Paths are /user, /login, etc.; base must include /api so requests hit .../api/user.
-const isDevelopment = process.env.NODE_ENV === 'development';
-const apiUrl = isDevelopment
-  ? '/api' // Next.js API proxy (app/api/[...path]/route.ts)
-  : (process.env.NEXT_PUBLIC_API_URL || 'https://api.bedieningenprofiel.nl').replace(/\/?$/, '') + '/api';
+// Use same-origin /api proxy in both dev and production so the browser never calls the
+// backend directly. This avoids CORS: the backend is only called from the Next.js server
+// (app/api/[...path]/route.ts), which forwards to NEXT_PUBLIC_API_URL.
+// Paths are /user, /login, etc.; proxy adds /api so requests hit backend .../api/user.
+const apiUrl = typeof window !== 'undefined' ? '/api' : (process.env.NEXT_PUBLIC_API_URL || 'https://api.bedieningenprofiel.nl').replace(/\/?$/, '') + (process.env.NEXT_PUBLIC_API_URL?.endsWith('/api') ? '' : '/api');
 
 const axiosInstance = axios.create({
   baseURL: apiUrl,
