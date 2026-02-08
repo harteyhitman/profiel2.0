@@ -29,6 +29,18 @@ import {
 } from '@/data';
 import styles from './page.module.scss';
 
+const EyeOpenIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" />
+    <path d="M2.5 10C2.5 10 5 5 10 5C15 5 17.5 10 17.5 10C17.5 10 15 15 10 15C5 15 2.5 10 2.5 10Z" />
+  </svg>
+);
+const EyeClosedIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M2.5 2.5L17.5 17.5M7.5 7.5C6.11929 7.5 5 8.61929 5 10C5 11.3807 6.11929 12.5 7.5 12.5C8.88071 12.5 10 11.3807 10 10M12.5 12.5C13.8807 12.5 15 11.3807 15 10C15 8.61929 13.8807 7.5 12.5 7.5M2.5 10C2.5 10 5 5 10 5C12.5 5 14.5 7.5 15 10M17.5 10C17.5 10 15 15 10 15C7.5 15 5.5 12.5 5 10" />
+  </svg>
+);
+
 const loginSchema = z.object({
   email: z.string().email('Vul een geldig e-mailadres in'),
   password: z.string().min(6, 'Wachtwoord moet ten minste 6 tekens bevatten'),
@@ -350,10 +362,10 @@ function AuthPageContent() {
                           <button
                             type="button"
                             onClick={() => setShowSignInPassword((s) => !s)}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
-                            aria-label="Toggle password visibility"
+                            className={styles.passwordToggle}
+                            aria-label={showSignInPassword ? 'Wachtwoord verbergen' : 'Wachtwoord tonen'}
                           >
-                            {showSignInPassword ? 'Verbergen' : 'Tonen'}
+                            {showSignInPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
                           </button>
                         </div>
                       </FormControl>
@@ -443,10 +455,10 @@ function AuthPageContent() {
                             <button
                               type="button"
                               onClick={() => setShowResetPassword((s) => !s)}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
-                              aria-label="Toggle password visibility"
+                              className={styles.passwordToggle}
+                              aria-label={showResetPassword ? 'Wachtwoord verbergen' : 'Wachtwoord tonen'}
                             >
-                              {showResetPassword ? 'Verbergen' : 'Tonen'}
+                              {showResetPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
                             </button>
                           </div>
                         </FormControl>
@@ -564,7 +576,7 @@ function AuthPageContent() {
 
                 {isTeamLeader && (
                   <div className={styles.borderBlock}>
-                    <h3 className="font-medium mb-3">Gegevens kerk/bediening</h3>
+                    <h3 className="font-medium mb-3 text-gray-800">Gegevens kerk/bediening</h3>
                     <FormField
                       control={registerForm.control}
                       name="churchName"
@@ -717,10 +729,10 @@ function AuthPageContent() {
                           <button
                             type="button"
                             onClick={() => setShowSignUpPassword((s) => !s)}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
-                            aria-label="Toggle password visibility"
+                            className={styles.passwordToggle}
+                            aria-label={showSignUpPassword ? 'Wachtwoord verbergen' : 'Wachtwoord tonen'}
                           >
-                            {showSignUpPassword ? 'Verbergen' : 'Tonen'}
+                            {showSignUpPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
                           </button>
                         </div>
                       </FormControl>

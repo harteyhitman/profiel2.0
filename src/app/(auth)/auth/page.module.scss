@@ -101,6 +101,25 @@ $auth-green: $button-dark;
     padding-right: 2.75rem !important;
   }
 
+  .passwordToggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.25rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $text-secondary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
   [class*='floatingLabel'] {
     color: $text-secondary !important;
     font-weight: $font-weight-medium !important;
