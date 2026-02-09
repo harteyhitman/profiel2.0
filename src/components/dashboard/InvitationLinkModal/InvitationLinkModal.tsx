@@ -52,10 +52,37 @@ export default function InvitationLinkModal({ isOpen, onClose }: InvitationLinkM
     return `${base}/join-church/${encodeURIComponent(inviteCode)}`;
   }, [inviteCode, invitationType]);
 
+  const copyToClipboard = (text: string): Promise<boolean> => {
+    if (navigator.clipboard?.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+    }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve(ok);
+    } catch {
+      return Promise.resolve(false);
+    }
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(inviteUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (!inviteCode) return;
+    copyToClipboard(inviteUrl).then((ok) => {
+      if (ok) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    });
+  };
+
+  const handleGenerateCode = () => {
+    if (churchId && !generateCode.isPending) generateCode.mutate();
   };
 
   const tipText =
@@ -117,6 +144,7 @@ export default function InvitationLinkModal({ isOpen, onClose }: InvitationLinkM
               type="button"
               onClick={handleCopy}
               className={styles.copyButton}
+              disabled={!inviteCode}
               aria-label={copied ? 'Gekopieerd' : 'Kopiëren'}
             >
               {copied ? (
@@ -127,6 +155,28 @@ export default function InvitationLinkModal({ isOpen, onClose }: InvitationLinkM
               {copied ? 'Gekopieerd' : 'Kopiëren'}
             </button>
           </div>
+          {!inviteCode && churchId && (
+            <div className={styles.generateSection}>
+              <p className={styles.generateHint}>
+                Deze kerk heeft nog geen uitnodigingscode. Klik op onderstaande knop om er een te genereren.
+              </p>
+              <button
+                type="button"
+                onClick={handleGenerateCode}
+                disabled={generateCode.isPending}
+                className={styles.generateButton}
+              >
+                {generateCode.isPending ? (
+                  <>
+                    <span className={styles.spinner} aria-hidden />
+                    Bezig met genereren...
+                  </>
+                ) : (
+                  'Genereer uitnodigingscode'
+                )}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Tip */}

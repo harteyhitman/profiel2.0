@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useMyChurch, useChurchMembers, useChurchDashboard } from '@/hooks/use-dashboard';
+import { useMyChurch, useChurchMembers, useChurchDashboard, useGenerateChurchInviteCode } from '@/hooks/use-dashboard';
 import { generateDummyDashboardData, getDummyDominantRole } from '@/lib/utils/dummyData';
 import type { ChurchSummary, RoleScores } from '@/lib/types/dashboard';
 import MetricCard from '@/components/dashboard/MetricCard/MetricCard';
@@ -15,7 +15,8 @@ import styles from './page.module.scss';
 
 export default function MembersPage() {
   const { data: churchData } = useMyChurch();
-  const churchId = (churchData as { church: ChurchSummary } | undefined)?.church?.id ?? null;
+  const church = (churchData as { church: ChurchSummary } | undefined)?.church;
+  const churchId = church?.id ?? null;
   const { data: membersData, isLoading: membersLoading } = useChurchMembers(churchId);
   const { data: dashboardData, isLoading: dashboardLoading } = useChurchDashboard(churchId);
 
@@ -47,17 +48,51 @@ export default function MembersPage() {
 
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isInvitationLinkModalOpen, setIsInvitationLinkModalOpen] = useState(false);
+  const [inviteType, setInviteType] = useState<'user' | 'guest'>('user');
   const [copied, setCopied] = useState(false);
-  const church = (churchData as { church: ChurchSummary } | undefined)?.church;
-  const inviteUrl = church?.inviteCode
-    ? `${typeof window !== 'undefined' ? window.location.origin : 'https://bedieningenprofiel.nl'}/join-church/${church.inviteCode}`
-    : '';
+  const generateInviteCode = useGenerateChurchInviteCode(churchId);
 
-  const handleCopy = () => {
-    if (inviteUrl) {
-      navigator.clipboard.writeText(inviteUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://bedieningenprofiel.nl';
+  const inviteUrl = useMemo(() => {
+    if (!church?.inviteCode) return '';
+    if (inviteType === 'guest') {
+      return `${baseUrl}/questionnaire/guest?inviteCode=${encodeURIComponent(church.inviteCode)}`;
+    }
+    return `${baseUrl}/join-church/${church.inviteCode}`;
+  }, [church?.inviteCode, inviteType, baseUrl]);
+
+  const copyToClipboard = (text: string): Promise<boolean> => {
+    if (navigator.clipboard?.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+    }
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve(ok);
+    } catch {
+      return Promise.resolve(false);
+    }
+  };
+
+  const handleCopyInviteLink = () => {
+    if (!inviteUrl) return;
+    copyToClipboard(inviteUrl).then((ok) => {
+      if (ok) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    });
+  };
+
+  const handleGenerateInviteCode = () => {
+    if (churchId && !generateInviteCode.isPending) {
+      generateInviteCode.mutate();
     }
   };
 
@@ -130,12 +165,35 @@ export default function MembersPage() {
             </svg>
             Uitnodigingslink
           </button>
-          {inviteUrl ? (
-            <div className={styles.urlContainer}>
-              <span className={styles.urlText}>{inviteUrl}</span>
+          <div className={styles.inviteLinkCard}>
+            <div className={styles.inviteToggle}>
               <button
                 type="button"
-                onClick={handleCopy}
+                className={inviteType === 'user' ? styles.inviteToggleActive : styles.inviteToggleInactive}
+                onClick={() => setInviteType('user')}
+                aria-pressed={inviteType === 'user'}
+              >
+                Gebruikersuitnodiging
+              </button>
+              <button
+                type="button"
+                className={inviteType === 'guest' ? styles.inviteToggleActive : styles.inviteToggleInactive}
+                onClick={() => setInviteType('guest')}
+                aria-pressed={inviteType === 'guest'}
+              >
+                Gastuitnodiging
+              </button>
+            </div>
+            <div className={styles.urlContainer}>
+              <span className={styles.urlText}>
+                {inviteUrl || (inviteType === 'guest'
+                  ? `${baseUrl}/questionnaire/guest?inviteCode=...`
+                  : `${baseUrl}/join-church/...`)}
+              </span>
+              <button
+                type="button"
+                onClick={handleCopyInviteLink}
+                disabled={!church?.inviteCode}
                 className={styles.copyButton}
                 aria-label={copied ? 'Gekopieerd' : 'Kopiëren'}
               >
@@ -146,7 +204,29 @@ export default function MembersPage() {
                 {copied ? 'Gekopieerd' : 'Kopiëren'}
               </button>
             </div>
-          ) : null}
+            {!church?.inviteCode && churchId && (
+              <div className={styles.generateWrap}>
+                <p className={styles.generateHint}>
+                  Deze kerk heeft nog geen uitnodigingscode. Genereer er een om gebruikers- of gastlinks te delen.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleGenerateInviteCode}
+                  disabled={generateInviteCode.isPending}
+                  className={styles.generateButton}
+                >
+                  {generateInviteCode.isPending ? (
+                    <>
+                      <span className={styles.spinner} aria-hidden />
+                      Bezig met genereren...
+                    </>
+                  ) : (
+                    'Genereer uitnodigingscode'
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className={styles.metricsGrid}>

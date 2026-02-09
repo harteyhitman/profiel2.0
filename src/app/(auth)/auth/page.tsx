@@ -106,6 +106,7 @@ function AuthPageContent() {
   const redirect = searchParams?.get('redirect') ?? '';
   const emailRedirectAddress = searchParams?.get('email') ?? '';
   const emailForgotPassword = searchParams?.get('forgot-password-email') ?? '';
+  const prefillEmail = searchParams?.get('prefillEmail') ?? '';
   const resetPasswordToken = searchParams?.get('token') ?? '';
   const urlActiveTab = searchParams?.get('activeTab') ?? '';
 
@@ -176,6 +177,13 @@ function AuthPageContent() {
       forgotPasswordForm.setValue('email', emailForgotPassword);
     }
   }, [emailForgotPassword, activeTab]);
+
+  useEffect(() => {
+    if (prefillEmail) {
+      setActiveTab('register');
+      registerForm.setValue('email', prefillEmail);
+    }
+  }, [prefillEmail]);
 
   useEffect(() => {
     if (redirect?.includes('/join/')) {

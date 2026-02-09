@@ -129,8 +129,67 @@
     transform: scale(0.98);
   }
 
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   @include mobile {
     justify-content: center;
+  }
+}
+
+.generateSection {
+  @include flex-column;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: $border-width-thin solid $border-color;
+}
+
+.generateHint {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.generateButton {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border: $border-width-thin solid $accent-green;
+  border-radius: $border-radius-md;
+  background: $background-white;
+  color: $accent-green;
+  @include body-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: opacity $transition-base $transition-ease;
+
+  &:hover:not(:disabled) {
+    background: $light-mint;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 

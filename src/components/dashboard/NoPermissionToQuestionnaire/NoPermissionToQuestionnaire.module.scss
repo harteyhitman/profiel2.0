@@ -1,0 +1,59 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.wrap {
+  padding: $spacing-2xl;
+  text-align: center;
+  max-width: 28rem;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: $spacing-xl;
+  }
+}
+
+.title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0 0 $spacing-md;
+  font-family: $font-family-heading;
+}
+
+.message {
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0 0 $spacing-xl;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.primaryLink {
+  display: inline-block;
+  background: $button-light;
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  border-radius: $border-radius-md;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.contactLink {
+  color: $text-secondary;
+  text-decoration: underline;
+  font-size: $font-size-sm;
+
+  &:hover {
+    color: $text-primary;
+  }
+}

@@ -2,8 +2,10 @@
 
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import QuestionCard from '@/components/dashboard/QuestionCard/QuestionCard';
+import NoPermissionToQuestionnaire from '@/components/dashboard/NoPermissionToQuestionnaire/NoPermissionToQuestionnaire';
+import CelebrationEffect from '@/components/dashboard/CelebrationEffect/CelebrationEffect';
+import GuestCompletionModal from '@/components/dashboard/GuestCompletionModal/GuestCompletionModal';
 import { profileAPI, type QuestionResponse } from '@/lib/api/profile';
 import { QUESTIONS, TOTAL_QUESTIONS } from '@/lib/constants/questionnaire';
 import { validateResponses } from '@/lib/utils/questionnaireScoring';
@@ -36,6 +38,9 @@ function GuestQuestionnaireContent() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
   const question = QUESTIONS[currentIndex];
   const currentResponse = responses.find((r) => r.questionId === question?.id) ?? {
@@ -85,7 +90,9 @@ function GuestQuestionnaireContent() {
         lastName: lastName.trim(),
         responses,
       });
+      setSubmittedEmail(email.trim());
       setStep('submitted');
+      setShowCelebration(true);
     } catch (e: unknown) {
       const message =
         e && typeof e === 'object' && 'message' in e
@@ -104,27 +111,37 @@ function GuestQuestionnaireContent() {
     return (
       <div className={styles.page}>
         <div className={styles.center}>
-          <p className={styles.error}>Ontbrekende of ongeldige uitnodigingslink.</p>
-          <Link href="/" className={styles.link}>
-            Naar startpagina
-          </Link>
+          <NoPermissionToQuestionnaire />
         </div>
       </div>
     );
   }
 
   if (step === 'submitted') {
+    const handleCelebrationComplete = () => {
+      setShowCelebration(false);
+      setShowCompletionModal(true);
+    };
     return (
       <div className={styles.page}>
-        <div className={styles.center}>
-          <h1 className={styles.title}>Bedankt</h1>
-          <p className={styles.message}>
-            Je antwoorden zijn verzonden. Je kunt dit venster sluiten.
-          </p>
-          <Link href="/" className={styles.link}>
-            Naar startpagina
-          </Link>
-        </div>
+        <CelebrationEffect
+          show={showCelebration}
+          onComplete={handleCelebrationComplete}
+          message="Vragenlijst voltooid!"
+        />
+        <GuestCompletionModal
+          isOpen={showCompletionModal}
+          onClose={() => setShowCompletionModal(false)}
+          email={submittedEmail}
+        />
+        {!showCelebration && !showCompletionModal && (
+          <div className={styles.center}>
+            <h1 className={styles.title}>Bedankt</h1>
+            <p className={styles.message}>
+              Je antwoorden zijn verzonden.
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -228,7 +245,7 @@ function GuestQuestionnaireContent() {
                 {currentIndex === TOTAL_QUESTIONS - 1
                   ? submitting
                     ? 'Verzenden…'
-                    : 'Verzenden'
+                    : 'Afronden'
                   : 'Volgende'}
               </button>
             </>
@@ -242,7 +259,7 @@ function GuestQuestionnaireContent() {
               {currentIndex === TOTAL_QUESTIONS - 1
                 ? submitting
                   ? 'Verzenden…'
-                  : 'Verzenden'
+                  : 'Afronden'
                 : 'Volgende'}
             </button>
           )}
