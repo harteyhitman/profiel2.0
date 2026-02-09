@@ -1,7 +1,7 @@
 'use client';
 
-
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useSubscriptionStatus, useCreateCheckoutSession, useCurrentPlan } from '@/hooks/use-subscription';
 import { SUBSCRIPTION_PLANS, PLAN_LIMITS, PLAN_FEATURES } from '@/lib/constants/subscription';
@@ -9,15 +9,64 @@ import { getStripePriceId } from '@/lib/utils/stripe';
 import type { SubscriptionPlan, BillingPeriod, SubscriptionReceipt } from '@/lib/types/subscription';
 import SubscriptionCard from '@/components/dashboard/SubscriptionCard/SubscriptionCard';
 import ToggleSubscriptionPeriod from '@/components/ui/ToggleSubscriptionPeriod/ToggleSubscriptionPeriod';
+import { Button } from '@/components/ui/forms';
 import styles from './page.module.scss';
 
 export default function SubscriptionPage() {
-  const { user } = useAuth();
-  const { data: subscriptionStatus, isLoading: isLoadingStatus } = useSubscriptionStatus();
+  const { user, loading: authLoading } = useAuth();
+  const {
+    data: subscriptionStatus,
+    isLoading: isLoadingStatus,
+    isError: subscriptionError,
+    refetch: refetchStatus,
+  } = useSubscriptionStatus();
   const currentPlan = useCurrentPlan();
   const checkoutMutation = useCreateCheckoutSession();
   const [period, setPeriod] = useState<BillingPeriod>('monthly');
   const isDev = process.env.NODE_ENV === 'development';
+
+  if (authLoading || isLoadingStatus) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.loadingWrap}>
+          <div className={styles.spinner} aria-hidden />
+          <p className={styles.loadingText}>Laden…</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.stateCard}>
+          <h2 className={styles.stateTitle}>Niet ingelogd</h2>
+          <p className={styles.stateText}>
+            Je moet ingelogd zijn om je abonnement te bekijken en beheren.
+          </p>
+          <Link href="/auth" className={styles.stateLink}>
+            Inloggen
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (subscriptionError) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.stateCard}>
+          <h2 className={styles.stateTitle}>Fout bij het ophalen van abonnement</h2>
+          <p className={styles.stateText}>
+            Er is een fout opgetreden bij het ophalen van je abonnementsplan.
+          </p>
+          <Button type="button" onClick={() => refetchStatus()}>
+            Opnieuw laden
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   const handleSelectPlan = (plan: SubscriptionPlan) => {
     if (plan === 'free') {
