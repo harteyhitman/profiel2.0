@@ -79,7 +79,30 @@ const iconAccount = (
   </svg>
 );
 
-/** Sidebar nav config: route = main route (clicking label goes here). children = secondary routes only (no duplicate of main). */
+const iconFaq = (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 14H10.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 10C10 8.9 10.9 8 12 8H12.5C13.6 8 14.5 8.9 14.5 10V10.5C14.5 11.6 13.6 12.5 12.5 12.5H12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const iconRecommendation = (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 2L12 8L18 8L13 12L15 18L10 14L5 18L7 12L2 8L8 8L10 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+/** Shared dashboard nav: Questionnaire, Result, Recommendation, Profile, FAQs only (for users who did not register on behalf of church/ministry). */
+export const SHARED_DASHBOARD_NAV_CONFIG: NavItemConfig[] = [
+  { label: 'Vragenlijst', icon: iconQuestionnaire, route: '/dashboard/questionnaire' },
+  { label: 'Resultaat', icon: iconResult, route: '/dashboard/result' },
+  { label: 'Aanbeveling', icon: iconRecommendation, route: '/dashboard/recommendation' },
+  { label: 'Profiel', icon: iconAccount, route: '/dashboard/profile' },
+  { label: 'Veelgestelde vragen', icon: iconFaq, route: '/dashboard/faqs' },
+];
+
+/** Full dashboard nav for team leaders / users who registered on behalf of church or ministry. */
 export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
   { label: 'Overzicht', icon: iconDashboard, route: '/dashboard' },
   {
@@ -102,17 +125,7 @@ export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
   },
   { label: 'Vragenlijst', icon: iconQuestionnaire, route: '/dashboard/questionnaire' },
   { label: 'Resultaat', icon: iconResult, route: '/dashboard/result' },
-  {
-    label: 'Veelgestelde vragen',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M10 14H10.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M10 10C10 8.9 10.9 8 12 8H12.5C13.6 8 14.5 8.9 14.5 10V10.5C14.5 11.6 13.6 12.5 12.5 12.5H12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    route: '/dashboard/faqs',
-  },
+  { label: 'Veelgestelde vragen', icon: iconFaq, route: '/dashboard/faqs' },
   {
     label: 'Groei',
     icon: iconGrowth,
@@ -122,3 +135,8 @@ export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
   { label: 'Abonnement', icon: iconSubscription, route: '/dashboard/subscription' },
   { label: 'Mijn Account', icon: iconAccount, route: '/dashboard/account' },
 ];
+
+/** Returns nav config based on user role: shared dashboard for 'user', full for 'teamleader'. */
+export function getSidebarNavConfig(role: 'user' | 'teamleader' | undefined): NavItemConfig[] {
+  return role === 'teamleader' ? SIDEBAR_NAV_CONFIG : SHARED_DASHBOARD_NAV_CONFIG;
+}

@@ -52,6 +52,24 @@ export const ROLE_COLORS: Record<RoleKey, string> = {
   teacher: '#b79cef',
 };
 
+/** Bullet points for recommendation page: strengths per role. */
+export const RECOMMENDATION_STRENGTHS: Record<RoleKey, string[]> = {
+  apostle: ['Visionair en ondernemend', 'Bouwt en breidt uit', 'Legt nieuwe fundamenten', 'Houdt van uitdaging en verandering'],
+  prophet: ['Hoort Gods stem', 'Spreekt waarheid', 'Ziet wat verbeterd kan worden', 'Scherp onderscheidingsvermogen'],
+  evangelist: ['Passie voor het goede nieuws', 'Bereikt mensen met de boodschap', 'Enthousiast en overtuigend', 'Focus op redding en genade'],
+  herder: ['Groot hart voor mensen', 'Zorgt voor anderen', 'Richt op relaties en emotionele gezondheid', 'Creëert veilige omgeving'],
+  teacher: ['Legt complexe concepten uit', 'Onderzoekt en deelt waarheid', 'Nauwkeurig en zorgvuldig', 'Helpt anderen begrijpen'],
+};
+
+/** Bullet points for recommendation page: development areas per role. */
+export const RECOMMENDATION_DEVELOPMENT: Record<RoleKey, string[]> = {
+  apostle: ['Geduld met bestaande structuren', 'Luisteren naar anderen voordat je bouwt', 'Rust nemen na verandering'],
+  prophet: ['Timing en zachtheid in communicatie', 'Bevestiging zoeken bij anderen', 'Balans tussen waarschuwen en bemoedigen'],
+  evangelist: ['Opvolging en discipelschap', 'Diepgang na de eerste ontmoeting', 'Samenwerken met herders en leraren'],
+  herder: ['Grenzen stellen', 'Niet voor iedereen verantwoordelijk', 'Visie en richting naast zorg'],
+  teacher: ['Praktische toepassing', 'Niet alleen kennis maar ook doen', 'Toegankelijk blijven voor niet-specialisten'],
+};
+
 export interface QuestionStatement {
   text: string;
   role: RoleKey;

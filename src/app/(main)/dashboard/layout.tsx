@@ -1,5 +1,6 @@
 import DashboardLayout from '@/components/dashboard/DashboardLayout/DashboardLayout';
 import ProtectedRoute from '@/components/dashboard/ProtectedRoute/ProtectedRoute';
+import RestrictTeamRoutes from '@/components/dashboard/RestrictTeamRoutes/RestrictTeamRoutes';
 
 export default function DashboardLayoutWrapper({
   children,
@@ -8,7 +9,9 @@ export default function DashboardLayoutWrapper({
 }) {
   return (
     <ProtectedRoute>
-      <DashboardLayout>{children}</DashboardLayout>
+      <RestrictTeamRoutes>
+        <DashboardLayout>{children}</DashboardLayout>
+      </RestrictTeamRoutes>
     </ProtectedRoute>
   );
 }

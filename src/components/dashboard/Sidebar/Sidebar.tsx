@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import LogoutButton from '@/components/dashboard/LogoutButton/LogoutButton';
-import { SIDEBAR_NAV_CONFIG, type NavItemConfig } from './sidebarNavConfig';
+import { getSidebarNavConfig, type NavItemConfig } from './sidebarNavConfig';
 import { useAuth } from '@/contexts/AuthContext';
 import { dashboardAPI } from '@/lib/api/dashboard';
 import Logo from '../../../../public/navbar/brand-logo.png';
@@ -53,6 +53,8 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const { user } = useAuth();
   const [expandedNav, setExpandedNav] = useState<string | null>(null);
   const [showResultNav, setShowResultNav] = useState(false);
+
+  const navConfig = getSidebarNavConfig(user?.role);
 
   const prefetchForRoute = useCallback(
     (route: string) => {
@@ -102,8 +104,8 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     setExpandedNav((prev) => (prev === label ? null : label));
   };
 
-  const visibleItems = SIDEBAR_NAV_CONFIG.filter((item) => {
-    if (item.label === 'Resultaat' && !showResultNav) return false;
+  const visibleItems = navConfig.filter((item) => {
+    if (item.label === 'Resultaat' && user?.role === 'teamleader' && !showResultNav) return false;
     return true;
   });
 
