@@ -43,7 +43,7 @@ export default function AddMemberModal({
     if (!availableMembers) return [];
     return availableMembers.map((m: any) => ({
       id: String(m.id ?? m.userId),
-      name: m.name ?? 'Unknown',
+      name: m.name ?? 'Onbekend',
       email: m.email,
     }));
   }, [availableMembers]);
@@ -78,14 +78,14 @@ export default function AddMemberModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Add member"
+      title="Lid toevoegen"
       showCloseButton
       size="medium"
       closeOnOverlayClick={false}
     >
       <div className={styles.wrapper}>
         <p className={styles.helperText}>
-          Selecteer de leden die je’d like to add to the {teamName} wilt toevoegen
+          Selecteer de leden die je aan het team wilt toevoegen.
         </p>
 
         {/* Search */}

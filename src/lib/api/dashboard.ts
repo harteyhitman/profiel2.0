@@ -52,12 +52,35 @@ export const dashboardAPI = {
       return emptyResults;
     }
 
-    // Get profile which includes scores/results
+    // Get profile which includes scores/results (scores may be in .scores, .profile.scores, or at top level)
     try {
       const profileResponse = await axiosInstance.get(`/users/${targetUserId}/profile`);
+      const data = profileResponse.data as Record<string, unknown>;
+      const profile = (data.profile as Record<string, unknown>) || data;
+      const scoresFromNested = data.scores ?? (profile?.scores as RoleScores | undefined);
+      const scoresFromTopLevel =
+        typeof data.apostle === 'number' || typeof data.prophet === 'number'
+          ? {
+              apostle: Number(data.apostle) || 0,
+              prophet: Number(data.prophet) || 0,
+              evangelist: Number(data.evangelist) || 0,
+              herder: Number(data.herder) || 0,
+              teacher: Number(data.teacher) || 0,
+            }
+          : null;
+      const scores: RoleScores =
+        scoresFromNested && typeof scoresFromNested === 'object'
+          ? {
+              apostle: Number((scoresFromNested as RoleScores).apostle) || 0,
+              prophet: Number((scoresFromNested as RoleScores).prophet) || 0,
+              evangelist: Number((scoresFromNested as RoleScores).evangelist) || 0,
+              herder: Number((scoresFromNested as RoleScores).herder) || 0,
+              teacher: Number((scoresFromNested as RoleScores).teacher) || 0,
+            }
+          : scoresFromTopLevel ?? emptyResults.scores;
       return {
-        scores: profileResponse.data.scores || profileResponse.data?.profile?.scores || emptyResults.scores,
-        profile: profileResponse.data.profile || profileResponse.data || {},
+        scores,
+        profile: profile || {},
       };
     } catch (error: any) {
       // If profile fetch fails, return empty results

@@ -105,9 +105,9 @@ export default function DashboardContent() {
       {/* Header Section */}
       <div className={styles.headerSection}>
         <div className={styles.headerText}>
-          <h1 className={styles.title}>Dashboard</h1>
+          <h1 className={styles.title}>Overzicht</h1>
           <p className={styles.subtitle}>
-            Je Kerk Dashboard zou in één oogopslag een verhaal moeten vertellen.
+            Je kerkoverzicht in één oogopslag.
           </p>
         </div>
         <div className={styles.actionButtons}>
@@ -198,7 +198,7 @@ export default function DashboardContent() {
         />
         <MetricCard
           title="Denominatie"
-          value={effectiveDashboardData?.church?.denomination || (churchData as { church: ChurchSummary } | undefined)?.church?.denomination || 'Reformed'}
+          value={effectiveDashboardData?.church?.denomination || (churchData as { church: ChurchSummary } | undefined)?.church?.denomination || 'Gereformeerd'}
           animate={false}
           icon={
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

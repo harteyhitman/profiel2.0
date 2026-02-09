@@ -48,10 +48,9 @@ export default function TeamControlsBalance({ teamResults, dashboardData }: Team
   return (
     <div className={styles.section}>
       <div className={styles.sectionHeader}>
-        <h3 className={styles.sectionTitle}>Team Controls Balans</h3>
+        <h3 className={styles.sectionTitle}>Teamcontrols-balans</h3>
         <p className={styles.sectionSubtitle}>
-          Analyse van sterke en zwakke punten van je team controls.
-
+          Analyse van sterke en zwakke punten van je team bedieningen.
         </p>
       </div>
       <div className={styles.cardsGrid}>
@@ -66,15 +65,15 @@ export default function TeamControlsBalance({ teamResults, dashboardData }: Team
         <div className={styles.card}>
           <div className={`${styles.cardHeader} ${styles.cardHeaderBlue}`}></div>
           <div className={styles.cardBody}>
-            <h4 className={styles.cardTitle}>Sterkste Control</h4>
+            <h4 className={styles.cardTitle}>Sterkste bediening</h4>
             <p className={styles.cardValue}>{strongestControl}</p>
-            <p className={`${styles.cardSubtext} ${styles.cardSubtextBlue}`}>Balans score: {balanceScore}%</p>
+            <p className={`${styles.cardSubtext} ${styles.cardSubtextBlue}`}>Balansscore: {balanceScore}%</p>
           </div>
         </div>
         <div className={styles.card}>
           <div className={`${styles.cardHeader} ${styles.cardHeaderRed}`}></div>
           <div className={styles.cardBody}>
-            <h4 className={styles.cardTitle}>Zwakste Control</h4>
+            <h4 className={styles.cardTitle}>Zwakste bediening</h4>
             <p className={styles.cardValue}>{weakestControl}</p>
             <p className={`${styles.cardSubtext} ${styles.cardSubtextRed}`}>Aandachtspunt voor werving</p>
 

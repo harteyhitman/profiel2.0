@@ -10,13 +10,13 @@ import styles from './page.module.scss';
 const faqItems: Record<string, Record<string, Array<{ question: string; answer: string }>>> = {
   'general-use': {
     'church-members': [
-      { question: 'What is the Ministry Profile and how does it help me?', answer: "Ministry's profile is a platform that helps you gain insight into your ministry with a short test. You will receive a personal report and the church team will see the distribution of gifts." },
-      { question: "What's in my personal report?", answer: 'Your personal report contains detailed insights about your ministry profile, including your strengths, areas for growth, and recommendations based on your assessment results.' },
-      { question: 'Where will I see my results later?', answer: 'You can access your results in the Result section of your dashboard after completing the questionnaire.' },
-      { question: 'Can I be linked to a team later?', answer: 'Yes, team leaders and administrators can assign you to teams after you complete your assessment.' },
-      { question: 'Does it cost money as an individual?', answer: 'No, individual members do not pay for the assessment. The church or organization covers the subscription costs.' },
-      { question: 'What is the advantage over buying a test once?', answer: 'The platform provides ongoing insights, team analysis, and continuous growth tracking compared to a one-time assessment.' },
-      { question: 'Where can I find help?', answer: 'You can find help in the FAQs section, contact support, or reach out to your team leader for assistance.' },
+      { question: 'Wat is het Bedieningenprofiel en hoe helpt het mij?', answer: 'Het Bedieningenprofiel is een platform dat je met een korte test inzicht geeft in je bediening. Je ontvangt een persoonlijk rapport en het kerkteam ziet de verdeling van gaven.' },
+      { question: 'Wat staat er in mijn persoonlijke rapport?', answer: 'Je persoonlijke rapport bevat gedetailleerde inzichten over je bedieningsprofiel: je sterke punten, groeigebieden en aanbevelingen op basis van de resultaten.' },
+      { question: 'Waar zie ik later mijn resultaten?', answer: 'Je vindt je resultaten in het onderdeel Resultaat op je dashboard na het invullen van de vragenlijst.' },
+      { question: 'Kan ik later aan een team worden gekoppeld?', answer: 'Ja, teamleiders en beheerders kunnen je na je assessment aan teams toevoegen.' },
+      { question: 'Kost het geld als individu?', answer: 'Nee, individuele leden betalen niet voor de test. De kerk of organisatie draagt de abonnementskosten.' },
+      { question: 'Wat is het voordeel ten opzichte van een eenmalige test?', answer: 'Het platform biedt doorlopende inzichten, teamanalyses en groeivolging vergeleken met een eenmalige test.' },
+      { question: 'Waar kan ik hulp vinden?', answer: 'Je vindt hulp bij Veelgestelde vragen, via de support of door contact op te nemen met je teamleider.' },
     ],
   },
 };
@@ -44,14 +44,14 @@ export default function FAQSubCategoryPage() {
       <div className={styles.breadcrumbWrap}>
         <Breadcrumb
           items={[
-            { label: 'FAQ', href: '/dashboard/faqs' },
+            { label: 'Veelgestelde vragen', href: '/dashboard/faqs' },
             { label: categoryTitle, href: `/dashboard/faqs/${categoryId}` },
             { label: subCategoryTitle },
           ]}
         />
       </div>
 
-      <button type="button" onClick={handleBack} className={styles.backButton} aria-label={`Back to ${categoryTitle}`}>
+      <button type="button" onClick={handleBack} className={styles.backButton} aria-label={`Terug naar ${categoryTitle}`}>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>

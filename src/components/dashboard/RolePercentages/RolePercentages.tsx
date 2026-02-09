@@ -2,19 +2,16 @@
 
 import React, { useMemo } from 'react';
 import type { RoleScores } from '@/lib/types/dashboard';
+import { ROLE_LABELS, type RoleKey } from '@/lib/constants/questionnaire';
 import styles from './RolePercentages.module.scss';
 
 interface RolePercentagesProps {
   scores?: RoleScores | null;
 }
 
-const ROLE_ORDER: { key: keyof RoleScores; label: string }[] = [
-  { key: 'apostle', label: 'Apostle' },
-  { key: 'prophet', label: 'prophet' },
-  { key: 'evangelist', label: 'evangelist' },
-  { key: 'herder', label: 'shepherd' },
-  { key: 'teacher', label: 'teacher' },
-];
+const ROLE_KEYS: RoleKey[] = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
+
+const ROLE_ORDER = ROLE_KEYS.map((key) => ({ key, label: ROLE_LABELS[key] }));
 
 export default function RolePercentages({ scores }: RolePercentagesProps) {
   const roles = useMemo(() => {

@@ -14,15 +14,23 @@ import {
   YAxis,
   Cell,
   CartesianGrid,
+  LabelList,
 } from 'recharts';
 import styles from './TeamsByRoleChart.module.scss';
 
+const FIVEFOLD_ROLES = [
+  { key: 'apostle' as const, label: 'Apostel', fill: 'var(--chart-apostle)' },
+  { key: 'prophet' as const, label: 'Profeet', fill: 'var(--chart-prophet)' },
+  { key: 'evangelist' as const, label: 'Evangelist', fill: 'var(--chart-evangelist)' },
+  { key: 'herder' as const, label: 'Herder', fill: 'var(--chart-shepherd)' },
+  { key: 'teacher' as const, label: 'Leraar', fill: 'var(--chart-teacher)' },
+] as const;
+
 const teamsByRoleChartConfig = {
-  value: { label: 'Teams', color: 'var(--chart-leader)' },
-  Leider: { label: 'Leider', color: 'var(--chart-leader)' },
-  Ondersteuner: { label: 'Ondersteuner', color: 'var(--chart-supporter)' },
-  Strategist: { label: 'Strategist', color: 'var(--chart-strategist)' },
-  Innovator: { label: 'Innovator', color: 'var(--chart-innovator)' },
+  value: { label: 'Aantal teams', color: 'var(--chart-apostle)' },
+  ...Object.fromEntries(
+    FIVEFOLD_ROLES.map((r) => [r.label, { label: r.label, color: r.fill }])
+  ),
 } satisfies ChartConfig;
 
 interface TeamsByRoleChartProps {
@@ -31,57 +39,55 @@ interface TeamsByRoleChartProps {
 
 export default function TeamsByRoleChart({ dashboardData }: TeamsByRoleChartProps) {
   const chartData = useMemo(() => {
-    if (!dashboardData?.teams || dashboardData.teams.length === 0) {
-      const totalTeams = dashboardData?.church?.totalTeams || 8;
-      return [
-        { label: 'Leider', value: 3, fill: 'var(--chart-leader)' },
-        { label: 'Ondersteuner', value: 2, fill: 'var(--chart-supporter)' },
-        { label: 'Strategist', value: 2, fill: 'var(--chart-strategist)' },
-        { label: 'Innovator', value: 1, fill: 'var(--chart-innovator)' },
-      ];
-    }
-
-    const roleCounts = {
-      Leider: 0,
-      Ondersteuner: 0,
-      Strategist: 0,
-      Innovator: 0,
+    const roleCounts: Record<string, number> = {
+      Apostel: 0,
+      Profeet: 0,
+      Evangelist: 0,
+      Herder: 0,
+      Leraar: 0,
     };
 
-    dashboardData.teams.forEach((team) => {
-      const roleDist = team.roleDistribution;
-      if (roleDist) {
-        const roles = [
-          { name: 'Leider', value: roleDist.apostle ?? 0 },
-          { name: 'Ondersteuner', value: roleDist.herder ?? 0 },
-          { name: 'Strategist', value: roleDist.teacher ?? 0 },
-          { name: 'Innovator', value: roleDist.evangelist ?? 0 },
-        ];
-        const dominant = roles.reduce((max, role) => (role.value > max.value ? role : max));
-        roleCounts[dominant.name as keyof typeof roleCounts]++;
-      }
-    });
+    if (dashboardData?.teams && dashboardData.teams.length > 0) {
+      dashboardData.teams.forEach((team) => {
+        const dist = team.roleDistribution;
+        if (dist && typeof dist === 'object') {
+          let maxKey: keyof typeof dist = 'apostle';
+          let maxVal = Number((dist as Record<string, number>).apostle) ?? 0;
+          (['prophet', 'evangelist', 'herder', 'teacher'] as const).forEach((k) => {
+            const v = Number((dist as Record<string, number>)[k]) ?? 0;
+            if (v > maxVal) {
+              maxVal = v;
+              maxKey = k;
+            }
+          });
+          const label = FIVEFOLD_ROLES.find((r) => r.key === maxKey)?.label ?? 'Leraar';
+          if (roleCounts[label] !== undefined) roleCounts[label]++;
+        }
+      });
+    } else {
+      // Dummy data matching design: Leraar 7, rest 0
+      roleCounts.Leraar = dashboardData?.church?.totalTeams ?? 7;
+    }
 
-    return [
-      { label: 'Leider', value: roleCounts.Leider, fill: 'var(--chart-leader)' },
-      { label: 'Ondersteuner', value: roleCounts.Ondersteuner, fill: 'var(--chart-supporter)' },
-      { label: 'Strategist', value: roleCounts.Strategist, fill: 'var(--chart-strategist)' },
-      { label: 'Innovator', value: roleCounts.Innovator, fill: 'var(--chart-innovator)' },
-    ];
+    return FIVEFOLD_ROLES.map((r) => ({
+      label: r.label,
+      value: roleCounts[r.label] ?? 0,
+      fill: r.fill,
+    }));
   }, [dashboardData]);
 
   return (
     <div className={styles.chartCard}>
       <div className={styles.chartHeader}>
-        <h3 className={styles.chartTitle}>Teams op Dominante Rol</h3>
+        <h3 className={styles.chartTitle}>Teams per Dominante Rol</h3>
         <p className={styles.chartSubtitle}>
-          De meeste teams worden geleid door individuen met sterke leiderschaps- en communicatie-eigenschappen.
+          Verdeling van teams op basis van de dominante rol
         </p>
       </div>
       <div className={styles.chartArea}>
         <ChartContainer
           config={teamsByRoleChartConfig}
-          className="h-[240px] w-full"
+          className="h-[260px] w-full"
         >
           <BarChart
             data={chartData}
@@ -107,6 +113,13 @@ export default function TeamsByRoleChart({ dashboardData }: TeamsByRoleChartProp
               {chartData.map((entry) => (
                 <Cell key={`cell-${entry.label}`} fill={entry.fill} />
               ))}
+              <LabelList
+                dataKey="value"
+                position="top"
+                fill="var(--text-secondary)"
+                fontSize={13}
+                fontWeight={500}
+              />
             </Bar>
           </BarChart>
         </ChartContainer>

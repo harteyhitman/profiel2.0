@@ -12,20 +12,20 @@ export default function QuestionnairePage() {
   };
 
   const instructions = [
-    'You will always see two statements.',
-    'Choose the one that suits you best – even if you sometimes recognize something in both.',
-    'You can only choose one, and there are no wrong answers.',
-    'Fill in what feels most recognizable and natural to you, not what you would like to be.',
-    'Trust that the bigger picture provides valuable insight – a single answer doesn\'t make all the difference.',
+    'Je ziet steeds twee stellingen.',
+    'Kies de stelling die het beste bij je past – ook als je je soms in allebei herkent.',
+    'Je kunt maar één keuze maken; er zijn geen foute antwoorden.',
+    'Vul in wat het meest herkenbaar en natuurlijk voelt, niet wat je graag zou willen zijn.',
+    'Vertrouw erop dat het totaalbeeld waardevol inzicht geeft – één antwoord maakt niet alles uit.',
   ];
 
   return (
     <div className={styles.page}>
       <header className={styles.headerSection}>
         <div className={styles.headerText}>
-          <h1 className={styles.title}>Questionnaire</h1>
+          <h1 className={styles.title}>Vragenlijst</h1>
           <p className={styles.subtitle}>
-            View and manage your current subscription or upgrade to a better plan.
+            Ontdek je bedieningenprofiel door de vragenlijst in te vullen.
           </p>
         </div>
         <button
@@ -33,16 +33,16 @@ export default function QuestionnairePage() {
           onClick={handleStartQuestion}
           className={styles.startButton}
         >
-          Start question
+          Start vragenlijst
         </button>
       </header>
 
       <section className={styles.welcomeBox}>
         <h2 className={styles.welcomeHeading}>
-          Welcome to the Control Profile questionnaire
+          Welkom bij de Bedieningenprofiel vragenlijst
         </h2>
         <p className={styles.welcomeText}>
-          It&apos;s wonderful that you&apos;re taking this step! This test will help you discover how God created you and where your strengths and areas of focus lie. We pray that this will be a blessing for you and your church.
+          Fijn dat je deze stap zet! Deze vragenlijst helpt je ontdekken hoe God je heeft geschapen en waar je sterke punten en aandachtgebieden liggen. We bidden dat dit een zegen mag zijn voor jou en je kerk.
         </p>
       </section>
 
@@ -59,9 +59,9 @@ export default function QuestionnairePage() {
           <span className={styles.tipsIconCircle}>!</span>
         </div>
         <div className={styles.tipsContent}>
-          <h3 className={styles.tipsHeading}>Tips for completing the form</h3>
+          <h3 className={styles.tipsHeading}>Tips voor het invullen</h3>
           <p className={styles.tipsText}>
-            Complete the test calmly and without hesitation. Your first instinct is often the most accurate.
+            Vul de vragenlijst rustig en zonder te lang te twijfelen in. Je eerste gevoel is vaak het meest trefzeker.
           </p>
         </div>
       </section>

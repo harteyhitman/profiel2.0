@@ -45,19 +45,19 @@ export default function DistributionOfServicesChart({ dashboardData }: Distribut
       if (total > 0) {
         return [
           { label: 'Start', percentage: Math.round(((scores.apostle || 0) / total) * 100) },
-          { label: 'Active', percentage: Math.round(((scores.prophet || 0) / total) * 100) },
-          { label: 'Growing', percentage: Math.round(((scores.evangelist || 0) / total) * 100) },
-          { label: 'Deepening', percentage: Math.round(((scores.herder || 0) / total) * 100) },
-          { label: 'Fruitful', percentage: Math.round(((scores.teacher || 0) / total) * 100) },
+          { label: 'Actief', percentage: Math.round(((scores.prophet || 0) / total) * 100) },
+          { label: 'Groeiend', percentage: Math.round(((scores.evangelist || 0) / total) * 100) },
+          { label: 'Verdieping', percentage: Math.round(((scores.herder || 0) / total) * 100) },
+          { label: 'Vruchtbaar', percentage: Math.round(((scores.teacher || 0) / total) * 100) },
         ];
       }
     }
     return [
       { label: 'Start', percentage: 43 },
-      { label: 'Active', percentage: 35 },
-      { label: 'Growing', percentage: 14 },
-      { label: 'Deepening', percentage: 5 },
-      { label: 'Fruitful', percentage: 5 },
+      { label: 'Actief', percentage: 35 },
+      { label: 'Groeiend', percentage: 14 },
+      { label: 'Verdieping', percentage: 5 },
+      { label: 'Vruchtbaar', percentage: 5 },
     ];
   }, [dashboardData]);
 

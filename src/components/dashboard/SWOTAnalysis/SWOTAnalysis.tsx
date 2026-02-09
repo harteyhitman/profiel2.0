@@ -31,7 +31,7 @@ export default function SWOTAnalysis({ onCardClick }: SWOTAnalysisProps) {
   return (
     <div className={styles.container}>
       <SWOTCard
-        title="Strengths"
+        title="Sterke punten"
         backgroundColor="#EDE9FE"
         onClick={() => onCardClick?.('Strengths')}
         icon={
@@ -42,7 +42,7 @@ export default function SWOTAnalysis({ onCardClick }: SWOTAnalysisProps) {
         }
       />
       <SWOTCard
-        title="Weaknesses"
+        title="Zwakke punten"
         backgroundColor="#FEE2E2"
         onClick={() => onCardClick?.('Weaknesses')}
         icon={
@@ -53,7 +53,7 @@ export default function SWOTAnalysis({ onCardClick }: SWOTAnalysisProps) {
         }
       />
       <SWOTCard
-        title="Chances"
+        title="Kansen"
         backgroundColor="#FCE7F6"
         onClick={() => onCardClick?.('Chances')}
         icon={
@@ -64,7 +64,7 @@ export default function SWOTAnalysis({ onCardClick }: SWOTAnalysisProps) {
         }
       />
       <SWOTCard
-        title="Threats"
+        title="Bedreigingen"
         backgroundColor="#DCFCE7"
         onClick={() => onCardClick?.('Threats')}
         icon={

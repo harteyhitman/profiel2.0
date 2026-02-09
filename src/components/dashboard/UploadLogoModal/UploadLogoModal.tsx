@@ -30,10 +30,10 @@ export default function UploadLogoModal({
 
   const validateFile = (file: File): string | null => {
     if (!acceptedTypes.includes(file.type)) {
-      return 'Please upload a JPG, JPEG, or PNG file.';
+      return 'Upload een JPG-, JPEG- of PNG-bestand.';
     }
     if (file.size > maxSizeBytes) {
-      return `File size must be less than ${maxSizeMB}MB.`;
+      return `Bestandsgrootte moet kleiner zijn dan ${maxSizeMB} MB.`;
     }
     return null;
   };
@@ -130,7 +130,7 @@ export default function UploadLogoModal({
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
-      title="Upload logo"
+      title="Logo uploaden"
       showCloseButton={true}
       size="medium"
       closeOnOverlayClick={true}
@@ -142,7 +142,7 @@ export default function UploadLogoModal({
             <div className={styles.previewSection}>
               <div className={styles.circularPreview}>
                 {preview && (
-                  <img src={preview} alt="Logo preview" className={styles.previewImage} />
+                  <img src={preview} alt="Voorvertoning logo" className={styles.previewImage} />
                 )}
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function UploadLogoModal({
                 onClick={handleSave}
                 className={styles.saveButton}
               >
-                Save
+                Opslaan
               </Button>
               <Button
                 variant="outline"
@@ -161,7 +161,7 @@ export default function UploadLogoModal({
                 onClick={handleChangePhoto}
                 className={styles.changePhotoButton}
               >
-                Change photo
+                Foto wijzigen
               </Button>
             </div>
           </>
@@ -196,9 +196,9 @@ export default function UploadLogoModal({
 
               <div className={styles.uploadText}>
                 <p className={styles.instructionText}>
-                  <span className={styles.clickText}>Click to upload</span> or drag and drop
+                  <span className={styles.clickText}>Klik om te uploaden</span> of sleep een bestand hierheen
                 </p>
-                <p className={styles.fileInfo}>JPG, JPEG, PNG less than 1MB</p>
+                <p className={styles.fileInfo}>JPG, JPEG of PNG, max. 1 MB</p>
               </div>
             </div>
 
@@ -215,7 +215,7 @@ export default function UploadLogoModal({
                 onClick={handleClose}
                 className={styles.cancelButton}
               >
-                Cancel
+                Annuleren
               </Button>
               <Button
                 variant="primary"
@@ -224,7 +224,7 @@ export default function UploadLogoModal({
                 disabled={!selectedFile}
                 className={styles.uploadButton}
               >
-                Upload
+                Uploaden
               </Button>
             </div>
           </>

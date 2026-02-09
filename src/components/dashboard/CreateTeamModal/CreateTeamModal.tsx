@@ -52,15 +52,15 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Create team"
+      title="Team aanmaken"
       showCloseButton={true}
       size="medium"
       closeOnOverlayClick={false}
     >
       <div className={styles.modalContent}>
-        <h2 className={styles.heading}>Create a New Ministry Team</h2>
+        <h2 className={styles.heading}>Nieuw bedieningsteam aanmaken</h2>
         <p className={styles.description}>
-          Organize your church into ministries or departments. Each team can have assigned leaders, members, and ministry functions.
+          Organiseer je kerk in bedieningen of afdelingen. Elk team kan leiders, leden en bedieningsfuncties hebben.
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -69,7 +69,7 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
             id="teamName"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            placeholder="Team Name"
+            placeholder="Teamnaam"
             className={styles.input}
             required
           />
@@ -78,13 +78,13 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
             id="teamDescription"
             value={formData.description}
             onChange={(e) => handleInputChange('description', e.target.value)}
-            placeholder="Team Description (optional)"
+            placeholder="Teamomschrijving (optioneel)"
             className={styles.input}
           />
           <div className={styles.urlRow}>
-            <label htmlFor="teamUrl" className={styles.urlLabel}>Team url</label>
+            <label htmlFor="teamUrl" className={styles.urlLabel}>Team-URL</label>
             <div className={styles.urlInputGroup}>
-              <span className={styles.urlPrefix}>Ministryprofile/</span>
+              <span className={styles.urlPrefix}>Bedieningenprofiel/</span>
               <input
                 type="text"
                 id="teamUrl"
@@ -101,7 +101,7 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
             disabled={!isFormValid}
             className={styles.createButton}
           >
-            Create Team
+            Team aanmaken
           </button>
         </form>
       </div>

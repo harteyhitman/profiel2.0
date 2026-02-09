@@ -27,7 +27,7 @@ export default function AISummaryCard({ dashboardData }: AISummaryCardProps) {
     const scores: RoleScores = (dashboardData?.aggregatedScores || dashboardData?.totalScores || defaultScores) as RoleScores;
     const roles = [
       { name: 'Apostel', value: scores.apostle || 0 },
-      { name: 'Profet', value: scores.prophet || 0 },
+      { name: 'Profeet', value: scores.prophet || 0 },
       { name: 'Evangelist', value: scores.evangelist || 0 },
       { name: 'Herder', value: scores.herder || 0 },
       { name: 'Leraar', value: scores.teacher || 0 },

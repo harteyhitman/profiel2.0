@@ -17,7 +17,7 @@ const PIE_COLORS = [
   '#2D2D2D', /* Teacher: near-black */
 ] as const;
 
-const LABELS = ['Apostle', 'Prophet', 'Evangelist', 'Shepherd', 'Teacher'] as const;
+const LABELS = ['Apostel', 'Profeet', 'Evangelist', 'Herder', 'Leraar'] as const;
 const SCORE_KEYS = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'] as const;
 
 /** SVG arc path for a pie slice: center (cx,cy), radius r, from startAngle to endAngle (radians, -π/2 = top). */
@@ -62,8 +62,8 @@ export default function ControlsDistributionChart({ dashboardData }: ControlsDis
   return (
     <div className={styles.card}>
       <header className={styles.header}>
-        <h3 className={styles.title}>Controls distribution</h3>
-        <p className={styles.subtitle}>Division of Primary Ministries Within the Church</p>
+        <h3 className={styles.title}>Verdeling bedieningen</h3>
+        <p className={styles.subtitle}>Verdeling van de vijf bedieningen binnen de kerk</p>
       </header>
       <div className={styles.content}>
         <div className={styles.pieWrap}>

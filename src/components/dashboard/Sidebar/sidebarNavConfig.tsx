@@ -81,7 +81,7 @@ const iconAccount = (
 
 /** Sidebar nav config: route = main route (clicking label goes here). children = secondary routes only (no duplicate of main). */
 export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
-  { label: 'Dashboard', icon: iconDashboard, route: '/dashboard' },
+  { label: 'Overzicht', icon: iconDashboard, route: '/dashboard' },
   {
     label: 'Teams',
     icon: iconTeams,

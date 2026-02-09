@@ -5,11 +5,11 @@ import type { ChurchDashboardResponse } from '@/lib/types/dashboard';
 import styles from './AverageScoresChart.module.scss';
 
 const ROLE_CONFIG = [
-  { label: 'apostle', key: 'apostle' as const, fill: 'var(--chart-apostle)' },
-  { label: 'prophet', key: 'prophet' as const, fill: 'var(--chart-prophet)' },
-  { label: 'evangelist', key: 'evangelist' as const, fill: 'var(--chart-evangelist)' },
-  { label: 'shepherd', key: 'herder' as const, fill: 'var(--chart-shepherd)' },
-  { label: 'teacher', key: 'teacher' as const, fill: 'var(--chart-teacher)' },
+  { label: 'Apostel', key: 'apostle' as const, fill: 'var(--chart-apostle)' },
+  { label: 'Profeet', key: 'prophet' as const, fill: 'var(--chart-prophet)' },
+  { label: 'Evangelist', key: 'evangelist' as const, fill: 'var(--chart-evangelist)' },
+  { label: 'Herder', key: 'herder' as const, fill: 'var(--chart-shepherd)' },
+  { label: 'Leraar', key: 'teacher' as const, fill: 'var(--chart-teacher)' },
 ] as const;
 
 interface AverageScoresChartProps {
@@ -39,7 +39,7 @@ export default function AverageScoresChart({ dashboardData }: AverageScoresChart
   return (
     <div className={styles.chartCard}>
       <div className={styles.chartHeader}>
-        <h3 className={styles.chartTitle}>Average scores</h3>
+        <h3 className={styles.chartTitle}>Gemiddelde scores</h3>
       </div>
       <div className={styles.chartContainer}>
         <div className={styles.gridLines} aria-hidden />

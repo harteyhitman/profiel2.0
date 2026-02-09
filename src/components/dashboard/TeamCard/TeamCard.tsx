@@ -57,10 +57,10 @@ export default function TeamCard({ team }: TeamCardProps) {
           type="button"
           className={styles.copyButton}
           onClick={handleCopyInvite}
-          aria-label={copied ? 'Copied' : 'Copy invite link'}
+          aria-label={copied ? 'Gekopieerd' : 'Uitnodigingslink kopiëren'}
         >
           <CopyIcon />
-          {copied ? 'Copied' : 'Copy invite'}
+          {copied ? 'Gekopieerd' : 'Uitnodiging kopiëren'}
         </button>
       </div>
 
@@ -68,14 +68,14 @@ export default function TeamCard({ team }: TeamCardProps) {
         <div className={styles.titleRow}>
           <h3 className={styles.teamName}>{team.name}</h3>
           <span className={`${styles.statusBadge} ${styles[team.status]}`}>
-            {team.status === 'active' ? 'Active' : 'Low activity'}
+            {team.status === 'active' ? 'Actief' : 'Weinig activiteit'}
           </span>
         </div>
         <p className={styles.description}>{team.description}</p>
         <div className={styles.pills}>
           <div className={styles.pill}>
             <GroupIcon size={14} />
-            <span>{team.memberCount} members</span>
+            <span>{team.memberCount} {team.memberCount === 1 ? 'lid' : 'leden'}</span>
           </div>
           <div className={styles.pill}>
             <GroupIcon size={14} />
@@ -85,7 +85,7 @@ export default function TeamCard({ team }: TeamCardProps) {
       </div>
 
       <button type="button" className={styles.viewButton} onClick={handleViewMembers}>
-        View team members
+        Bekijk teamleden
       </button>
     </div>
   );

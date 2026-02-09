@@ -31,10 +31,10 @@ export default function MembersPage() {
     return Array.from({ length: 45 }, (_, i) => ({
       id: i + 1,
       userId: i + 1,
-      name: `Member ${i + 1}`,
-      email: `member${i + 1}@example.com`,
-      role: 'Member',
-      status: 'Active',
+      name: `Lid ${i + 1}`,
+      email: `lid${i + 1}@voorbeeld.nl`,
+      role: 'Lid',
+      status: 'Actief',
       scores: {
         apostle: 25 + (i % 5),
         prophet: 30 + (i % 4),
@@ -65,17 +65,17 @@ export default function MembersPage() {
     if (!effectiveMembersData?.length) return;
     const csvData = effectiveMembersData.map((member: any) => ({
       'ID': member.id ?? member.userId ?? '',
-      'Name': member.name ?? '',
-      'Email': member.email ?? '',
-      'Role': member.role ?? '',
-      'Apostle Score': member.scores?.apostle ?? 0,
-      'Prophet Score': member.scores?.prophet ?? 0,
-      'Evangelist Score': member.scores?.evangelist ?? 0,
-      'Shepherd Score': member.scores?.herder ?? 0,
-      'Teacher Score': member.scores?.teacher ?? 0,
-      'Status': member.status ?? 'Active',
+      'Naam': member.name ?? '',
+      'E-mail': member.email ?? '',
+      'Rol': member.role ?? '',
+      'Apostel-score': member.scores?.apostle ?? 0,
+      'Profeet-score': member.scores?.prophet ?? 0,
+      'Evangelist-score': member.scores?.evangelist ?? 0,
+      'Herder-score': member.scores?.herder ?? 0,
+      'Leraar-score': member.scores?.teacher ?? 0,
+      'Status': member.status ?? 'Actief',
     }));
-    downloadCSV(csvData, `member-report-${new Date().toISOString().split('T')[0]}.csv`);
+    downloadCSV(csvData, `ledenrapport-${new Date().toISOString().split('T')[0]}.csv`);
   };
 
   const scores = effectiveDashboardData?.aggregatedScores;
@@ -88,9 +88,9 @@ export default function MembersPage() {
       <div className={styles.page}>
         <div className={styles.headerSection}>
           <div className={styles.headerText}>
-            <h1 className={styles.title}>Member Dashboard</h1>
+            <h1 className={styles.title}>Ledendashboard</h1>
             <p className={styles.subtitle}>
-              Gain insight into the composition and ministry profiles of your church
+              Krijg inzicht in de samenstelling en bedieningsprofielen van je kerk
             </p>
           </div>
           <button
@@ -102,7 +102,7 @@ export default function MembersPage() {
               <path d="M10 2V14M10 14L6 10M10 14L14 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M2 16V17C2 17.5523 2.44772 18 3 18H17C17.5523 18 18 17.5523 18 17V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            Download report
+            Rapport downloaden
           </button>
         </div>
 
@@ -151,7 +151,7 @@ export default function MembersPage() {
 
         <div className={styles.metricsGrid}>
           <MetricCard
-            title="Total number of members"
+            title="Totaal aantal leden"
             value={totalMembers}
             icon={
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -163,7 +163,7 @@ export default function MembersPage() {
             }
           />
           <MetricCard
-            title="Dominant control"
+            title="Dominante bediening"
             value={dominantControl}
             animate={false}
             icon={
@@ -176,7 +176,7 @@ export default function MembersPage() {
             }
           />
           <MetricCard
-            title="Lowest service"
+            title="Laagste bediening"
             value={lowestService}
             animate={false}
             icon={
@@ -225,7 +225,14 @@ function getDominantRole(scores: RoleScores | undefined): string {
       maxRole = role;
     }
   });
-  return maxRole.charAt(0).toUpperCase() + maxRole.slice(1);
+  const roleLabels: Record<string, string> = {
+    apostle: 'Apostel',
+    prophet: 'Profeet',
+    evangelist: 'Evangelist',
+    herder: 'Herder',
+    teacher: 'Leraar',
+  };
+  return roleLabels[maxRole] ?? maxRole.charAt(0).toUpperCase() + maxRole.slice(1);
 }
 
 function getLowestService(scores: RoleScores | undefined): string {
@@ -239,5 +246,12 @@ function getLowestService(scores: RoleScores | undefined): string {
       minRole = role;
     }
   });
-  return minRole.charAt(0).toUpperCase() + minRole.slice(1);
+  const roleLabels: Record<string, string> = {
+    apostle: 'Apostel',
+    prophet: 'Profeet',
+    evangelist: 'Evangelist',
+    herder: 'Herder',
+    teacher: 'Leraar',
+  };
+  return roleLabels[minRole] ?? minRole.charAt(0).toUpperCase() + minRole.slice(1);
 }

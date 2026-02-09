@@ -7,7 +7,8 @@ import { useCountUp } from '@/hooks/useCountUp';
 import styles from './FullScoreBreakdown.module.scss';
 
 const ROLE_KEYS: RoleKey[] = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
-const MAX_SCORE_PER_ROLE = 200; // 40 × 5 (docs/QUESTIONNAIRE_AND_RESULTS_V2.md)
+const MAX_SCORE_PER_ROLE = 80;
+const LEGACY_MAX = 200; // scale from legacy 0–200 to 0–80 for display
 
 interface FullScoreBreakdownProps {
   scores?: RoleScores | null;
@@ -16,11 +17,15 @@ interface FullScoreBreakdownProps {
 
 export default function FullScoreBreakdown({ scores, variant = 'grid' }: FullScoreBreakdownProps) {
   const scoreData = useMemo(() => {
-    const list = ROLE_KEYS.map((key) => ({
-      role: ROLE_LABELS[key],
-      score: scores?.[key] ?? 0,
-      maxScore: MAX_SCORE_PER_ROLE,
-    }));
+    const list = ROLE_KEYS.map((key) => {
+      const raw = scores?.[key] ?? 0;
+      const score = raw <= MAX_SCORE_PER_ROLE ? raw : Math.round((raw / LEGACY_MAX) * MAX_SCORE_PER_ROLE);
+      return {
+        role: ROLE_LABELS[key],
+        score,
+        maxScore: MAX_SCORE_PER_ROLE,
+      };
+    });
     return list.sort((a, b) => b.score - a.score);
   }, [scores]);
 
@@ -41,7 +46,7 @@ export default function FullScoreBreakdown({ scores, variant = 'grid' }: FullSco
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.cardTitle}>Full Score Breakdown</h2>
+      <h2 className={styles.cardTitle}>Volledige score-uitsplitsing</h2>
       <div className={styles.grid}>
         {scoreData.map((item, index) => (
           <AnimatedScoreItem
@@ -77,7 +82,7 @@ function ScoreCard({
       <div className={styles.scoreCardHeader}>
         <span className={styles.scoreCardRole}>{item.role}</span>
         <span className={styles.scoreCardScore}>
-          <strong>{animatedValue}</strong> of {item.maxScore}
+          <strong>{animatedValue}</strong> van {item.maxScore}
         </span>
       </div>
       <div className={styles.scoreCardBarTrack}>
@@ -103,7 +108,7 @@ function AnimatedScoreItem({ item, showDivider }: { item: { role: string; score:
       <div className={styles.scoreContent}>
         <div className={styles.roleInfo}>
           <span className={styles.roleLabel}>{item.role}</span>
-          <span className={styles.maxScoreText}>{item.maxScore} points</span>
+          <span className={styles.maxScoreText}>{item.maxScore} punten</span>
         </div>
         <div className={styles.scoreValue}>{animatedValue}</div>
       </div>

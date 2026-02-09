@@ -64,6 +64,18 @@
   }
 }
 
+.feedbackMessage {
+  @include body-base;
+  color: $accent-green;
+  margin: $spacing-sm 0 0 0;
+}
+
+.feedbackError {
+  @include body-base;
+  color: #b91c1c;
+  margin: $spacing-sm 0 0 0;
+}
+
 .contentGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;

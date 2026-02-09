@@ -41,7 +41,7 @@ export default function StrengthsWeaknesses({ teamResults, dashboardData }: Stre
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h3 className={styles.title}>Strengths & Weaknesses</h3>
+        <h3 className={styles.title}>Sterke en zwakke punten</h3>
       </div>
       <ul className={styles.list}>
         {roles.map((role) => (

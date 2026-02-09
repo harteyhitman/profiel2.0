@@ -30,7 +30,7 @@ export default function ChurchLogoUpload({ onLogoChange }: ChurchLogoUploadProps
         <div className={styles.logoContainer}>
           <div className={styles.logoPlaceholder}>
             {logo ? (
-              <img src={logo} alt="Church logo" className={styles.logoImage} />
+              <img src={logo} alt="Kerklogo" className={styles.logoImage} />
             ) : (
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24 24C27.3137 24 30 21.3137 30 18C30 14.6863 27.3137 12 24 12C20.6863 12 18 14.6863 18 18C18 21.3137 20.6863 24 24 24Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

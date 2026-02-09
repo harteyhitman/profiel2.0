@@ -16,7 +16,7 @@ export default function FAQsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.headerSection}>
-        <h1 className={styles.title}>FAQS</h1>
+        <h1 className={styles.title}>Veelgestelde vragen</h1>
         <p className={styles.subtitle}>
           See which members are joining your team and their ratings
         </p>

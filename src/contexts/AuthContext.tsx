@@ -130,7 +130,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await authAPI.forgotPassword({ email });
       return response; // Return response with token
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || error.response?.data?.error || 'Failed to send reset email');
+      throw new Error(error.response?.data?.message || error.response?.data?.error || 'Verzenden van reset-e-mail mislukt.');
     }
   };
 

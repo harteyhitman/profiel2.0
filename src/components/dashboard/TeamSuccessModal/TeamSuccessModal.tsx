@@ -33,7 +33,7 @@ export default function TeamSuccessModal({
     >
       <div className={styles.modalContent}>
         <div className={styles.iconContainer}>
-      <Image src={SuccessImg} alt='SuccessImg' />
+      <Image src={SuccessImg} alt="Succes" />
         </div>
 
         <div className={styles.textContainer}>

@@ -35,13 +35,13 @@ export default function FAQItemsPage() {
       <div className={styles.breadcrumbWrap}>
         <Breadcrumb
           items={[
-            { label: 'FAQ', href: '/dashboard/faqs' },
+            { label: 'Veelgestelde vragen', href: '/dashboard/faqs' },
             { label: categoryTitle },
           ]}
         />
       </div>
 
-      <button type="button" onClick={handleBack} className={styles.backButton} aria-label={`Back to ${categoryTitle}`}>
+      <button type="button" onClick={handleBack} className={styles.backButton} aria-label={`Terug naar ${categoryTitle}`}>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
@@ -65,7 +65,7 @@ export default function FAQItemsPage() {
           ))
         ) : (
           <div className={styles.emptyState}>
-            <p>No FAQ items available for this category yet.</p>
+            <p>Er zijn nog geen vragen beschikbaar voor deze categorie.</p>
           </div>
         )}
       </div>

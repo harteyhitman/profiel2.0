@@ -125,7 +125,7 @@ export default function TeamsPage() {
     <div className={styles.page}>
       <div className={styles.headerSection}>
         <div className={styles.headerText}>
-          <h1 className={styles.title}>Team Dashboard</h1>
+          <h1 className={styles.title}>Teamoverzicht</h1>
           <p className={styles.subtitle}>
             Visuele analyse van je teamsamenstelling.
           </p>
@@ -172,13 +172,13 @@ export default function TeamsPage() {
             type="button"
             onClick={handleCopy}
             className={styles.copyButton}
-            aria-label={copied ? 'Copied' : 'Copy link'}
+            aria-label={copied ? 'Gekopieerd' : 'Link kopiëren'}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
               <rect x="5" y="5" width="9" height="9" rx="1" stroke="currentColor" strokeWidth="2"/>
               <path d="M3 11V3C3 2.44772 3.44772 2 4 2H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? 'Gekopieerd' : 'Kopiëren'}
           </button>
         </div>
       </div>

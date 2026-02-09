@@ -41,7 +41,7 @@ export default function CoreControl({ scores }: CoreControlProps) {
           className={index === 0 ? styles.cardPrimary : styles.cardSecondary}
         >
           <div className={index === 0 ? styles.badgePrimary : styles.badgeSecondary}>
-            {control.type}
+            {control.type === 'Primary' ? 'Primair' : 'Secundair'}
           </div>
           <div className={styles.content}>
             <h3 className={styles.label}>{control.label}</h3>

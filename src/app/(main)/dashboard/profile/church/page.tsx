@@ -9,9 +9,9 @@ import styles from './page.module.scss';
 export default function ChurchProfilePage() {
   const [profileData, setProfileData] = useState({
     churchName: 'Skylaire III',
-    country: 'Netherland',
+    country: 'Nederland',
     city: 'Amsterdam',
-    domination: 'Reformed',
+    denomination: 'Gereformeerd',
   });
 
   const handleFieldUpdate = (field: keyof typeof profileData, value: string) => {
@@ -22,9 +22,9 @@ export default function ChurchProfilePage() {
     <div className={styles.page}>
       <div className={styles.headerSection}>
         <div className={styles.headerText}>
-          <h1 className={styles.title}>Church profile</h1>
+          <h1 className={styles.title}>Kerkprofiel</h1>
           <p className={styles.subtitle}>
-            Gain insight into the composition and ministry profiles of your church.
+            Krijg inzicht in de samenstelling en bedieningsprofielen van je kerk.
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function ChurchProfilePage() {
 
       <div className={styles.profileSection}>
         <ProfileField
-          label="Church name"
+          label="Naam van de kerk"
           value={profileData.churchName}
           onUpdate={(value) => handleFieldUpdate('churchName', value)}
         />
@@ -43,7 +43,7 @@ export default function ChurchProfilePage() {
 
       <div className={styles.profileSection}>
         <ProfileField
-          label="Country"
+          label="Land"
           value={profileData.country}
           onUpdate={(value) => handleFieldUpdate('country', value)}
         />
@@ -51,7 +51,7 @@ export default function ChurchProfilePage() {
 
       <div className={styles.profileSection}>
         <ProfileField
-          label="City"
+          label="Stad"
           value={profileData.city}
           onUpdate={(value) => handleFieldUpdate('city', value)}
         />
@@ -59,9 +59,9 @@ export default function ChurchProfilePage() {
 
       <div className={styles.profileSection}>
         <ProfileField
-          label="Domination"
-          value={profileData.domination}
-          onUpdate={(value) => handleFieldUpdate('domination', value)}
+          label="Denominatie"
+          value={profileData.denomination}
+          onUpdate={(value) => handleFieldUpdate('denomination', value)}
         />
       </div>
     </div>

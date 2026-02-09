@@ -32,9 +32,9 @@ export default function GrowthPage() {
 
   const handleExportCSV = () => {
     const growthData = [
-      { 'Member ID': '1', 'Name': 'Sample Member', 'Stage': 'Stage 1', 'Growth area': 'Prayer', 'Goal': 'Daily prayer', 'Status': 'Active' },
+      { 'Lid-ID': '1', 'Naam': 'Voorbeeldlid', 'Fase': 'Fase 1', 'Groeigebied': 'Gebed', 'Doel': 'Dagelijks gebed', 'Status': 'Actief' },
     ];
-    downloadCSV(growthData, `growth-plans-${new Date().toISOString().split('T')[0]}.csv`);
+    downloadCSV(growthData, `groeiplannen-${new Date().toISOString().split('T')[0]}.csv`);
   };
 
 
@@ -77,7 +77,7 @@ export default function GrowthPage() {
           }
         />
         <MetricCard
-          title="Dominant control"
+          title="Dominante bediening"
           value={String(getDummyDominantRole() ?? '00').padStart(2, '0')}
           animate={false}
           icon={

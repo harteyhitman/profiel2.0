@@ -43,7 +43,7 @@ export default function TeamProfileChart({ teamResults, dashboardData }: TeamPro
   return (
     <div className={styles.chartCard}>
       <div className={styles.chartHeader}>
-        <h3 className={styles.chartTitle}>Team Profile</h3>
+        <h3 className={styles.chartTitle}>Teamprofiel</h3>
       </div>
       <div className={styles.chartContainer}>
         <div className={styles.gridLines} aria-hidden />

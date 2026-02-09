@@ -55,18 +55,25 @@ export default function MemberListPage() {
     );
   }, [members, searchQuery]);
 
+  const ROLE_LABELS: Record<string, string> = {
+    apostle: 'Apostel',
+    prophet: 'Profeet',
+    evangelist: 'Evangelist',
+    herder: 'Herder',
+    teacher: 'Leraar',
+  };
   function getDominantRole(scores: any): string {
     if (!scores) return 'N.v.t.';
-    const roles = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
-    let maxRole = roles[0];
-    let maxScore = scores[roles[0]] || 0;
-    roles.forEach(role => {
-      if ((scores[role] || 0) > maxScore) {
-        maxScore = scores[role];
-        maxRole = role;
+    const roleKeys = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
+    let maxKey = roleKeys[0];
+    let maxScore = scores[roleKeys[0]] || 0;
+    roleKeys.forEach((key) => {
+      if ((scores[key] || 0) > maxScore) {
+        maxScore = scores[key];
+        maxKey = key;
       }
     });
-    return maxRole.charAt(0).toUpperCase() + maxRole.slice(1);
+    return ROLE_LABELS[maxKey] ?? maxKey;
   }
 
 
