@@ -17,8 +17,8 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Church Profile App",
-  description: "Church management and profile application",
+  title: "Bedieningen Profiel - Inzicht in je gemeenteleden & kerk",
+  description: "Bedieningen Profiel - Inzicht in je gemeenteleden & kerk",
   icons: {
     icon: [
       { url: '/favicon.ico' },
