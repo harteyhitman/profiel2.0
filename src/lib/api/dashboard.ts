@@ -13,6 +13,8 @@ import type {
   ChurchStats,
   RoleScores,
 } from '../types/dashboard';
+import type { QuestionResponse } from './profile';
+import { calculateRoleScores } from '../utils/questionnaireScoring';
 
 export const dashboardAPI = {
   // User Dashboard Endpoints
@@ -68,7 +70,7 @@ export const dashboardAPI = {
               teacher: Number(data.teacher) || 0,
             }
           : null;
-      const scores: RoleScores =
+      let scores: RoleScores =
         scoresFromNested && typeof scoresFromNested === 'object'
           ? {
               apostle: Number((scoresFromNested as RoleScores).apostle) || 0,
@@ -78,6 +80,14 @@ export const dashboardAPI = {
               teacher: Number((scoresFromNested as RoleScores).teacher) || 0,
             }
           : scoresFromTopLevel ?? emptyResults.scores;
+
+      // If API returned no scores (all zeros) but we have questionnaire responses, compute scores client-side
+      const total = scores.apostle + scores.prophet + scores.evangelist + scores.herder + scores.teacher;
+      const responses = (profile?.responses as QuestionResponse[] | undefined) ?? (data.responses as QuestionResponse[] | undefined);
+      if (total === 0 && Array.isArray(responses) && responses.length > 0) {
+        scores = calculateRoleScores(responses, 40);
+      }
+
       return {
         scores,
         profile: profile || {},

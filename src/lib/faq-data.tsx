@@ -15,6 +15,11 @@ export interface FAQSubCategory {
   icon?: React.ReactNode;
 }
 
+export interface FAQItemEntry {
+  question: string;
+  answer: string;
+}
+
 // Reusable icon components for FAQ
 const IconClock = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,6 +147,99 @@ export const FAQ_SUB_CATEGORIES: Record<string, FAQSubCategory[]> = {
   'payment-license': [],
 };
 
+/** FAQ items for categories that have no subcategories (shown on /dashboard/faqs/[categoryId]/items) */
+export const FAQ_ITEMS_BY_CATEGORY: Record<string, FAQItemEntry[]> = {
+  'personal-score': [
+    { question: 'Ben ik automatisch die bediening bij een hoge score?', answer: 'Nee. Een score laat zien waar je genade en aanleg ligt, maar bevestiging en vrucht komen door de Heilige Geest en de gemeente.' },
+    { question: 'Kan mijn score veranderen?', answer: 'Ja. Door groei, ervaringen en seizoenen kan een profiel verschuiven, maar je kernroeping blijft herkenbaar.' },
+    { question: 'Wat betekent een lage score?', answer: 'Dat betekent niet dat je "minder geestelijk" bent, maar dat die rol niet jouw primaire krachtveld is.' },
+    { question: 'Kan ik meerdere hoofdscores hebben?', answer: 'Soms wel. God combineert bedieningen, maar meestal word je in de praktijk vooral in één rol bevestigd.' },
+  ],
+  'ministry-vocation': [
+    { question: 'Is score hetzelfde als roeping tot ambt?', answer: 'Nee. Een score laat aanleg zien, maar roeping wordt bevestigd door God, vrucht en de gemeente.' },
+    { question: 'Verschil tussen gave, roeping en ambt?', answer: 'Gave is geschenk van de Geest, roeping is Gods stem, ambt is herkenning door de gemeente.' },
+    { question: 'Hoe weet ik of God mijn bediening bevestigt?', answer: 'Door innerlijke overtuiging, vrucht in de praktijk en bevestiging door geestelijke leiders.' },
+    { question: 'Kan de kerk mij anders herkennen dan mijn score?', answer: 'Ja. De test is een hulpmiddel, maar Gods Geest en de gemeenschap zien soms bredere kanten.' },
+  ],
+  'municipality': [
+    { question: 'Hoe gebruik ik mijn score in de gemeente?', answer: 'Door te dienen waar je gaven liggen en door anderen op te bouwen in liefde.' },
+    { question: 'Moet iedereen mijn bediening weten?', answer: 'Niet per se. Belangrijker is dat je bediening zichtbaar wordt in je daden en vrucht.' },
+    { question: 'Wat bij botsing met gemeentecultuur?', answer: 'Blijf in liefde dienen en zoek gesprek. God kan via jou nieuwe accenten brengen.' },
+    { question: 'Hoe omgaan met jaloezie over scores?', answer: 'Herinner jezelf dat alle gaven genade zijn en bedoeld om elkaar te dienen.' },
+  ],
+  'growth-development': [
+    { question: 'Kan ik groeien in een lage score rol?', answer: 'Ja, door oefening, onderwijs en de werking van de Geest kan groei plaatsvinden.' },
+    { question: 'Hoe ontwikkel ik mijn bediening?', answer: 'Door training, mentoring en actieve inzet in de gemeente.' },
+    { question: 'Is karakter belangrijker dan score?', answer: 'Ja. Karakter draagt de bediening; zonder karakter kan een hoge score schadelijk worden.' },
+    { question: 'Hoe weet ik of mijn bediening vrucht draagt?', answer: 'Door levens te zien veranderen en door bevestiging van anderen.' },
+  ],
+  'theological-spiritual': [
+    { question: 'Is mijn score Gods stem over mijn leven?', answer: 'Nee. Het is een hulpmiddel, maar Gods stem komt door de Geest, de Schrift en de gemeente.' },
+    { question: 'Hoe verhoudt dit zich tot de Geest?', answer: 'De Geest leidt altijd. De test helpt je dat concreet te herkennen.' },
+    { question: 'Is bediening een gave of opdracht?', answer: 'Beide: het is een genadegave en een roeping van Jezus om te dienen.' },
+    { question: 'Wat als mijn score me onzeker maakt?', answer: 'Breng je onzekerheid bij God. Je identiteit ligt in Christus, niet in cijfers.' },
+  ],
+  'the-test': [
+    { question: 'Hoe werkt de vragenlijst?', answer: 'Je krijgt 40 vragen met steeds twee stellingen. Je kiest per vraag de stelling die het beste bij je past (schaal 0–6, 3 = neutraal).' },
+    { question: 'Hoe betrouwbaar is de test?', answer: 'De test is gebaseerd op het vijfvoudige bedieningsmodel en geeft een indicatie van je sterke punten. Bevestiging komt door de gemeente en de Geest.' },
+    { question: 'Hoe worden de scores berekend?', answer: 'Op basis van je antwoorden worden scores per bediening (apostel, profeet, evangelist, herder, leraar) berekend. De hoogste scores bepalen je primaire en secundaire profiel.' },
+    { question: 'Kan ik de vragenlijst opnieuw doen?', answer: 'Ja. Je kunt je antwoorden later aanpassen; je resultaten worden dan opnieuw berekend.' },
+  ],
+  'result': [
+    { question: 'Waar vind ik mijn resultaat?', answer: 'Na het invullen van de vragenlijst vind je je resultaat onder Resultaat op je dashboard.' },
+    { question: 'Wat toont mijn resultaat?', answer: 'Je ziet je scores per bediening, je primaire en secundaire profiel en een volledige score-uitsplitsing (max. 80 punten per rol).' },
+    { question: 'Kan ik mijn resultaat delen?', answer: 'Ja. Je kunt je resultaat delen of exporteren via de knoppen op de resultaatpagina.' },
+    { question: 'Wat als ik nog geen resultaat heb?', answer: 'Vul eerst de vragenlijst in via Vragenlijst in het menu. Daarna verschijnt je resultaat.' },
+  ],
+  'teams-leadership': [
+    { question: 'Hoe worden teams samengesteld?', answer: 'Teamleiders en beheerders kunnen leden aan teams toevoegen op basis van bedieningsprofielen en behoeften.' },
+    { question: 'Wat is de rol van een teamleider?', answer: 'Een teamleider beheert het team, nodigt leden uit en ziet de verdeling van gaven binnen het team.' },
+    { question: 'Kan ik in meerdere teams zitten?', answer: 'Ja, afhankelijk van hoe je kerk of organisatie teams inricht.' },
+    { question: 'Hoe zie ik het teamprofiel?', answer: 'Op het teamoverzicht zie je de samenstelling en bedieningsverdeling van elk team.' },
+  ],
+  'account-data': [
+    { question: 'Hoe wijzig ik mijn wachtwoord?', answer: 'Ga naar je accountinstellingen of gebruik de link "Wachtwoord vergeten" op de inlogpagina.' },
+    { question: 'Wie heeft toegang tot mijn gegevens?', answer: 'Je gegevens zijn zichtbaar voor beheerders en teamleiders binnen je kerk of organisatie, conform het privacybeleid.' },
+    { question: 'Kan ik mijn account verwijderen?', answer: 'Neem contact op met je beheerder of support als je je account wilt laten verwijderen.' },
+  ],
+  'payment-license': [
+    { question: 'Wat kost het platform?', answer: 'De kosten zijn afhankelijk van het abonnement van je kerk of organisatie. Individuele leden betalen doorgaans niet zelf.' },
+    { question: 'Hoe verleng ik een licentie?', answer: 'Licentieverlenging verloopt via de beheerder of het abonnement van je organisatie.' },
+  ],
+  'contact-support': [
+    { question: 'Hoe neem ik contact op?', answer: 'Via de contact- of ondersteuningspagina of via je teamleider of beheerder.' },
+    { question: 'Waar vind ik hulp?', answer: 'Bij Veelgestelde vragen (FAQ), in je dashboard en via je kerkelijke beheerder.' },
+  ],
+};
+
+/** FAQ items for subcategories (shown on /dashboard/faqs/[categoryId]/[subCategoryId]) */
+export const FAQ_ITEMS_BY_SUBCATEGORY: Record<string, Record<string, FAQItemEntry[]>> = {
+  'general-use': {
+    'church-members': [
+      { question: 'Wat is het Bedieningenprofiel en hoe helpt het mij?', answer: 'Het Bedieningenprofiel is een platform dat je met een korte test inzicht geeft in je bediening. Je ontvangt een persoonlijk rapport en het kerkteam ziet de verdeling van gaven.' },
+      { question: 'Wat staat er in mijn persoonlijke rapport?', answer: 'Je persoonlijke rapport bevat gedetailleerde inzichten over je bedieningsprofiel: je sterke punten, groeigebieden en aanbevelingen op basis van de resultaten.' },
+      { question: 'Waar zie ik later mijn resultaten?', answer: 'Je vindt je resultaten in het onderdeel Resultaat op je dashboard na het invullen van de vragenlijst.' },
+      { question: 'Kan ik later aan een team worden gekoppeld?', answer: 'Ja, teamleiders en beheerders kunnen je na je assessment aan teams toevoegen.' },
+      { question: 'Kost het geld als individu?', answer: 'Nee, individuele leden betalen niet voor de test. De kerk of organisatie draagt de abonnementskosten.' },
+      { question: 'Wat is het voordeel ten opzichte van een eenmalige test?', answer: 'Het platform biedt doorlopende inzichten, teamanalyses en groeivolging vergeleken met een eenmalige test.' },
+      { question: 'Waar kan ik hulp vinden?', answer: 'Je vindt hulp bij Veelgestelde vragen, via de support of door contact op te nemen met je teamleider.' },
+    ],
+    'team-leaders': [
+      { question: 'Hoe nodig ik leden uit voor de vragenlijst?', answer: 'Via het dashboard kun je een uitnodigingslink genereren of leden per e-mail uitnodigen. Leden ontvangen dan een link om in te loggen en de vragenlijst in te vullen.' },
+      { question: 'Hoe voeg ik leden aan een team toe?', answer: 'Ga naar het teamoverzicht, kies een team en gebruik de optie om leden toe te voegen. Je kunt beschikbare leden selecteren op basis van hun profiel.' },
+      { question: 'Wat zie ik op het teamdashboard?', answer: 'Je ziet de samenstelling van je team(s), de verdeling van bedieningen en inzichten voor groei en balans.' },
+    ],
+    'church-leaders': [
+      { question: 'Hoe beheer ik accounts en rechten?', answer: 'Als beheerder kun je in de instellingen gebruikers en rollen beheren, en bepalen wie toegang heeft tot welke onderdelen.' },
+      { question: 'Hoe zie ik de resultaten van de kerk?', answer: 'Op het kerkdashboard zie je aggregaties van scores, verdeling van bedieningen en groei van leden.' },
+    ],
+    'reasons-background': [
+      { question: 'Waarom het Bedieningenprofiel?', answer: 'Het platform helpt kerken en organisaties om gaven en bedieningen zichtbaar te maken, teams te versterken en persoonlijke groei te ondersteunen.' },
+      { question: 'Op welk model is de test gebaseerd?', answer: 'De test is gebaseerd op het vijfvoudige bedieningsmodel (Efeziërs 4): apostel, profeet, evangelist, herder en leraar.' },
+    ],
+  },
+};
+
 export function getCategoryTitle(categoryId: string): string {
   return FAQ_CATEGORIES.find((c) => c.id === categoryId)?.title ?? categoryId;
 }
@@ -149,4 +247,12 @@ export function getCategoryTitle(categoryId: string): string {
 export function getSubCategoryTitle(categoryId: string, subCategoryId: string): string {
   const subs = FAQ_SUB_CATEGORIES[categoryId];
   return subs?.find((s) => s.id === subCategoryId)?.title ?? subCategoryId;
+}
+
+/** Get FAQ items for a category (items page) or for a subcategory (subcategory page). */
+export function getFAQItems(categoryId: string, subCategoryId?: string): FAQItemEntry[] {
+  if (subCategoryId) {
+    return FAQ_ITEMS_BY_SUBCATEGORY[categoryId]?.[subCategoryId] ?? [];
+  }
+  return FAQ_ITEMS_BY_CATEGORY[categoryId] ?? [];
 }

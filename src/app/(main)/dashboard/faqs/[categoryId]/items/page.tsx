@@ -4,15 +4,8 @@ import React, { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Breadcrumb from '@/components/dashboard/Breadcrumb/Breadcrumb';
 import FAQItem from '@/components/dashboard/FAQItem/FAQItem';
-import { getCategoryTitle } from '@/lib/faq-data';
+import { getCategoryTitle, getFAQItems, FAQ_SUB_CATEGORIES } from '@/lib/faq-data';
 import styles from './page.module.scss';
-
-const faqItems: Record<string, Array<{ question: string; answer: string }>> = {
-  'personal-score': [
-    { question: 'How is my personal score calculated?', answer: 'Your personal score is calculated based on your responses to the questionnaire, analyzing your strengths and areas for growth across different ministry roles.' },
-    { question: 'What does my score mean?', answer: 'Your score reflects your alignment with different ministry roles and helps identify where your gifts and calling are strongest.' },
-  ],
-};
 
 export default function FAQItemsPage() {
   const router = useRouter();
@@ -22,9 +15,9 @@ export default function FAQItemsPage() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const categoryTitle = getCategoryTitle(categoryId);
-  const items = faqItems[categoryId] ?? [];
-
-  const handleBack = () => router.push(`/dashboard/faqs/${categoryId}`);
+  const items = getFAQItems(categoryId);
+  const hasSubCategories = (FAQ_SUB_CATEGORIES[categoryId]?.length ?? 0) > 0;
+  const handleBack = () => router.push(hasSubCategories ? `/dashboard/faqs/${categoryId}` : '/dashboard/faqs');
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);

@@ -4,22 +4,8 @@ import React, { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Breadcrumb from '@/components/dashboard/Breadcrumb/Breadcrumb';
 import FAQItem from '@/components/dashboard/FAQItem/FAQItem';
-import { getCategoryTitle, getSubCategoryTitle } from '@/lib/faq-data';
+import { getCategoryTitle, getSubCategoryTitle, getFAQItems } from '@/lib/faq-data';
 import styles from './page.module.scss';
-
-const faqItems: Record<string, Record<string, Array<{ question: string; answer: string }>>> = {
-  'general-use': {
-    'church-members': [
-      { question: 'Wat is het Bedieningenprofiel en hoe helpt het mij?', answer: 'Het Bedieningenprofiel is een platform dat je met een korte test inzicht geeft in je bediening. Je ontvangt een persoonlijk rapport en het kerkteam ziet de verdeling van gaven.' },
-      { question: 'Wat staat er in mijn persoonlijke rapport?', answer: 'Je persoonlijke rapport bevat gedetailleerde inzichten over je bedieningsprofiel: je sterke punten, groeigebieden en aanbevelingen op basis van de resultaten.' },
-      { question: 'Waar zie ik later mijn resultaten?', answer: 'Je vindt je resultaten in het onderdeel Resultaat op je dashboard na het invullen van de vragenlijst.' },
-      { question: 'Kan ik later aan een team worden gekoppeld?', answer: 'Ja, teamleiders en beheerders kunnen je na je assessment aan teams toevoegen.' },
-      { question: 'Kost het geld als individu?', answer: 'Nee, individuele leden betalen niet voor de test. De kerk of organisatie draagt de abonnementskosten.' },
-      { question: 'Wat is het voordeel ten opzichte van een eenmalige test?', answer: 'Het platform biedt doorlopende inzichten, teamanalyses en groeivolging vergeleken met een eenmalige test.' },
-      { question: 'Waar kan ik hulp vinden?', answer: 'Je vindt hulp bij Veelgestelde vragen, via de support of door contact op te nemen met je teamleider.' },
-    ],
-  },
-};
 
 export default function FAQSubCategoryPage() {
   const router = useRouter();
@@ -31,7 +17,7 @@ export default function FAQSubCategoryPage() {
 
   const categoryTitle = getCategoryTitle(categoryId);
   const subCategoryTitle = getSubCategoryTitle(categoryId, subCategoryId);
-  const items = faqItems[categoryId]?.[subCategoryId] ?? [];
+  const items = getFAQItems(categoryId, subCategoryId);
 
   const handleBack = () => router.push(`/dashboard/faqs/${categoryId}`);
 
@@ -63,7 +49,7 @@ export default function FAQSubCategoryPage() {
       </div>
 
       <div className={styles.faqList}>
-        {items.map((item, index) => (
+        {items.length > 0 ? items.map((item, index) => (
           <FAQItem
             key={index}
             question={item.question}
@@ -71,7 +57,11 @@ export default function FAQSubCategoryPage() {
             isExpanded={expandedIndex === index}
             onToggle={() => toggleExpand(index)}
           />
-        ))}
+        )) : (
+          <div className={styles.emptyState}>
+            <p>Er zijn nog geen vragen beschikbaar voor deze categorie.</p>
+          </div>
+        )}
       </div>
     </div>
   );

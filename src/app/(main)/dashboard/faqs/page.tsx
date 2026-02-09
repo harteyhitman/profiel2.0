@@ -18,7 +18,7 @@ export default function FAQsPage() {
       <div className={styles.headerSection}>
         <h1 className={styles.title}>Veelgestelde vragen</h1>
         <p className={styles.subtitle}>
-          See which members are joining your team and their ratings
+          Vind antwoorden op veelgestelde vragen over het platform en je bedieningsprofiel.
         </p>
       </div>
 

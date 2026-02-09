@@ -18,10 +18,10 @@ import type {
 } from '@/lib/types/dashboard';
 
 // User Dashboard Hooks
-export function useUserResults() {
+export function useUserResults(userId?: number | null) {
   return useQuery<UserResults>({
-    queryKey: ['user', 'results'],
-    queryFn: () => dashboardAPI.getUserResults(),
+    queryKey: ['user', 'results', userId ?? 'current'],
+    queryFn: () => dashboardAPI.getUserResults(userId ?? undefined),
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: false,
   });

@@ -18,12 +18,13 @@ const EXPORT_FILENAME_PREFIX = 'bedieningen-profiel';
 export default function ResultPage() {
   const { user } = useAuth();
   const userId = user?.id != null ? Number(user.id) : null;
-  const { data: userResults, isLoading: resultsLoading } = useUserResults();
+  const { data: userResults, isLoading: resultsLoading } = useUserResults(userId ?? undefined);
   const results = userResults as UserResults | undefined;
 
   const scores = results?.scores ?? null;
   const roleProfile = scores ? calculatePrimaryRole(scores) : null;
-  const hasResults = scores && roleProfile?.totalScore != null && roleProfile.totalScore > 0;
+  // Show results when we have scores (from API or cache), including when total is 0 (e.g. all neutral answers)
+  const hasResults = scores != null && roleProfile != null;
 
   const [exporting, setExporting] = useState(false);
   const [sharing, setSharing] = useState(false);

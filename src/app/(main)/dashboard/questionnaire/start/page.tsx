@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useUserProfile } from '@/hooks/use-dashboard';
 import { profileAPI, type QuestionResponse } from '@/lib/api/profile';
 import { QUESTIONS, TOTAL_QUESTIONS } from '@/lib/constants/questionnaire';
-import { validateResponses } from '@/lib/utils/questionnaireScoring';
+import { validateResponses, calculateRoleScores } from '@/lib/utils/questionnaireScoring';
 import styles from './page.module.scss';
 
 // AgreementSlider uses -5..5; API uses 0–6 (docs/QUESTIONNAIRE_AND_RESULTS_V2.md).
@@ -105,7 +105,13 @@ export default function QuestionnaireStartPage() {
     setSubmitError(null);
     setSubmitting(true);
     try {
-      await profileAPI.submitProfile({ responses });
+      const submitResponse = await profileAPI.submitProfile({ responses });
+      // Populate result cache immediately so the result page shows scores without waiting for refetch
+      const scores = submitResponse?.scores ?? calculateRoleScores(responses, TOTAL_QUESTIONS);
+      queryClient.setQueryData(
+        ['user', 'results', userId ?? 'current'],
+        { scores, profile: submitResponse?.results?.profile ?? {} }
+      );
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['user', 'results'] }),
         ...(userId ? [queryClient.invalidateQueries({ queryKey: ['users', userId, 'profile'] })] : []),
