@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import type { ChurchDashboardResponse } from '@/lib/types/dashboard';
+import type { ChurchDashboardResponse, RoleScores } from '@/lib/types/dashboard';
 import {
   ChartContainer,
   ChartTooltip,
@@ -49,12 +49,13 @@ export default function TeamsByRoleChart({ dashboardData }: TeamsByRoleChartProp
 
     if (dashboardData?.teams && dashboardData.teams.length > 0) {
       dashboardData.teams.forEach((team) => {
-        const dist = team.roleDistribution;
+        const dist = team.roleDistribution as RoleScores | undefined;
         if (dist && typeof dist === 'object') {
-          let maxKey: keyof typeof dist = 'apostle';
-          let maxVal = Number((dist as Record<string, number>).apostle) ?? 0;
-          (['prophet', 'evangelist', 'herder', 'teacher'] as const).forEach((k) => {
-            const v = Number((dist as Record<string, number>)[k]) ?? 0;
+          const keys: (keyof RoleScores)[] = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
+          let maxKey: keyof RoleScores = 'apostle';
+          let maxVal = Number(dist.apostle) ?? 0;
+          keys.forEach((k) => {
+            const v = Number(dist[k]) ?? 0;
             if (v > maxVal) {
               maxVal = v;
               maxKey = k;
