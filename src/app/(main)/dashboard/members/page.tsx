@@ -165,7 +165,7 @@ export default function MembersPage() {
             </svg>
             Uitnodigingslink
           </button>
-          <div className={styles.inviteLinkCard}>
+          {/* <div className={styles.inviteLinkCard}>
             <div className={styles.inviteToggle}>
               <button
                 type="button"
@@ -226,7 +226,7 @@ export default function MembersPage() {
                 </button>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.metricsGrid}>
