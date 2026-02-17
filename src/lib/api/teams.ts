@@ -64,6 +64,14 @@ export const teamsApi = {
   },
 
   /**
+   * Get team by ID. GET /api/teams/:id (docs/API_REFERENCE.md)
+   */
+  getById: async (teamId: number): Promise<Team> => {
+    const response = await axiosInstance.get<Team>(`/teams/${teamId}`);
+    return response.data;
+  },
+
+  /**
    * Get team by invite code
    * GET /api/teams/by-invite/{inviteCode}
    */

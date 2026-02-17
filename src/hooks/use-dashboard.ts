@@ -96,6 +96,15 @@ export function useCreateTeam() {
   });
 }
 
+export function useTeam(teamId: number | string | null) {
+  return useQuery({
+    queryKey: ['teams', teamId],
+    queryFn: () => teamsApi.getById(Number(teamId)),
+    enabled: !!teamId,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
 export function useTeamResults(teamId: number | string | null) {
   return useQuery<TeamResults>({
     queryKey: ['teams', teamId, 'results'],

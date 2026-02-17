@@ -1,0 +1,32 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.chartContainer {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-color;
+  padding: $spacing-xl;
+  height: 100%;
+}
+
+.header {
+  margin-bottom: $spacing-lg;
+}
+
+.title {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0 0 $spacing-xs 0;
+}
+
+.description {
+  @include body-small;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.chartWrapper {
+  height: 350px;
+  width: 100%;
+}

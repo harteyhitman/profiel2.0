@@ -2,23 +2,32 @@
 
 
 import React, { useMemo } from 'react';
-import type { TeamResults, ChurchDashboardResponse } from '@/lib/types/dashboard';
+import type { TeamResults } from '@/lib/types/dashboard';
+import { NATIONAL_AVERAGE_SCORES } from '@/lib/constants/questionnaire';
 import styles from './NationalAverageChart.module.scss';
 
 interface NationalAverageChartProps {
   teamResults?: TeamResults | null;
-  dashboardData?: ChurchDashboardResponse | null;
 }
 
-export default function NationalAverageChart({ teamResults, dashboardData }: NationalAverageChartProps) {
+export default function NationalAverageChart({ teamResults }: NationalAverageChartProps) {
   const roles = ['Apostel', 'Profeet', 'Evangelist', 'Herder', 'Leraar'];
   
-  const { dataPoints, maxValue, highlightedIndex, highlightedValue, highlightedPercentage } = useMemo(() => {
-    const scores = teamResults?.aggregatedScores || dashboardData?.aggregatedScores;
+  const { dataPoints, nationalAveragePoints, maxValue, highlightedIndex, highlightedValue, highlightedPercentage } = useMemo(() => {
+    const scores = teamResults?.averageScores || teamResults?.aggregatedScores;
     
+    const nationalPoints = [
+      NATIONAL_AVERAGE_SCORES.apostle,
+      NATIONAL_AVERAGE_SCORES.prophet,
+      NATIONAL_AVERAGE_SCORES.evangelist,
+      NATIONAL_AVERAGE_SCORES.herder,
+      NATIONAL_AVERAGE_SCORES.teacher,
+    ];
+
     if (!scores) {
       return {
         dataPoints: [0, 0, 0, 0, 0],
+        nationalAveragePoints: nationalPoints,
         maxValue: 100,
         highlightedIndex: 0,
         highlightedValue: 0,
@@ -34,20 +43,25 @@ export default function NationalAverageChart({ teamResults, dashboardData }: Nat
       scores.teacher || 0,
     ];
     
-    const maxValue = Math.max(...dataPoints, 100);
+    const maxValue = Math.max(...dataPoints, ...nationalPoints, 100);
     const highlightedIndex = 2; // evangelist
     const highlightedValue = dataPoints[highlightedIndex];
     const total = dataPoints.reduce((sum, val) => sum + val, 0);
     const highlightedPercentage = total > 0 ? Math.round((highlightedValue / total) * 100) : 0;
 
-    return { dataPoints, maxValue, highlightedIndex, highlightedValue, highlightedPercentage };
-  }, [teamResults, dashboardData]);
-
+    return { dataPoints, nationalAveragePoints: nationalPoints, maxValue, highlightedIndex, highlightedValue, highlightedPercentage };
+  }, [teamResults]);
 
   // Convert data points to SVG coordinates
   const points = dataPoints.map((value, index) => {
     const x = 60 + (index * 80);
-    const y = 200 - (value / maxValue * 180);
+    const y = 230 - (value / maxValue * 180);
+    return `${x},${y}`;
+  }).join(' ');
+
+  const nationalPointsLine = nationalAveragePoints.map((value, index) => {
+    const x = 60 + (index * 80);
+    const y = 230 - (value / maxValue * 180);
     return `${x},${y}`;
   }).join(' ');
 
@@ -111,6 +125,16 @@ export default function NationalAverageChart({ teamResults, dashboardData }: Nat
             <polygon
               points={`40,230 ${points} 480,230`}
               fill="url(#areaGradient)"
+            />
+            
+            <polyline
+              points={nationalPointsLine}
+              fill="none"
+              stroke="#9CA3AF"
+              strokeWidth="2"
+              strokeDasharray="5 5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             
             {/* Line chart */}

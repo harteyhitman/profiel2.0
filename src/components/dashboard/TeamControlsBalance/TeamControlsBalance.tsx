@@ -2,25 +2,29 @@
 
 
 import React, { useMemo } from 'react';
-import type { TeamResults, ChurchDashboardResponse } from '@/lib/types/dashboard';
+import type { TeamResults } from '@/lib/types/dashboard';
 import styles from './TeamControlsBalance.module.scss';
 
 interface TeamControlsBalanceProps {
   teamResults?: TeamResults | null;
-  dashboardData?: ChurchDashboardResponse | null;
+  members?: any[];
 }
 
-export default function TeamControlsBalance({ teamResults, dashboardData }: TeamControlsBalanceProps) {
+export default function TeamControlsBalance({ teamResults, members: propMembers }: TeamControlsBalanceProps) {
   const { memberCount, strongestControl, weakestControl, balanceScore } = useMemo(() => {
-    // Prefer teamResults, fallback to dashboardData
-    const members = teamResults?.members || [];
-    const scores = teamResults?.aggregatedScores || dashboardData?.aggregatedScores;
+    const members = propMembers || teamResults?.members || [];
+    const scores = teamResults?.aggregatedScores;
     
-    if (!scores && members.length === 0) {
+    // Total member count from different sources
+    const totalMemberCount = members.length || 
+                           (teamResults as any)?.members?.length || 
+                           0;
+    
+    if (!scores && totalMemberCount === 0) {
       return {
         memberCount: 0,
-        strongestControl: 'Leraar',
-        weakestControl: 'Apostel',
+        strongestControl: 'N.v.t.',
+        weakestControl: 'N.v.t.',
         balanceScore: 0,
       };
     }
@@ -37,46 +41,46 @@ export default function TeamControlsBalance({ teamResults, dashboardData }: Team
     const strongest = roles[0];
     const weakest = roles[roles.length - 1];
 
-      return {
-        memberCount: members.length || dashboardData?.teams?.reduce((sum, t) => sum + (t.memberCount || 0), 0) || 0,
-        strongestControl: strongest?.name || 'N.v.t.',
-        weakestControl: weakest?.name || 'N.v.t.',
-        balanceScore: total > 0 ? Math.round((strongest?.value || 0) / total * 100) : 0,
-      };
-  }, [teamResults, dashboardData]);
+    // Count members with scores/profile
+    const membersWithProfile = members.length > 0 
+      ? members.filter((m: any) => m.profile || m.scores).length
+      : totalMemberCount;
+
+    return {
+      memberCount: membersWithProfile,
+      strongestControl: strongest?.name || 'N/A',
+      weakestControl: weakest?.name || 'N/A',
+      balanceScore: total > 0 ? Math.round((strongest?.value || 0) / total * 100) : 0,
+    };
+  }, [teamResults, propMembers]);
 
   return (
     <div className={styles.section}>
       <div className={styles.sectionHeader}>
-        <h3 className={styles.sectionTitle}>Teamcontrols-balans</h3>
+        <h3 className={styles.sectionTitle}>Team Balans</h3>
         <p className={styles.sectionSubtitle}>
-          Analyse van sterke en zwakke punten van je team bedieningen.
+          Analyse van sterktes en zwaktes van de bedieningen in uw team.
         </p>
       </div>
       <div className={styles.cardsGrid}>
-        <div className={styles.card}>
-
-          <div className={`${styles.cardHeader} ${styles.cardHeaderGreen}`}></div>
+        <div className={`${styles.card} ${styles.cardGreen}`}>
           <div className={styles.cardBody}>
             <h4 className={styles.cardTitle}>Team Samenstelling</h4>
-            <p className={styles.cardValue}>{memberCount} {memberCount === 1 ? 'lid' : 'leden'} met profiel</p>
+            <p className={styles.cardValue}>{memberCount} leden met profiel</p>
           </div>
         </div>
-        <div className={styles.card}>
-          <div className={`${styles.cardHeader} ${styles.cardHeaderBlue}`}></div>
+        <div className={`${styles.card} ${styles.cardBlue}`}>
           <div className={styles.cardBody}>
-            <h4 className={styles.cardTitle}>Sterkste bediening</h4>
+            <h4 className={styles.cardTitle}>Sterkste Bediening</h4>
             <p className={styles.cardValue}>{strongestControl}</p>
-            <p className={`${styles.cardSubtext} ${styles.cardSubtextBlue}`}>Balansscore: {balanceScore}%</p>
+            <p className={`${styles.cardSubtext} ${styles.cardSubtextBlue}`}>Balans score: {balanceScore}%</p>
           </div>
         </div>
-        <div className={styles.card}>
-          <div className={`${styles.cardHeader} ${styles.cardHeaderRed}`}></div>
+        <div className={`${styles.card} ${styles.cardRed}`}>
           <div className={styles.cardBody}>
-            <h4 className={styles.cardTitle}>Zwakste bediening</h4>
+            <h4 className={styles.cardTitle}>Zwakste Bediening</h4>
             <p className={styles.cardValue}>{weakestControl}</p>
             <p className={`${styles.cardSubtext} ${styles.cardSubtextRed}`}>Aandachtspunt voor werving</p>
-
           </div>
         </div>
       </div>

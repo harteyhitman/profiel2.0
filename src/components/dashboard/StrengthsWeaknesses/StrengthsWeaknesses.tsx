@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import type { TeamResults, ChurchDashboardResponse } from '@/lib/types/dashboard';
+import type { TeamResults } from '@/lib/types/dashboard';
 import styles from './StrengthsWeaknesses.module.scss';
 
 const ROLE_KEYS = [
@@ -14,12 +14,11 @@ const ROLE_KEYS = [
 
 interface StrengthsWeaknessesProps {
   teamResults?: TeamResults | null;
-  dashboardData?: ChurchDashboardResponse | null;
 }
 
-export default function StrengthsWeaknesses({ teamResults, dashboardData }: StrengthsWeaknessesProps) {
+export default function StrengthsWeaknesses({ teamResults }: StrengthsWeaknessesProps) {
   const roles = useMemo(() => {
-    const scores = teamResults?.aggregatedScores || dashboardData?.aggregatedScores;
+    const scores = teamResults?.aggregatedScores;
 
     if (!scores) {
       return ROLE_KEYS.map((r) => ({ ...r, percentage: 0 }));
@@ -36,7 +35,7 @@ export default function StrengthsWeaknesses({ teamResults, dashboardData }: Stre
       ...r,
       percentage: total > 0 ? Math.round(((scores[r.key] || 0) / total) * 100) : 0,
     }));
-  }, [teamResults, dashboardData]);
+  }, [teamResults]);
 
   return (
     <div className={styles.card}>

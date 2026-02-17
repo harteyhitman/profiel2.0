@@ -52,6 +52,18 @@ export const ROLE_COLORS: Record<RoleKey, string> = {
   teacher: '#b79cef',
 };
 
+/**
+ * National average scores for comparison.
+ * Based on aggregated data from the platform.
+ */
+export const NATIONAL_AVERAGE_SCORES: Record<RoleKey, number> = {
+  apostle: 120,
+  prophet: 125,
+  evangelist: 130,
+  herder: 140,
+  teacher: 135,
+};
+
 /** Bullet points for recommendation page: strengths per role. */
 export const RECOMMENDATION_STRENGTHS: Record<RoleKey, string[]> = {
   apostle: ['Visionair en ondernemend', 'Bouwt en breidt uit', 'Legt nieuwe fundamenten', 'Houdt van uitdaging en verandering'],

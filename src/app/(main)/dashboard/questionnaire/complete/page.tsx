@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/forms';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserResults } from '@/hooks/use-dashboard';
 import { calculatePrimaryRole } from '@/lib/utils/roleCalculations';
-import { ROLE_LABELS } from '@/lib/constants/questionnaire';
+import { ROLE_LABELS, type RoleKey } from '@/lib/constants/questionnaire';
 import type { UserResults } from '@/lib/types/dashboard';
 import CelebrationEffect from '@/components/dashboard/CelebrationEffect/CelebrationEffect';
 import styles from './page.module.scss';
@@ -19,7 +19,7 @@ export default function QuestionnaireCompletePage() {
   const results = userResults as UserResults | undefined;
   const scores = results?.scores ?? null;
   const roleProfile = scores ? calculatePrimaryRole(scores) : null;
-  const primaryRoleLabel = roleProfile?.primaryRole ? ROLE_LABELS[roleProfile.primaryRole] : null;
+  const primaryRoleLabel = roleProfile?.primaryRole ? ROLE_LABELS[roleProfile.primaryRole as RoleKey] : null;
 
   const [showCelebration, setShowCelebration] = useState(true);
 

@@ -1,0 +1,349 @@
+@use '@/styles/mixins.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tabsList {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.tabTrigger {
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 2px solid transparent;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover {
+    color: #111827;
+  }
+  
+  &.active {
+    color: #00C070;
+    border-bottom-color: #00C070;
+  }
+}
+
+.contentSpace {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.cardTitleBig {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.cardTitleBigWithIcon {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.cardContent {
+  padding: 1.5rem;
+}
+
+/* Progress Bar */
+.progressBar {
+  height: 0.5rem;
+  width: 100%;
+  background-color: #f3f4f6;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #00C070;
+  border-radius: 9999px;
+}
+
+.statusText {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Badges */
+.badgeWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badgeSuccess {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.badgeDestructive {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.badgeSecondary {
+  background-color: #f3f4f6;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+}
+
+/* Role Dots */
+.roleDotLarge {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.roleDotSmall {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+/* Chart */
+.chartContainer {
+  height: 400px;
+  width: 100%;
+}
+
+/* Alerts / Recommendations */
+.alertList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.alertWarning {
+  background-color: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.alertDestructive {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+
+.alertSuccess {
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.textWarning {
+  color: #d97706;
+}
+
+.textDestructive {
+  color: #dc2626;
+}
+
+.textSuccess {
+  color: #059669;
+}
+
+.alertContent {
+  flex: 1;
+}
+
+.alertTitle {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  color: #1f2937;
+}
+
+.alertDescription {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.recommendationText {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #6b7280;
+}
+
+/* Teams List */
+.teamList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.teamItem {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teamHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teamName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.gapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gapTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #374151;
+}
+
+.gapGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gapTag {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  border: 1px solid transparent;
+}
+
+.gapTagSevere {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+
+.gapTagModerate {
+  background-color: #fffbeb;
+  border-color: #fcd34d;
+}
+
+.gapRoleName {
+  font-weight: 500;
+  color: #1f2937;
+  margin-right: auto;
+}
+
+.gapPercentage {
+  font-size: 0.75rem;
+}
+
+.gapTagSevere .gapPercentage {
+  color: #dc2626;
+}
+
+.balancedMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #059669;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  background-color: #ecfdf5;
+  border-radius: 0.25rem;
+}
+
+.emptyState {
+  text-align: center;
+  color: #6b7280;
+  padding: 2rem;
+}

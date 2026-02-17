@@ -24,22 +24,21 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
     fullName: '',
     email: '',
     phone: '',
-
-    role: 'Leider',
+    role: 'Leader',
   });
   const [showRoleDropdown, setShowRoleDropdown] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('Leider');
+  const [selectedRole, setSelectedRole] = useState('Leader');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const roles = ['Leider', 'Lid', 'Beheerder', 'Moderator'];
+  const roles = ['Leader', 'Church leader', 'Member', 'Admin'];
 
   
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (showRoleDropdown && !target.closest(`.${styles.roleDropdown}`)) {
+      if (showRoleDropdown && !target.closest(`.${styles.roleDropdownContainer}`)) {
         setShowRoleDropdown(false);
       }
     };
@@ -78,7 +77,7 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
       });
       setState('confirmation');
     } catch (err: any) {
-      setError(err.message || 'Uitnodiging verzenden mislukt. Probeer het opnieuw.');
+      setError(err.message || 'Failed to send invitation. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -88,8 +87,8 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
   const handleOk = () => {
     setState('form');
 
-    setFormData({ fullName: '', email: '', phone: '', role: 'Leider' });
-    setSelectedRole('Leider');
+    setFormData({ fullName: '', email: '', phone: '', role: 'Leader' });
+    setSelectedRole('Leader');
 
     onClose();
   };
@@ -102,9 +101,7 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-
-      title="Lid uitnodigen"
-
+      title="Invite member"
       showCloseButton={true}
       size="medium"
       closeOnOverlayClick={false}
@@ -113,10 +110,9 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
         <div className={styles.modalContent}>
           <div className={styles.modalHeader}>
 
-            <h2 className={styles.subtitle}>Nieuw Lid Uitnodigen</h2>
+            <h2 className={styles.subtitle}>Invite a New Member</h2>
             <p className={styles.description}>
-              Stuur een uitnodigingslink of e-mail om een nieuw lid aan je team toe te voegen.
-
+              Send an invite link or email to add a new member to your team.
             </p>
           </div>
 
@@ -127,9 +123,7 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
                 name="fullName"
                 value={formData.fullName}
                 onChange={(e) => handleInputChange('fullName', e.target.value)}
-
-                placeholder="Volledige naam"
-
+                placeholder="Full name"
                 required
               />
             </div>
@@ -140,9 +134,7 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
                 name="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-
-                placeholder="E-mailadres"
-
+                placeholder="Email address"
                 required
               />
             </div>
@@ -154,24 +146,21 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
-
-                placeholder="Telefoonnummer"
-
+                placeholder="Phone number"
                 required
               />
             </div>
 
-            <div className={styles.formGroup}>
-              <div className={styles.roleDropdown}>
+            <div className={styles.roleGroup}>
+              <span className={styles.roleLabel}>Role</span>
+              <div className={styles.roleDropdownContainer}>
                 <button
                   type="button"
                   className={styles.roleButton}
                   onClick={() => setShowRoleDropdown(!showRoleDropdown)}
                 >
                   <span className={styles.roleButtonText}>
-
-                    {selectedRole || 'Rol'}
-
+                    {selectedRole || 'Role'}
                   </span>
                   <svg
                     width="20"
@@ -221,38 +210,31 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
               type="submit"
               variant="secondary"
               disabled={!isFormValid || isLoading}
-
               fullWidth
               className={styles.inviteButton}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
               </svg>
-
-              {isLoading ? 'Verzenden...' : 'Lid Uitnodigen'}
-
+              {isLoading ? 'Sending...' : 'Invite Member'}
             </Button>
           </form>
         </div>
       ) : (
         <div className={styles.confirmationContent}>
           <div className={styles.confirmationHeader}>
-
-            <h2 className={styles.confirmationTitle}>Uitnodiging verzonden</h2>
+            <h2 className={styles.confirmationTitle}>Invite sent</h2>
             <p className={styles.confirmationMessage}>
-              Een uitnodigingslink wordt verzonden naar {formData.email}
-
+              An invitation link will be sent to {formData.email}
             </p>
           </div>
 
           <div className={styles.confirmationList}>
-
-            <p className={styles.confirmationListTitle}>De uitgenodigde gebruiker zal:</p>
+            <p className={styles.confirmationListTitle}>The user will:</p>
             <ul className={styles.confirmationListItems}>
-              <li>Zijn profiel instellen</li>
-              <li>Zijn rol vragenlijst voltooien</li>
-              <li>Automatisch verschijnen onder 'Leden in afwachting' totdat ze deelnemen</li>
-
+              <li>Set up their profile</li>
+              <li>Complete their role questionnaire</li>
+              <li>Automatically appear under &quot;Pending Members&quot; until they join</li>
             </ul>
           </div>
 
@@ -263,13 +245,10 @@ export default function InviteMemberModal({ isOpen, onClose }: InviteMemberModal
             fullWidth
             className={styles.okButton}
           >
-
-            Oké
-
+            Ok
           </Button>
         </div>
       )}
     </Modal>
   );
 }
-

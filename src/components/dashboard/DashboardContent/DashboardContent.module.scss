@@ -113,12 +113,47 @@
 
 .chartsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  align-items: stretch;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
 
   @include tablet-down {
     grid-template-columns: 1fr;
   }
 }
 
+.tabs {
+  display: flex;
+  gap: $spacing-md;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: $spacing-lg;
+  overflow-x: auto;
+  
+  // Hide scrollbar but keep functionality
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  padding: $spacing-md $spacing-lg;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-size: 16px;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  &.active {
+    color: $text-primary;
+    border-bottom-color: $text-primary;
+  }
+}

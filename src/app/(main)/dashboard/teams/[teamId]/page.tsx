@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useTeamMembers, useTeamResults, useAddTeamMember } from '@/hooks/use-dashboard';
+import { useTeamMembers, useTeamResults, useAddTeamMember, useTeam } from '@/hooks/use-dashboard';
 
 import { Button } from '@/components/ui/forms';
 import MemberListTable from '@/components/dashboard/MemberListTable/MemberListTable';
 import AddMemberModal from '@/components/dashboard/AddMemberModal/AddMemberModal';
+import ProfileDistributionChart from '@/components/dashboard/ProfileDistributionChart/ProfileDistributionChart';
+import RoleChart from '@/components/dashboard/RoleChart/RoleChart';
+import { NATIONAL_AVERAGE_SCORES } from '@/lib/constants/questionnaire';
 import styles from './page.module.scss';
 
 const ROLE_LABELS: Record<string, string> = {
@@ -32,7 +35,11 @@ function getDominantRole(scores: Record<string, number> | null | undefined): str
   return ROLE_LABELS[maxKey] ?? maxKey;
 }
 
-export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: string }> | { teamId: string } }) {
+export default function TeamDetailsPage({
+  params,
+}: {
+  params: Promise<{ teamId: string }>;
+}) {
   const router = useRouter();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
@@ -42,7 +49,7 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: 
 
   useEffect(() => {
     const getParams = async () => {
-      const resolvedParams = 'then' in params ? await params : params;
+      const resolvedParams = await params;
       setTeamId(resolvedParams.teamId);
 
 
@@ -51,6 +58,7 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: 
   }, [params]);
 
 
+  const { data: team, isLoading: teamLoading } = useTeam(teamId);
   const { data: teamMembers, isLoading: membersLoading } = useTeamMembers(teamId);
   const { data: teamResults, isLoading: resultsLoading } = useTeamResults(teamId);
   const addMemberMutation = useAddTeamMember(teamId);
@@ -58,19 +66,53 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: 
   // Transform members data for the table
   const members = React.useMemo(() => {
     if (!teamMembers) return [];
-    return teamMembers.map((member: any) => ({
-      id: member.id?.toString() || member.userId?.toString(),
-      name: member.name || 'Onbekend',
-      email: member.email || '',
-      role: member.role || 'Lid',
-      primaryControl: member.scores ? getDominantRole(member.scores) : 'N.v.t.',
-      status: member.status || 'In afwachting',
-    }));
+    return teamMembers.map((member: any) => {
+      const memberScores = member.profile || member.scores;
+      return {
+        id: member.id?.toString() || member.userId?.toString(),
+        name: member.name || 'Onbekend',
+        email: member.email || '',
+        role: member.role || 'Lid',
+        primaryControl: memberScores ? getDominantRole(memberScores) : 'N.v.t.',
+        status: member.status || 'In afwachting',
+      };
+    });
   }, [teamMembers]);
 
-  // Get team info from results
-  const teamName = teamResults?.members?.[0]?.teamId ? `Team ${teamId}` : 'Team';
-  const teamDescription = 'Details en profielen van teamleden.';
+  // Calculate aggregated scores if not provided
+  const aggregatedScores = useMemo(() => {
+    if (teamResults?.aggregatedScores) return teamResults.aggregatedScores;
+    
+    const scores = {
+      apostle: 0,
+      prophet: 0,
+      evangelist: 0,
+      herder: 0,
+      teacher: 0,
+    };
+    
+    // Fallback calculation from members if teamResults doesn't have it
+    const dataToUse = teamResults?.results || teamMembers;
+
+    if (dataToUse) {
+      dataToUse.forEach((item: any) => {
+        const s = item.scores || item.profile;
+        if (s) {
+          scores.apostle += s.apostle || 0;
+          scores.prophet += s.prophet || 0;
+          scores.evangelist += s.evangelist || 0;
+          scores.herder += s.herder || 0;
+          scores.teacher += s.teacher || 0;
+        }
+      });
+    }
+    
+    return scores;
+  }, [teamResults, teamMembers]);
+
+  // Get team info
+  const teamName = team?.name || (teamResults?.members?.[0]?.teamId ? `Team ${teamId}` : 'Team');
+  const teamDescription = team?.description || 'Details en profielen van teamleden.';
 
   const handleAddMembers = async (memberIds: string[]) => {
     try {
@@ -146,7 +188,19 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: 
       {membersLoading ? (
         <div>Leden laden...</div>
       ) : (
-        <MemberListTable members={members} />
+        <>
+          <div className={styles.chartsGrid}>
+             <RoleChart 
+               results={aggregatedScores} 
+               type="bar" 
+               isTeam={true}
+               comparisonData={NATIONAL_AVERAGE_SCORES}
+               showLegend={true}
+             />
+             <ProfileDistributionChart members={teamMembers || []} />
+          </div>
+          <MemberListTable members={members} />
+        </>
       )}
 
 
@@ -162,4 +216,3 @@ export default function TeamDetailsPage({ params }: { params: Promise<{ teamId: 
     </div>
   );
 }
-

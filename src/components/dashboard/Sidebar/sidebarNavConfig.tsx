@@ -109,7 +109,11 @@ export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
     label: 'Teams',
     icon: iconTeams,
     route: '/dashboard/teams',
-    children: [{ label: 'Teamlijst', href: '/dashboard/teams/list' }],
+    children: [
+      { label: 'Teamlijst', href: '/dashboard/teams/list' },
+      { label: 'Teamvergelijking', href: '/dashboard/teams/comparison' },
+      { label: 'Hiatenanalyse', href: '/dashboard/teams/gap-analysis' },
+    ],
   },
   {
     label: 'Leden',

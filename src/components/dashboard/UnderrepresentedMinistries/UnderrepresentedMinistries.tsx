@@ -2,49 +2,69 @@
 
 
 import React, { useMemo } from 'react';
-import type { TeamResults, ChurchDashboardResponse } from '@/lib/types/dashboard';
+import type { TeamResults } from '@/lib/types/dashboard';
 import styles from './UnderrepresentedMinistries.module.scss';
 
 interface UnderrepresentedMinistriesProps {
   teamResults?: TeamResults | null;
-  dashboardData?: ChurchDashboardResponse | null;
+  members?: any[];
 }
 
-export default function UnderrepresentedMinistries({ teamResults, dashboardData }: UnderrepresentedMinistriesProps) {
+const ROLE_COLORS: Record<string, string> = {
+  'Apostel': '#3b82f6', // Blue
+  'Profeet': '#10b981', // Green
+  'Evangelist': '#ec4899', // Pink
+  'Herder': '#f59e0b', // Orange
+  'Leraar': '#8b5cf6', // Purple
+};
+
+export default function UnderrepresentedMinistries({ teamResults, members: propMembers }: UnderrepresentedMinistriesProps) {
   const ministries = useMemo(() => {
-    const members = teamResults?.members || [];
-    const scores = teamResults?.aggregatedScores || dashboardData?.aggregatedScores;
+    const scores = teamResults?.aggregatedScores;
     
-    if (!scores || members.length === 0) {
+    if (!scores) {
       return [
-        { name: 'Apostel', memberCount: 0 },
-        { name: 'Apostel', memberCount: 0 },
-        { name: 'Apostel', memberCount: 0 },
-        { name: 'Apostel', memberCount: 0 },
-        { name: 'Apostel', memberCount: 0 },
-        { name: 'Apostel', memberCount: 0 },
+        { name: 'Apostel', key: 'apostle', memberCount: 0, description: 'Het team heeft meer Apostolische energie nodig.' },
+        { name: 'Profeet', key: 'prophet', memberCount: 0, description: 'Het team heeft meer Profetische energie nodig.' },
+        { name: 'Evangelist', key: 'evangelist', memberCount: 0, description: 'Het team heeft meer Evangelistische energie nodig.' },
+        { name: 'Herder', key: 'herder', memberCount: 0, description: 'Het team heeft meer Herderlijke energie nodig.' },
+        { name: 'Leraar', key: 'teacher', memberCount: 0, description: 'Het team heeft meer Onderwijzende energie nodig.' },
       ];
     }
 
-    // Find underrepresented roles (roles with low scores)
     const roles = [
-      { name: 'Apostel', value: scores.apostle || 0 },
-      { name: 'Profeet', value: scores.prophet || 0 },
-      { name: 'Evangelist', value: scores.evangelist || 0 },
-      { name: 'Herder', value: scores.herder || 0 },
-      { name: 'Leraar', value: scores.teacher || 0 },
+      { name: 'Apostel', key: 'apostle', value: scores.apostle || 0, description: 'Het team heeft meer Apostolische energie nodig.' },
+      { name: 'Profeet', key: 'prophet', value: scores.prophet || 0, description: 'Het team heeft meer Profetische energie nodig.' },
+      { name: 'Evangelist', key: 'evangelist', value: scores.evangelist || 0, description: 'Het team heeft meer Evangelistische energie nodig.' },
+      { name: 'Herder', key: 'herder', value: scores.herder || 0, description: 'Het team heeft meer Herderlijke energie nodig.' },
+      { name: 'Leraar', key: 'teacher', value: scores.teacher || 0, description: 'Het team heeft meer Onderwijzende energie nodig.' },
     ].sort((a, b) => a.value - b.value);
 
-    // Return the 6 most underrepresented (with some repetition for design)
-    return [
-      { name: roles[0]?.name || 'Apostel', memberCount: 0 },
-      { name: roles[0]?.name || 'Apostel', memberCount: members.length > 0 ? Math.floor(members.length * 0.1) : 0 },
-      { name: roles[0]?.name || 'Apostel', memberCount: 0 },
-      { name: roles[0]?.name || 'Apostel', memberCount: 0 },
-      { name: roles[0]?.name || 'Apostel', memberCount: 0 },
-      { name: roles[0]?.name || 'Apostel', memberCount: 0 },
-    ];
-  }, [teamResults, dashboardData]);
+    // Filter members who have these roles as primary
+    const members = propMembers || teamResults?.members || [];
+    
+    return roles.map(role => {
+      const primaryCount = members.length > 0 ? members.filter((m: any) => {
+        const s = m.profile || m.scores;
+        if (!s) return false;
+        // Find the key with the highest value
+        let maxVal = -1;
+        let dominant = '';
+        for (const [key, val] of Object.entries(s)) {
+          if (typeof val === 'number' && val > maxVal) {
+            maxVal = val;
+            dominant = key;
+          }
+        }
+        return dominant === role.key;
+      }).length : 0;
+
+      return {
+        ...role,
+        memberCount: primaryCount
+      };
+    });
+  }, [teamResults, propMembers]);
 
   return (
     <div className={styles.section}>
@@ -54,40 +74,46 @@ export default function UnderrepresentedMinistries({ teamResults, dashboardData 
         <div className={styles.column}>
           {ministries.slice(0, 3).map((ministry, index) => (
             <div key={index} className={styles.ministryItem}>
-
-             
-              <div className={styles.descriptionBox}>
-              <button className={styles.ministryButton}>
+              <div 
+                className={styles.ministryTag}
+                style={{ 
+                  backgroundColor: `${ROLE_COLORS[ministry.name] || '#10b981'}15`,
+                  color: ROLE_COLORS[ministry.name] || '#10b981'
+                }}
+              >
                 {ministry.name}
-              </button>
-                <p className={styles.ministryDescription}>
-                  Het team heeft meer {ministry.name} energie nodig.
-                </p>
               </div>
-              <span className={styles.memberCount}>
-                {ministry.memberCount} {ministry.memberCount === 1 ? 'lid' : 'leden'}
-
-              </span>
+              <div className={styles.descriptionBox}>
+                <p className={styles.ministryDescription}>
+                  {ministry.description}
+                </p>
+                <span className={styles.memberCount}>
+                  {ministry.memberCount} {ministry.memberCount === 1 ? 'lid' : 'leden'}
+                </span>
+              </div>
             </div>
           ))}
         </div>
         <div className={styles.column}>
-          {ministries.slice(3, 6).map((ministry, index) => (
+          {ministries.slice(3, 5).map((ministry, index) => (
             <div key={index} className={styles.ministryItem}>
-
-             
-              <div className={styles.descriptionBox}>
-              <button className={styles.ministryButton}>
+              <div 
+                className={styles.ministryTag}
+                style={{ 
+                  backgroundColor: `${ROLE_COLORS[ministry.name] || '#10b981'}15`,
+                  color: ROLE_COLORS[ministry.name] || '#10b981'
+                }}
+              >
                 {ministry.name}
-              </button>
-                <p className={styles.ministryDescription}>
-                  Het team heeft meer {ministry.name} energie nodig.
-                </p>
               </div>
-              <span className={styles.memberCount}>
-                {ministry.memberCount} {ministry.memberCount === 1 ? 'lid' : 'leden'}
-
-              </span>
+              <div className={styles.descriptionBox}>
+                <p className={styles.ministryDescription}>
+                  {ministry.description}
+                </p>
+                <span className={styles.memberCount}>
+                  {ministry.memberCount} {ministry.memberCount === 1 ? 'lid' : 'leden'}
+                </span>
+              </div>
             </div>
           ))}
         </div>

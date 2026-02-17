@@ -1,0 +1,112 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 450px; // As seen in design
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.memberList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.memberItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.memberInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.memberName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.initialsText {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  min-width: 24px;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.moreButton {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: #4b5563;
+  }
+}
+
+.footerLink {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #059669; // Green link
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

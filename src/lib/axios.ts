@@ -26,6 +26,7 @@ axiosInstance.interceptors.response.use(
       (url.includes('/churches/stats') && (status === 400 || status === 404)) ||
       (url.includes('/churches/my') && status === 403) ||
       (url.includes('/churches/my-churches') && status === 403) ||
+      (url.includes('/teams/') && url.includes('/results') && status === 404) ||
       (url.includes('/users/') && url.includes('/teams') && status === 404) ||
       (url.includes('/users/') && url.includes('/profile') && status === 404) ||
       (isUserEndpoint && (status === 401 || status === 500));

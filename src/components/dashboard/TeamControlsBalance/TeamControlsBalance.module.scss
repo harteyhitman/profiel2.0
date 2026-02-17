@@ -2,123 +2,106 @@
 @use '../../../styles/mixins' as *;
 
 .section {
-  background-color: $background-white;
-  border-radius: $border-radius-lg;
-  padding: $spacing-xl;
-  border: $border-width-thin solid $border-color;
-  box-shadow: $shadow-sm;
-
-  @include mobile {
-    padding: $spacing-md;
-  }
+  width: 100%;
 }
 
 .sectionHeader {
-  margin-bottom: $spacing-lg;
+  margin-bottom: 1.5rem;
 }
 
 .sectionTitle {
-  @include heading-medium;
-  color: $text-primary;
-  margin: 0 0 $spacing-xs 0;
-  font-family: $font-family-heading;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
 }
 
 .sectionSubtitle {
-  @include body-base;
-  color: $text-secondary;
+  font-size: 12px;
+  color: #6b7280;
   margin: 0;
 }
 
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-lg;
+  gap: 1.5rem;
 
   @include tablet-down {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include mobile {
     grid-template-columns: 1fr;
   }
 }
 
 .card {
-  @include flex-column;
-  gap: 0;
-  background-color: $background-white;
-  border-radius: $border-radius-md;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
   overflow: hidden;
-  border: $border-width-thin solid $border-color;
+  display: flex;    
+  flex-direction: column;
+  height: 100%;
+}
 
-  box-shadow: $shadow-sm;
-  width: 100%;
+.cardGreen {
+  background-color: #ecfdf5;
+  border-color: #d1fae5;
+}
+
+.cardBlue {
+  background-color: #eff6ff;
+  border-color: #dbeafe;
+}
+
+.cardRed {
+  background-color: #fef2f2;
+  border-color: #fee2e2;
 }
 
 .cardHeader {
-  height: 70px; // Just a colored bar, no text
-  min-height: 8px;
-  
-  &.cardHeaderGreen {
-    background-color: #D1FAE5; // Light green
-  }
-  
-  &.cardHeaderBlue {
-    background-color: #DBEAFE; // Light blue
-  }
-  
-  &.cardHeaderRed {
-    background-color: #FEE2E2; // Light red/pink
-  }
+  height: 4px;
+  width: 100%;
+}
 
+.cardHeaderGreen {
+  background-color: #10b981;
+}
+
+.cardHeaderBlue {
+  background-color: #3b82f6;
+}
+
+.cardHeaderRed {
+  background-color: #ef4444;
 }
 
 .cardBody {
-  padding: $spacing-lg;
-  @include flex-column;
-  gap: $spacing-sm;
-
-  text-align: center;
-  align-items: center;
-
+  padding: 1.25rem;
 }
 
 .cardTitle {
-  @include body-base;
-  color: $text-primary;
-  font-weight: $font-weight-semibold;
-  margin: 0;
-
-  text-align: center;
-
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0 0 0.5rem 0;
 }
 
 .cardValue {
-  @include heading-medium;
-  color: $text-primary;
-  margin: 0;
-
-  font-weight: 400;
-  font-size: 14px;
-  text-align: center;
-
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
 }
 
 .cardSubtext {
-  @include body-small;
-  color: $text-secondary;
-  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
 
-  text-align: center;
-  
-  &.cardSubtextBlue {
-    color: #3B82F6; // Blue
-  }
-  
-  &.cardSubtextRed {
-    color: #EF4444; // Red
-  }
+.cardSubtextBlue {
+  color: #3b82f6;
+}
 
+.cardSubtextRed {
+  color: #ef4444;
 }
 
