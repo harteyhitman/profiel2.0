@@ -1,12 +1,12 @@
-import styles from './DataCard.module.scss';
+import styles from "./DataCard.module.scss";
 
 export default function DataCard() {
   const ministries = [
-    { name: 'Apostel', value: 85 },
-    { name: 'Profeet', value: 70 },
-    { name: 'Evangelist', value: 60 },
-    { name: 'Herder', value: 75 },
-    { name: 'Leraar', value: 65 },
+    { name: "Apostel", value: 85 },
+    { name: "Profeet", value: 70 },
+    { name: "Evangelist", value: 60 },
+    { name: "Herder", value: 75 },
+    { name: "Leraar", value: 65 },
   ];
 
   const lineData = [82, 75, 68, 72, 78];
@@ -16,20 +16,19 @@ export default function DataCard() {
     <div className={styles.card}>
       {/* HEADER */}
       <div className={styles.membersChip}>
-  <span className={styles.membersIcon}>👥</span>
-  <span>Leden</span>
-</div>
+        <span className={styles.membersIcon}>👥</span>
+        <span>Leden</span>
+      </div>
 
       <div className={styles.header}>
         <div>
           <span className={styles.meta}>Leden</span>
-          <h2 className={styles.value}>2,847  <span className={styles.sub}>Actieve Profielen</span></h2>
-         
+          <h2 className={styles.value}>
+            2,847 <span className={styles.sub}>Actieve Profielen</span>
+          </h2>
         </div>
 
-        <span className={styles.badge}>
-          Vijfvoudige Bediening Rapport
-        </span>
+        <span className={styles.badge}>Vijfvoudige Bediening Rapport</span>
       </div>
 
       {/* CHART */}
@@ -58,7 +57,7 @@ export default function DataCard() {
                 const y = 40 - (v / maxValue) * 40;
                 return `${x},${y}`;
               })
-              .join(' ')}
+              .join(" ")}
           />
         </svg>
       </div>
@@ -70,10 +69,9 @@ export default function DataCard() {
         <Stat value="23%" label="Nieuwe Profielen (30d)" />
       </div>
       <div className={styles.reportBadge}>
-  <span className={styles.reportIcon}>📊</span>
-  <span>Rapport</span>
-</div>
-
+        <span className={styles.reportIcon}>📊</span>
+        <span>Rapport</span>
+      </div>
     </div>
   );
 }

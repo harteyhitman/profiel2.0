@@ -48,10 +48,11 @@ $auth-green: $button-dark;
   }
 
   label {
-    color: $text-primary !important;
+    color: $text-secondary !important;
     font-size: $font-size-sm !important;
     font-weight: $font-weight-semibold !important;
     line-height: 1.4;
+    margin-bottom: $spacing-md;
   }
 
   input,
@@ -69,7 +70,7 @@ $auth-green: $button-dark;
     border: 1px solid $border-color;
     border-radius: $border-radius-md;
     transition: border-color $transition-base $transition-ease, box-shadow $transition-base $transition-ease;
-
+    
     &::placeholder {
       color: $text-secondary !important;
       opacity: 1;

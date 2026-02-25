@@ -8,26 +8,26 @@
   box-sizing: border-box;
 }
 
-.floatingLabel {
-  position: absolute;
-  left: $spacing-md;
-  top: 50%;
-  transform: translateY(-50%);
-  color: $text-light;
-  font-size: $font-size-base;
-  pointer-events: none;
-  transition: all $transition-base $transition-ease;
-  background-color: $background-white;
-  padding: 0 $spacing-xs;
-  z-index: 1;
+// .floatingLabel {
+//   position: absolute;
+//   left: $spacing-md;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   color: $text-light;
+//   font-size: $font-size-base;
+//   pointer-events: none;
+//   transition: all $transition-base $transition-ease;
+//   background-color: $background-white;
+//   padding: 0 $spacing-xs;
+//   z-index: 1;
 
-  &.active {
-    top: 0;
-    transform: translateY(-50%) scale(0.875);
-    color: $accent-green;
-    font-weight: $font-weight-medium;
-  }
-}
+//   &.active {
+//     top: 0;
+//     transform: translateY(-50%) scale(0.875);
+//     color: $accent-green;
+//     font-weight: $font-weight-medium;
+//   }
+// }
 
 .required {
   color: #dc2626;
