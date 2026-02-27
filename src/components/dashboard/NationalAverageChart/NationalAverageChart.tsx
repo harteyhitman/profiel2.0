@@ -2,12 +2,11 @@
 
 
 import React, { useMemo } from 'react';
-import type { TeamResults } from '@/lib/types/dashboard';
 import { NATIONAL_AVERAGE_SCORES } from '@/lib/constants/questionnaire';
 import styles from './NationalAverageChart.module.scss';
 
 interface NationalAverageChartProps {
-  teamResults?: TeamResults | null;
+  teamResults?: any | null;
 }
 
 export default function NationalAverageChart({ teamResults }: NationalAverageChartProps) {

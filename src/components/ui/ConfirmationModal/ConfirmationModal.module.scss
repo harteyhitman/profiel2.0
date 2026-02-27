@@ -1,0 +1,60 @@
+@use '../../../styles/_variables.scss' as *;
+@use '../../../styles/_mixins.scss' as *;
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: $background-white;
+  padding: $spacing-xl;
+  border-radius: $border-radius-lg;
+  box-shadow: $card-shadow;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  @include mobile {
+    padding: $spacing-lg;
+  }
+}
+
+.modalTitle {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0;
+}
+
+.modalMessage {
+  @include body-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-md;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+
+  .confirmButton {
+    background-color: $danger-color;
+    border-color: $danger-color;
+    color: $background-white;
+
+    &:hover {
+      background-color: darken($danger-color, 10%);
+      border-color: darken($danger-color, 10%);
+    }
+  }
+}

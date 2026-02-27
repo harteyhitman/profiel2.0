@@ -8,7 +8,7 @@ import styles from './ScoreOverviewChart.module.scss';
 
 const ROLE_KEYS: RoleKey[] = ['apostle', 'prophet', 'evangelist', 'herder', 'teacher'];
 
-const MAX_SCORE_PER_ROLE = 200; // 40 questions × 5 (docs/QUESTIONNAIRE_AND_RESULTS_V2.md)
+const MAX_SCORE_PER_ROLE = 80; // 40 questions × 5 (docs/QUESTIONNAIRE_AND_RESULTS_V2.md)
 
 function AnimatedBarGroup({
   score,
@@ -66,7 +66,7 @@ export default function ScoreOverviewChart({ scores: propScores }: ScoreOverview
     <div className={styles.chart}>
       <div className={styles.chartContainer}>
         <div className={styles.yAxis}>
-          {[200, 150, 100, 50, 0].map((value) => (
+          {[80,60, 40, 20, 0].map((value) => (
             <div key={value} className={styles.yAxisLabel}>
               {value}
             </div>
@@ -74,7 +74,7 @@ export default function ScoreOverviewChart({ scores: propScores }: ScoreOverview
         </div>
         <div className={styles.barsContainer}>
           <div className={styles.gridLines} aria-hidden="true">
-            {[200, 150, 100, 50].map((y) => (
+            {[80,60, 40, 20, 0].map((y) => (
               <div
                 key={y}
                 className={styles.gridLine}

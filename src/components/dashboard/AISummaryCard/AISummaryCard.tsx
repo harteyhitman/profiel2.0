@@ -47,7 +47,7 @@ export default function AISummaryCard({ dashboardData }: AISummaryCardProps) {
             <path d="M12 2C8.13 2 5 5.13 5 9C5 11.38 6.19 13.47 8 14.74V17C8 18.1 8.9 19 10 19H14C15.1 19 16 18.1 16 17V14.74C17.81 13.47 19 11.38 19 9C19 5.13 15.87 2 12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M9 9H15M9 13H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <h3 className={styles.cardTitle}>AI Kerk Samenvatting</h3>
+          <h3 className={styles.cardTitle}>Kerk Samenvatting</h3>
         </div>
       </div>
       <div className={styles.cardContent}>

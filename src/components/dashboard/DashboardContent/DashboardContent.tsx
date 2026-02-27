@@ -13,6 +13,10 @@ import MemberGrowthChart from '../MemberGrowthChart/MemberGrowthChart';
 import TeamsByRoleChart from '../TeamsByRoleChart/TeamsByRoleChart';
 import TeamEngagementChart from '../TeamEngagementChart/TeamEngagementChart';
 import AISummaryCard from '../AISummaryCard/AISummaryCard';
+import RoleChart from '../RoleChart/RoleChart';
+import AverageScoresChart from '../AverageScoresChart/AverageScoresChart';
+import NationalAverageChart from '../NationalAverageChart/NationalAverageChart';
+import RolePercentages from '../RolePercentages/RolePercentages';
 import { useChurchDashboard } from '@/hooks/use-dashboard';
 import InviteMemberModal from '../InviteMemberModal/InviteMemberModal';
 import CreateTeamModal from '../CreateTeamModal/CreateTeamModal';
@@ -205,6 +209,24 @@ export default function DashboardContent() {
       </div>
 
       {/* Charts Section */}
+      <div className={styles.chartsGrid}>
+        <RoleChart
+          results={effectiveDashboardData?.averageScores || { apostle: 0, prophet: 0, evangelist: 0, herder: 0, teacher: 0 }}
+          type="radar"
+          showLegend={true}
+        />
+        <AverageScoresChart dashboardData={effectiveDashboardData} />
+      </div>
+
+      <div className={styles.chartsGrid}>
+        <RoleChart
+          results={effectiveDashboardData?.aggregatedScores || { apostle: 0, prophet: 0, evangelist: 0, herder: 0, teacher: 0 }}
+          type="pie"
+          showLegend={true}
+        />
+        <NationalAverageChart teamResults={effectiveDashboardData} />
+      </div>
+
       <div className={styles.chartsGrid}>
         <MemberGrowthChart dashboardData={effectiveDashboardData} />
         <TeamsByRoleChart dashboardData={effectiveDashboardData} />

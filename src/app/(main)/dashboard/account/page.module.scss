@@ -1,8 +1,11 @@
-@use '../../../../styles/variables' as *;
-@use '../../../../styles/mixins' as *;
+@use '../../../../styles/_variables.scss' as *;
+@use '../../../../styles/_mixins.scss' as *;
 
 .page {
   padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
 
   @include mobile {
     padding: $spacing-md;
@@ -41,10 +44,149 @@
   margin: 0;
 }
 
-.startButton {
-  flex-shrink: 0;
+.contentCard {
+  background-color: $background-white;
+  border-radius: $border-radius-lg;
+  box-shadow: $card-shadow;
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding-bottom: $spacing-md;
+  border-bottom: 1px solid $border-color;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: $primary-color; // A green color
+  color: $background-white;
+  @include flex-center;
+  @include heading-medium;
+}
+
+.profileInfo {
+  @include flex-column;
+  gap: $spacing-xs;
+}
+
+.profileName {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0;
+}
+
+.profileEmail {
+  @include body-small;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.personalInfoSection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.sectionTitle {
+  @include heading-small;
+  color: $text-primary;
+  margin: 0;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-xs 0;
+  border-bottom: 1px solid $border-color;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.infoLabel {
+  @include body-base;
+  color: $text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.infoValue {
+  @include body-base;
+  color: $text-secondary;
+}
+
+.editButton {
+  align-self: flex-end;
+  margin-top: $spacing-md;
+}
+
+.deleteAccountSection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.deleteDescription {
+  @include body-base;
+  color: $text-secondary;
+  margin: 0;
+}
+
+.deleteButton {
+  align-self: flex-start; // Align to start as per screenshot
+}
+
+.dangerButton {
+  background-color: $danger-color; // Red color for danger
+  border-color: $danger-color;
+  color: $background-white;
+
+  &:hover {
+    background-color: darken($danger-color, 10%);
+    border-color: darken($danger-color, 10%);
+  }
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
 
   @include mobile {
-    width: 100%;
+    grid-template-columns: 1fr;
   }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  label {
+    @include body-base;
+    color: $text-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
 }

@@ -104,7 +104,7 @@ export const SHARED_DASHBOARD_NAV_CONFIG: NavItemConfig[] = [
 
 /** Full dashboard nav for team leaders / users who registered on behalf of church or ministry. */
 export const SIDEBAR_NAV_CONFIG: NavItemConfig[] = [
-  { label: 'Overzicht', icon: iconDashboard, route: '/dashboard' },
+  { label: 'Kerkdashboard', icon: iconDashboard, route: '/dashboard' },
   {
     label: 'Teams',
     icon: iconTeams,
