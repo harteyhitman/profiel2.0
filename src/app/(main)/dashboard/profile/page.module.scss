@@ -63,6 +63,18 @@
   }
 }
 
+.headerActionsPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-sm);
+
+  @include tablet-down {
+    width: 100%;
+    align-items: stretch;
+  }
+}
+
 .shareButton {
   display: inline-flex;
   align-items: center;
@@ -80,6 +92,11 @@
 
   &:hover {
     background-color: var(--bg-muted);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 }
 
@@ -101,6 +118,25 @@
   &:hover {
     opacity: 0.95;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.feedbackMessage {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--green-primary);
+  margin: 0;
+}
+
+.feedbackError {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: #b91c1c;
+  margin: 0;
 }
 
 .scoreCard {

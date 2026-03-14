@@ -111,20 +111,51 @@ const IconLock = () => (
     <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
+const IconShield = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L5 6V11C5 15.55 8.03 19.74 12 21C15.97 19.74 19 15.55 19 11V6L12 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9.5 12L11.25 13.75L14.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconKey = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 7C21 9.20914 19.2091 11 17 11C16.1819 11 15.4211 10.7544 14.7873 10.3333L10 15.1207V18H7V21H4V17.8787L9.66667 12.212C9.24557 11.5789 9 10.8181 9 10C9 7.79086 10.7909 6 13 6C13.8181 6 14.5789 6.24557 15.212 6.66667L16 5.87868V3H19V6H21V7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M16.5 7.5H16.51" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconInfo = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 16V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 8H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const IconClipboard = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 3H15V6H9V3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 4H7C5.89543 4 5 4.89543 5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6C19 4.89543 18.1046 4 17 4H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 11H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 15H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
 export const FAQ_CATEGORIES: FAQCategory[] = [
-  { id: 'general-use', title: 'Algemeen gebruik', description: 'Vind hulp bij het navigeren op het platform en het effectief gebruiken van de belangrijkste functies.', icon: <IconClock /> },
-  { id: 'personal-score', title: 'Persoonlijke score', description: 'Leer hoe je score wordt berekend en wat die zegt over je groeigebieden.', icon: <IconPerson /> },
-  { id: 'the-test', title: 'De test', description: 'Begrijp de vragenlijst, betrouwbaarheid en hoe resultaten worden beoordeeld.', icon: <IconDocument /> },
-  { id: 'teams-leadership', title: 'Teams & leiderschap', description: 'Ontdek hoe teams zijn opgebouwd en hoe leiderschapsrollen evaluaties beïnvloeden.', icon: <IconTeam /> },
-  { id: 'theological-spiritual', title: 'Theologisch & geestelijke verwerking', description: 'Reflecteer op de geestelijke en theologische aspecten die je bedieningspad vormgeven.', icon: <IconBook /> },
-  { id: 'growth-development', title: 'Groei & ontwikkeling', description: 'Krijg begeleiding bij het verbeteren van je resultaten en het koesteren van persoonlijke groei.', icon: <IconChart /> },
-  { id: 'ministry-vocation', title: 'Bediening, roeping & identiteit', description: 'Begrijp hoe je roeping en bediening aansluiten bij je leiderschapsidentiteit.', icon: <IconMinistry /> },
-  { id: 'municipality', title: 'Relatie met de gemeente', description: 'Verken hoe je een gezonde samenwerking opbouwt tussen je bediening en de levende gemeenschap.', icon: <IconBuilding /> },
-  { id: 'account-data', title: 'Account, gegevens & privacy', description: 'Beheer je inloggegevens, accountinstellingen en toestemmingsvoorkeuren.', icon: <IconAccount /> },
-  { id: 'payment-license', title: 'Betaling & licentie', description: 'Leer over betaalmogelijkheden, abonnementen en licentieverlengingen.', icon: <IconPayment /> },
-  { id: 'contact-support', title: 'Contact & ondersteuning', description: 'Neem contact op met ons ondersteuningsteam voor hulp, feedback of partnershipinformatie.', icon: <IconContact /> },
-  { id: 'result', title: 'Resultaat', description: 'Begrijp je evaluatieresultaat, prestatiemetrics en interpretatiemethoden.', icon: <IconResult /> },
+  { id: 'personal-score', title: 'Over je persoonlijke score', description: 'Leer hoe je score wordt berekend en wat die zegt over je aanleg, sterke punten en groeigebieden.', icon: <IconPerson /> },
+  { id: 'ministry-vocation', title: 'Ambt, roeping en identiteit', description: 'Begrijp hoe roeping, bediening en identiteit zich tot elkaar verhouden in de praktijk.', icon: <IconMinistry /> },
+  { id: 'municipality', title: 'Relatie tot de gemeente', description: 'Verken hoe je bediening zich verbindt met de gemeente en hoe je daarin gezond kunt dienen.', icon: <IconBuilding /> },
+  { id: 'growth-development', title: 'Groei en ontwikkeling', description: 'Krijg begeleiding bij het ontwikkelen van je bediening en het verdiepen van persoonlijke groei.', icon: <IconChart /> },
+  { id: 'theological-spiritual', title: 'Theologische en geestelijke verwerking', description: 'Reflecteer op de geestelijke en theologische betekenis van je profiel en bediening.', icon: <IconBook /> },
+  { id: 'general-use', title: 'Algemeen gebruik', description: 'Vind hulp bij het navigeren op het platform en het gebruiken van de belangrijkste functies.', icon: <IconClock /> },
+  { id: 'the-test', title: 'De test', description: 'Begrijp de vragenlijst, betrouwbaarheid en hoe antwoorden worden verwerkt.', icon: <IconDocument /> },
+  { id: 'result', title: 'Resultaten', description: 'Begrijp je uitkomsten, hoe je ze leest en waar je ze terugvindt op het platform.', icon: <IconResult /> },
+  { id: 'account-data', title: 'Privacy en gegevens', description: 'Lees hoe gegevens worden opgeslagen, gedeeld en beschermd binnen het platform.', icon: <IconShield /> },
+  { id: 'access-accounts', title: 'Toegang en accounts', description: 'Beheer inloggen, wachtwoorden en toegang tot je persoonlijke account.', icon: <IconKey /> },
+  { id: 'teams-leadership', title: 'Teams en leiderschap', description: 'Ontdek hoe teams zijn opgebouwd en hoe leiderschap samenwerkt met bedieningsprofielen.', icon: <IconTeam /> },
+  { id: 'payment-license', title: 'Betalingen en licenties', description: 'Leer meer over abonnementen, licenties en hoe betalingen binnen organisaties werken.', icon: <IconPayment /> },
+  { id: 'contact-support', title: 'Contact en ondersteuning', description: 'Neem contact op met het ondersteuningsteam voor hulp, feedback of aanvullende vragen.', icon: <IconContact /> },
+  { id: 'disclaimer', title: 'Disclaimer', description: 'Lees hoe de resultaten bedoeld zijn en welke grenzen er gelden bij de interpretatie ervan.', icon: <IconInfo /> },
+  { id: 'background-frameworks', title: 'Achtergrond en ontwikkelkaders', description: 'Lees meer over de achtergrond van de vragenlijst en de kaders waarop deze is ontwikkeld.', icon: <IconBook /> },
+  { id: 'selection-criteria', title: 'Selectiecriteria en beoordelingsprincipes', description: 'Lees hoe kenmerken zijn geselecteerd en op welke beoordelingsprincipes de uitkomsten rusten.', icon: <IconClipboard /> },
 ];
 
 export const FAQ_SUB_CATEGORIES: Record<string, FAQSubCategory[]> = {
@@ -144,7 +175,11 @@ export const FAQ_SUB_CATEGORIES: Record<string, FAQSubCategory[]> = {
   'municipality': [],
   'contact-support': [],
   'account-data': [],
+  'access-accounts': [],
   'payment-license': [],
+  'disclaimer': [],
+  'background-frameworks': [],
+  'selection-criteria': [],
 };
 
 /** FAQ items for categories that have no subcategories (shown on /dashboard/faqs/[categoryId]/items) */
@@ -198,9 +233,14 @@ export const FAQ_ITEMS_BY_CATEGORY: Record<string, FAQItemEntry[]> = {
     { question: 'Hoe zie ik het teamprofiel?', answer: 'Op het teamoverzicht zie je de samenstelling en bedieningsverdeling van elk team.' },
   ],
   'account-data': [
-    { question: 'Hoe wijzig ik mijn wachtwoord?', answer: 'Ga naar je accountinstellingen of gebruik de link "Wachtwoord vergeten" op de inlogpagina.' },
     { question: 'Wie heeft toegang tot mijn gegevens?', answer: 'Je gegevens zijn zichtbaar voor beheerders en teamleiders binnen je kerk of organisatie, conform het privacybeleid.' },
+    { question: 'Welke gegevens worden opgeslagen?', answer: 'Alleen gegevens die nodig zijn voor je account, vragenlijst en resultaten worden opgeslagen en verwerkt binnen het platform.' },
     { question: 'Kan ik mijn account verwijderen?', answer: 'Neem contact op met je beheerder of support als je je account wilt laten verwijderen.' },
+  ],
+  'access-accounts': [
+    { question: 'Hoe maak ik een account aan?', answer: 'Je kunt een account aanmaken via de registratiepagina of via een uitnodiging van je kerk, teamleider of organisatie.' },
+    { question: 'Hoe wijzig ik mijn wachtwoord?', answer: 'Ga naar je accountinstellingen of gebruik de link "Wachtwoord vergeten" op de inlogpagina.' },
+    { question: 'Wat als ik niet kan inloggen?', answer: 'Controleer je e-mailadres en wachtwoord en neem contact op met support of je beheerder als het probleem blijft bestaan.' },
   ],
   'payment-license': [
     { question: 'Wat kost het platform?', answer: 'De kosten zijn afhankelijk van het abonnement van je kerk of organisatie. Individuele leden betalen doorgaans niet zelf.' },
@@ -209,6 +249,18 @@ export const FAQ_ITEMS_BY_CATEGORY: Record<string, FAQItemEntry[]> = {
   'contact-support': [
     { question: 'Hoe neem ik contact op?', answer: 'Via de contact- of ondersteuningspagina of via je teamleider of beheerder.' },
     { question: 'Waar vind ik hulp?', answer: 'Bij Veelgestelde vragen (FAQ), in je dashboard en via je kerkelijke beheerder.' },
+  ],
+  'disclaimer': [
+    { question: 'Is mijn uitslag een definitieve geestelijke beoordeling?', answer: 'Nee. Het profiel is een hulpmiddel voor reflectie en gesprek, maar vervangt geen geestelijke begeleiding, bevestiging of pastoraal onderscheidingsvermogen.' },
+    { question: 'Mag ik mijn score direct als ambt of bediening claimen?', answer: 'Nee. Resultaten zijn bedoeld als richtinggevend inzicht en horen altijd in samenhang met karakter, vrucht en bevestiging door de gemeente gelezen te worden.' },
+  ],
+  'background-frameworks': [
+    { question: 'Waarop is de vragenlijst gebaseerd?', answer: 'De vragenlijst is ontwikkeld vanuit het vijfvoudige bedieningsmodel en is bedoeld om herkenbare patronen in aanleg en bediening zichtbaar te maken.' },
+    { question: 'Wat wordt bedoeld met ontwikkelkaders?', answer: 'Dat zijn de inhoudelijke en praktische uitgangspunten die gebruikt zijn om vragen, profielen en interpretaties op een consistente manier vorm te geven.' },
+  ],
+  'selection-criteria': [
+    { question: 'Hoe zijn de selectiecriteria bepaald?', answer: 'De criteria zijn samengesteld op basis van kenmerken die passen bij de verschillende bedieningsrollen en die in de praktijk herkenbaar en toetsbaar zijn.' },
+    { question: 'Wat zijn beoordelingsprincipes?', answer: 'Dat zijn de uitgangspunten waarmee antwoorden worden gelezen en gewogen, zodat de uitkomst een gebalanceerd profiel geeft in plaats van een losse momentopname.' },
   ],
 };
 

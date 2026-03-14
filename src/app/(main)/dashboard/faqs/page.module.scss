@@ -28,8 +28,12 @@
 
 .categoriesGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: $spacing-lg;
+
+  @media (max-width: #{$breakpoint-large - 1px}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   @include tablet-down {
     grid-template-columns: repeat(2, 1fr);
