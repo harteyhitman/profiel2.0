@@ -18,8 +18,8 @@ const roleDescriptions: Record<string, string> = {
 };
 
 export default function RoleCard({ type, role, description }: RoleCardProps) {
-  // Use role-specific description if available, otherwise use provided description
-  const displayDescription = roleDescriptions[role] || description;
+  // Use provided description (e.g. from ROLE_DESCRIPTIONS) when given, otherwise short fallback
+  const displayDescription = description?.trim() ? description : roleDescriptions[role];
 
   return (
     <div className={`${styles.roleCard} ${styles[type]}`}>

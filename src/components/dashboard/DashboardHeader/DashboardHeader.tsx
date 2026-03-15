@@ -1,20 +1,14 @@
 "use client";
 
-
-import React, { useEffect, useMemo, useRef, useState } from "react";
-
-import Image from "next/image";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
 import styles from "./DashboardHeader.module.scss";
 import Logo from "../../../../public/navbar/brand-logo.png";
 import { IoIosNotifications } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { useMyChurch, useMyChurches } from "@/hooks/use-dashboard";
-import { useStoredActiveChurchId } from "@/hooks/use-active-church";
-
 
 interface DashboardHeaderProps {
   onMenuClick?: () => void;
@@ -22,89 +16,37 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
   const { user, logout } = useAuth();
-  const pathname = usePathname();
   const [showChurchDropdown, setShowChurchDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const churchDropdownRef = useRef<HTMLDivElement | null>(null);
-  const userDropdownRef = useRef<HTMLDivElement | null>(null);
-  const { data: myChurchData } = useMyChurch();
-  const { data: myChurchesData } = useMyChurches();
-  const [selectedChurchId, setSelectedChurchId] = useStoredActiveChurchId();
+  const churchRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
 
-  const displayName = user?.name?.trim() || "Gebruiker";
-  const avatarLabel = displayName.charAt(0).toUpperCase();
-  const churchName = myChurchData?.church?.name || myChurchesData?.[0]?.name || "Kerk";
-  const showChurchMenu = user?.role === "teamleader";
-  const churchOptions = myChurchesData ?? (myChurchData?.church ? [myChurchData.church] : []);
+  const userName = user?.name?.trim() || "User";
 
-  const userMenuItems = useMemo(
-    () =>
-      user?.role === "teamleader"
-        ? [
-            { label: "Mijn profiel", href: "/dashboard/profile" },
-            { label: "Mijn account", href: "/dashboard/account" },
-          ]
-        : [
-            { label: "Mijn profiel", href: "/dashboard/profile" },
-            { label: "Resultaat", href: "/dashboard/result" },
-          ],
-    [user?.role]
-  );
+  const userInitials = useMemo(() => {
+    if (!user?.name) return "U";
+    const nameParts = user.name.trim().split(/\s+/);
+    if (nameParts.length >= 2) {
+      return (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
+    }
+    if (nameParts.length === 1) {
+      return nameParts[0].substring(0, 2).toUpperCase();
+    }
+    return "U";
+  }, [user?.name]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-
-      if (churchDropdownRef.current && !churchDropdownRef.current.contains(target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (churchRef.current && !churchRef.current.contains(event.target as Node)) {
         setShowChurchDropdown(false);
       }
-
-      if (userDropdownRef.current && !userDropdownRef.current.contains(target)) {
+      if (userRef.current && !userRef.current.contains(event.target as Node)) {
         setShowUserDropdown(false);
       }
-    };
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setShowChurchDropdown(false);
-        setShowUserDropdown(false);
-      }
-    };
-
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const handleToggleChurchDropdown = () => {
-    setShowChurchDropdown((prev) => !prev);
-    setShowUserDropdown(false);
-  };
-
-  const handleToggleUserDropdown = () => {
-    setShowUserDropdown((prev) => !prev);
-    setShowChurchDropdown(false);
-  };
-
-  const handleCloseMenus = () => {
-    setShowChurchDropdown(false);
-    setShowUserDropdown(false);
-  };
-
-  const handleSelectChurch = (churchId: number) => {
-    setSelectedChurchId(churchId);
-    setShowChurchDropdown(false);
-  };
-
-  const handleLogout = async () => {
-    handleCloseMenus();
-    await logout();
-  };
-
 
   return (
     <header className={styles.header}>
@@ -169,91 +111,78 @@ export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
        
         </button>
 
-        {showChurchMenu && (
-          <div className={styles.dropdownContainer} ref={churchDropdownRef}>
-            <button
-              type="button"
-              className={styles.dropdownButton}
-              onClick={handleToggleChurchDropdown}
-              aria-expanded={showChurchDropdown}
-              aria-haspopup="menu"
-            >
-              <span className={styles.dropdownLabel}>{churchName}</span>
-              <RiArrowDropDownLine
-                style={{ fontSize: '24px', color: '#000' }}
-                className={showChurchDropdown ? styles.dropdownIconOpen : undefined}
-              />
-            </button>
-            {showChurchDropdown && (
-              <div className={styles.dropdownMenu} role="menu" aria-label="Kerk menu">
-                {churchOptions.map((church) => {
-                  const isActiveChurch = church.id === (selectedChurchId ?? myChurchData?.church?.id);
-                  const location = [church.city, church.denomination].filter(Boolean).join(" · ");
+        <div className={styles.dropdownContainer} ref={churchRef}>
+          <button
+            type="button"
+            className={styles.dropdownButton}
+            onClick={() => {
+              setShowChurchDropdown(!showChurchDropdown);
+              setShowUserDropdown(false);
+            }}
+            aria-expanded={showChurchDropdown}
+            aria-haspopup="true"
+          >
+            <span>Kerk</span>
+            <RiArrowDropDownLine style={{ fontSize: '24px', color: '#000' }} />
+          </button>
+          {showChurchDropdown && (
+            <div className={styles.dropdownMenu} role="menu">
+              <Link
+                href="/dashboard/profile/church"
+                className={styles.dropdownItem}
+                role="menuitem"
+                onClick={() => setShowChurchDropdown(false)}
+              >
+                Kerkprofiel
+              </Link>
+            </div>
+          )}
+        </div>
 
-                  return (
-                    <button
-                      key={church.id}
-                      type="button"
-                      className={`${styles.dropdownAction} ${isActiveChurch ? styles.dropdownItemActive : ""}`}
-                      role="menuitemradio"
-                      aria-checked={isActiveChurch}
-                      onClick={() => handleSelectChurch(church.id)}
-                    >
-                      <span className={styles.dropdownItemBody}>
-                        <span className={styles.dropdownItemTitle}>{church.name}</span>
-                        {location ? <span className={styles.dropdownItemMeta}>{location}</span> : null}
-                      </span>
-                      {isActiveChurch ? <span className={styles.dropdownCheck}>Actief</span> : null}
-                    </button>
-                  );
-                })}
-                <Link
-                  href="/dashboard/profile/church"
-                  className={`${styles.dropdownItem} ${pathname === "/dashboard/profile/church" ? styles.dropdownItemActive : ""}`}
-                  role="menuitem"
-                  onClick={handleCloseMenus}
-                >
-                  Kerkprofiel beheren
-                </Link>
-              </div>
-            )}
-          </div>
-        )}
-
-        <div className={styles.userContainer} ref={userDropdownRef}>
+        <div className={styles.userContainer} ref={userRef}>
           <button
             type="button"
             className={styles.userButton}
-            onClick={handleToggleUserDropdown}
+            onClick={() => {
+              setShowUserDropdown(!showUserDropdown);
+              setShowChurchDropdown(false);
+            }}
             aria-expanded={showUserDropdown}
-            aria-haspopup="menu"
+            aria-haspopup="true"
           >
             <div className={styles.avatar}>
-              <span>{avatarLabel}</span>
+              <span>{userInitials}</span>
             </div>
-            <span className={styles.userName}>{displayName}</span>
-            <RiArrowDropDownLine
-              style={{ fontSize: '24px', color: '#000' }}
-              className={`${styles.userDropdownIcon} ${showUserDropdown ? styles.dropdownIconOpen : ""}`}
-            />
+            <span className={styles.userName}>{userName}</span>
+            <RiArrowDropDownLine style={{ fontSize: '24px', color: '#000' }} />
           </button>
           {showUserDropdown && (
-            <div className={`${styles.dropdownMenu} ${styles.userDropdownMenu}`} role="menu" aria-label="Gebruiker menu">
-              {userMenuItems.map((item) => {
-                const isActive = pathname === item.href || pathname?.startsWith(item.href + "/");
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`${styles.dropdownItem} ${isActive ? styles.dropdownItemActive : ""}`}
-                    role="menuitem"
-                    onClick={handleCloseMenus}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-              <button type="button" className={styles.dropdownAction} onClick={handleLogout}>
+            <div className={styles.dropdownMenu} role="menu">
+              <Link
+                href="/dashboard/profile"
+                className={styles.dropdownItem}
+                role="menuitem"
+                onClick={() => setShowUserDropdown(false)}
+              >
+                Mijn profiel
+              </Link>
+              <Link
+                href="/dashboard/account"
+                className={styles.dropdownItem}
+                role="menuitem"
+                onClick={() => setShowUserDropdown(false)}
+              >
+                Mijn account
+              </Link>
+              <button
+                type="button"
+                className={styles.dropdownItem}
+                role="menuitem"
+                onClick={() => {
+                  setShowUserDropdown(false);
+                  logout();
+                }}
+              >
                 Uitloggen
               </button>
             </div>

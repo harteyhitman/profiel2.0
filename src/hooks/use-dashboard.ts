@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { dashboardAPI } from '@/lib/api/dashboard';
 import { teamsApi } from '@/lib/api/teams';
 import { useAuth } from '@/contexts/AuthContext';
-import { setStoredActiveChurchId, useStoredActiveChurchId } from '@/hooks/use-active-church';
 import type {
   UserResults,
   UserTeams,
@@ -209,37 +207,14 @@ export function useMyChurches() {
 
 export function useMyChurch() {
   const { user } = useAuth();
-  const [selectedChurchId] = useStoredActiveChurchId();
-  const myChurchesQuery = useMyChurches();
-  const fallbackChurchQuery = useQuery<{ church: ChurchSummary }>({
-    queryKey: ['churches', 'my', 'fallback'],
+  
+  return useQuery<{ church: ChurchSummary }>({
+    queryKey: ['churches', 'my'],
     queryFn: () => dashboardAPI.getMyChurch(),
-    enabled: !!user && user.role === 'teamleader',
+    enabled: !!user && user.role === 'teamleader', // Only fetch for team leaders (matches client folder)
     staleTime: 5 * 60 * 1000,
     retry: false,
   });
-
-  const activeChurch = useMemo(() => {
-    const churches = myChurchesQuery.data ?? [];
-    const selectedChurch = selectedChurchId
-      ? churches.find((church) => church.id === selectedChurchId)
-      : null;
-
-    return selectedChurch ?? fallbackChurchQuery.data?.church ?? churches[0] ?? null;
-  }, [fallbackChurchQuery.data?.church, myChurchesQuery.data, selectedChurchId]);
-
-  useEffect(() => {
-    if (user?.role !== 'teamleader') return;
-    if (!activeChurch?.id) return;
-    if (selectedChurchId === activeChurch.id) return;
-    setStoredActiveChurchId(activeChurch.id);
-  }, [activeChurch?.id, selectedChurchId, user?.role]);
-
-  return {
-    data: activeChurch ? { church: activeChurch } : undefined,
-    isLoading: myChurchesQuery.isLoading || fallbackChurchQuery.isLoading,
-    error: myChurchesQuery.error ?? fallbackChurchQuery.error,
-  };
 }
 
 export function useInviteMember() {

@@ -63,23 +63,23 @@ export default function TeamListPage() {
 
   const handleCreateTeam = async (teamData: { name: string; description: string; url: string }) => {
     try {
-      if (!church?.id) {
-        console.error('Cannot create team: church ID is missing');
-        alert('Kan team niet aanmaken: kerk ID ontbreekt. Zorg ervoor dat je bij een kerk hoort.');
-        return;
-      }
       const response = await createTeamMutation.mutateAsync({
-        name: teamData.name,
-        description: teamData.description,
-        churchId: church.id,
+        name: teamData.name.trim(),
+        description: teamData.description?.trim() || undefined,
+        ...(church?.id != null && { churchId: church.id }),
       });
       setCreatedTeamId(response.id.toString());
       setCreatedTeamName(response.name);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Failed to create team:', error);
-      alert('Kan team niet aanmaken. Probeer het opnieuw.');
+      const err = error as { response?: { data?: { message?: string; error?: string; detail?: string } } };
+      const backendMessage = err.response?.data?.message ?? err.response?.data?.error ?? err.response?.data?.detail;
+      const message = backendMessage
+        ? `Mislukt om team aan te maken. ${typeof backendMessage === 'string' ? backendMessage : ''}`
+        : 'Mislukt om team aan te maken. Controleer of je bij een kerk hoort of probeer het later opnieuw.';
+      alert(message);
+      throw error;
     }
-
   };
 
   const handleShowSuccess = () => {

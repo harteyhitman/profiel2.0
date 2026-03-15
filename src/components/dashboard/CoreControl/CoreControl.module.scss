@@ -11,8 +11,7 @@
   }
 }
 
-.cardPrimary,
-.cardSecondary {
+.card {
   border-radius: $border-radius-lg;
   padding: $spacing-xl;
   box-shadow: $shadow-sm;
@@ -23,32 +22,14 @@
   }
 }
 
-.cardPrimary {
-  background-color: #ede9fe;
-}
-
-.cardSecondary {
-  background-color: #fffbeb;
-}
-
-.badgePrimary,
-.badgeSecondary {
+.badge {
   position: absolute;
   top: $spacing-md;
   right: $spacing-md;
   padding: $spacing-xs $spacing-md;
   border-radius: $border-radius-sm;
   @include body-small;
-  color: #fff;
   font-weight: $font-weight-medium;
-}
-
-.badgePrimary {
-  background-color: #6d28d9;
-}
-
-.badgeSecondary {
-  background-color: #d97706;
 }
 
 .content {

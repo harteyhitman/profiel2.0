@@ -44,12 +44,13 @@ export const ROLE_DESCRIPTIONS: Record<RoleKey, string> = {
     'Je hebt een natuurlijke aanleg voor het begrijpen en uitleggen van complexe concepten. Je geniet ervan om waarheid te ontdekken en te delen met anderen.',
 };
 
+/** Single source of truth for role colors (bar chart + Kernbediening cards). */
 export const ROLE_COLORS: Record<RoleKey, string> = {
-  apostle: '#4097db',
-  prophet: '#a8e3c9',
-  evangelist: '#ffbdcb',
-  herder: '#ffd9a8',
-  teacher: '#b79cef',
+  apostle: '#3b82f6',   // Blue
+  prophet: '#10b981',  // Green
+  evangelist: '#ec4899', // Pink
+  herder: '#f59e0b',   // Orange
+  teacher: '#8b5cf6',  // Purple
 };
 
 /**

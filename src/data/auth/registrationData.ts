@@ -1,17 +1,15 @@
 import { SelectOption } from '@/components/ui/forms';
 
 // Registration Form Sector Options (where you work / where you'd like to work)
+// Used for "Waar ben je werkzaam in de maatschappij?" and "Waar zou je werkzaam willen zijn in de maatschappij?"
 export const registrationSectorOptions: SelectOption[] = [
-  { value: 'education', label: 'Opleiding' },
-  { value: 'healthcare', label: 'Zorg' },
-  { value: 'technology', label: 'Technologie' },
-  { value: 'finance', label: 'Financieel' },
-  { value: 'non-profit', label: 'Non-profit' },
-  { value: 'art-entertainment', label: 'Kunst en entertainment' },
-  { value: 'ministry', label: 'Bediening' },
-  { value: 'business', label: 'Bedrijf' },
-  { value: 'government', label: 'Overheid' },
-  { value: 'other', label: 'Anders' },
+  { value: 'Business', label: 'Business' },
+  { value: 'Overheid', label: 'Overheid' },
+  { value: 'Kunst & entertainment', label: 'Kunst & entertainment' },
+  { value: 'Onderwijs', label: 'Onderwijs' },
+  { value: 'Familie & zorg', label: 'Familie & zorg' },
+  { value: 'Religie', label: 'Religie' },
+  { value: 'Media', label: 'Media' },
 ];
 
 // How did you find us? (referral source)

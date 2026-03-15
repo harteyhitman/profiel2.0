@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Sansita, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -34,9 +34,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-};
-
-export const viewport: Viewport = {
   themeColor: '#073020',
 };
 

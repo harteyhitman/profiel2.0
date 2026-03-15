@@ -7,7 +7,7 @@ import styles from './CreateTeamModal.module.scss';
 interface CreateTeamModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onCreateTeam?: (teamData: { name: string; description: string; url: string }) => void;
+  onCreateTeam?: (teamData: { name: string; description: string; url: string }) => void | Promise<void>;
   onSuccess?: () => void;
 }
 
@@ -17,11 +17,12 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
     description: '',
     url: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
-      // Reset form when modal closes
       setFormData({ name: '', description: '', url: '' });
+      setIsSubmitting(false);
     }
   }, [isOpen]);
 
@@ -29,20 +30,24 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name.trim()) {
-      const fullUrl = `Ministryprofile/team/${formData.url || formData.name.toLowerCase().replace(/\s+/g, '-')}`;
-      onCreateTeam?.({
+    if (!formData.name.trim() || !onCreateTeam) return;
+    const fullUrl = `Ministryprofile/team/${formData.url || formData.name.toLowerCase().replace(/\s+/g, '-')}`;
+    setIsSubmitting(true);
+    try {
+      const result = onCreateTeam({
         name: formData.name,
         description: formData.description,
         url: fullUrl,
       });
+      await (result instanceof Promise ? result : Promise.resolve());
       onClose();
-      // Trigger success modal after a brief delay
-      setTimeout(() => {
-        onSuccess?.();
-      }, 100);
+      onSuccess?.();
+    } catch {
+      // Error is handled in parent (alert or toast)
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -98,10 +103,10 @@ export default function CreateTeamModal({ isOpen, onClose, onCreateTeam, onSucce
 
           <button
             type="submit"
-            disabled={!isFormValid}
+            disabled={!isFormValid || isSubmitting}
             className={styles.createButton}
           >
-            Team aanmaken
+            {isSubmitting ? 'Bezig…' : 'Team aanmaken'}
           </button>
         </form>
       </div>

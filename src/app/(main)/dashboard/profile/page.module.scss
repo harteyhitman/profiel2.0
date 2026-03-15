@@ -13,6 +13,7 @@
 
 .headerSection {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
@@ -63,18 +64,6 @@
   }
 }
 
-.headerActionsPanel {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-sm);
-
-  @include tablet-down {
-    width: 100%;
-    align-items: stretch;
-  }
-}
-
 .shareButton {
   display: inline-flex;
   align-items: center;
@@ -90,14 +79,21 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--bg-muted);
   }
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.6;
+    cursor: not-allowed;
   }
+}
+
+.socialIcons {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-left: var(--space-xs);
 }
 
 .downloadButton {
@@ -115,39 +111,38 @@
   cursor: pointer;
   transition: opacity 0.2s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.95;
   }
 
   &:disabled {
-    cursor: not-allowed;
     opacity: 0.6;
+    cursor: not-allowed;
   }
 }
 
 .feedbackMessage {
   font-family: var(--font-ui);
-  font-size: var(--text-sm);
-  color: var(--green-primary);
-  margin: 0;
+  font-size: var(--text-base);
+  color: var(--green-primary, #0d9488);
+  margin: var(--space-sm) 0 0 0;
+  width: 100%;
 }
 
 .feedbackError {
   font-family: var(--font-ui);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: #b91c1c;
-  margin: 0;
+  margin: var(--space-sm) 0 0 0;
+  width: 100%;
 }
 
-.scoreCard {
+/* Row 1: Score overzicht (vertical chart) | Primary + Secondary cards */
+.scoreOverviewSection {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
-  gap: 0;
-  background-color: var(--bg-card);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
+  gap: var(--space-xl);
   margin-bottom: var(--space-xl);
 
   @include tablet-down {
@@ -155,44 +150,74 @@
   }
 }
 
-.scoreCardLeft {
-  padding: var(--space-xl);
-  min-width: 0;
-
-  @include mobile {
-    padding: var(--space-lg);
-  }
-}
-
-.scoreCardMiddle {
-  border-left: 5px solid var(--primary-accent);
-  background-color: var(--primary-bg);
-  padding: var(--space-xl);
-  min-width: 0;
-
-  @include tablet-down {
-    border-left: none;
-    border-top: 5px solid var(--primary-accent);
-  }
-
-  @include mobile {
-    padding: var(--space-lg);
-  }
-}
-
-.scoreCardRight {
-  border-left: 5px solid var(--secondary-accent);
-  padding: var(--space-xl);
-  min-width: 0;
+.scoreOverviewLeft {
   background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
 
-  @include tablet-down {
-    border-left: none;
-    border-top: 5px solid var(--secondary-accent);
+  @include mobile {
+    padding: var(--space-lg);
+  }
+}
+
+.chartWrapper {
+  margin-top: var(--space-md);
+  min-height: 200px;
+}
+
+.scoreOverviewRight {
+  display: flex;
+  // flex-direction: column;
+  gap: var(--space-lg);
+  min-width: 0;
+}
+
+.roleCardWrap {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--primary-accent, #52b787);
+
+  &:last-of-type {
+    border-left-color: var(--secondary-accent, #9ca3af);
   }
 
   @include mobile {
     padding: var(--space-lg);
+  }
+}
+
+/* Row 2: Full score breakdown | Horizontal distribution chart */
+.breakdownRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+
+  @include tablet-down {
+    flex-direction: column;
+  }
+}
+
+.breakdownLeft {
+  flex: 0 0 calc(60% - var(--space-xl) / 2);
+  min-width: 0;
+
+  @include tablet-down {
+    flex: 1 1 100%;
+  }
+}
+
+.breakdownRight {
+  flex: 0 0 calc(40% - var(--space-xl) / 2);
+  min-width: 0;
+
+  @include tablet-down {
+    flex: 1 1 100%;
   }
 }
 
@@ -205,9 +230,6 @@
   margin: 0 0 var(--space-xl) 0;
 }
 
-.fullScoreSection {
-  margin-bottom: var(--space-xl);
-}
 
 .swotSection {
   margin-bottom: var(--space-xl);

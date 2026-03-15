@@ -3,9 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { useSubscriptionStatus, useCreateCheckoutSession, useCurrentPlan } from '@/hooks/use-subscription';
-import { SUBSCRIPTION_PLANS, PLAN_LIMITS, PLAN_FEATURES } from '@/lib/constants/subscription';
-import { getStripePriceId } from '@/lib/utils/stripe';
+import { useSubscriptionStatus, useCurrentPlan } from '@/hooks/use-subscription';
+import { SUBSCRIPTION_PLANS, PLAN_LIMITS, PLAN_FEATURES, STRIPE_PAYMENT_LINKS } from '@/lib/constants/subscription';
 import type { SubscriptionPlan, BillingPeriod, SubscriptionReceipt } from '@/lib/types/subscription';
 import SubscriptionCard from '@/components/dashboard/SubscriptionCard/SubscriptionCard';
 import ToggleSubscriptionPeriod from '@/components/ui/ToggleSubscriptionPeriod/ToggleSubscriptionPeriod';
@@ -21,9 +20,7 @@ export default function SubscriptionPage() {
     refetch: refetchStatus,
   } = useSubscriptionStatus();
   const currentPlan = useCurrentPlan();
-  const checkoutMutation = useCreateCheckoutSession();
   const [period, setPeriod] = useState<BillingPeriod>('monthly');
-  const isDev = process.env.NODE_ENV === 'development';
 
   if (authLoading || isLoadingStatus) {
     return (
@@ -70,63 +67,41 @@ export default function SubscriptionPage() {
 
   const handleSelectPlan = (plan: SubscriptionPlan) => {
     if (plan === 'free') {
-      return; // Free plan doesn't require checkout
-    }
-
-    if (!user?.id || !user?.email) {
-      console.error('User data missing');
       return;
     }
 
-    try {
-      const priceId = getStripePriceId(plan as 'pro' | 'proplus', period, isDev);
-
-      const amount =
-        typeof PLAN_LIMITS[plan].price === 'object'
-          ? PLAN_LIMITS[plan].price[period]
-          : PLAN_LIMITS[plan].price;
-
-      // Store receipt data for success page
-      const receiptData: SubscriptionReceipt = {
-        customerEmail: user.email,
-        customerName: user.name || user.email.split('@')[0],
-        planName: plan,
-        amount,
-        currency: 'eur',
-        billingPeriod: period,
-        paymentDate: new Date().toISOString(),
-      };
-
-      localStorage.setItem('pending_subscription_receipt', JSON.stringify(receiptData));
-
-      checkoutMutation.mutate({
-        userId: String(user.id),
-        priceId,
-        email: user.email,
-      });
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
+    const paymentLink = STRIPE_PAYMENT_LINKS[plan]?.[period];
+    if (!paymentLink) {
+      console.error('No payment link for plan/period:', plan, period);
+      return;
     }
+
+    const amount =
+      typeof PLAN_LIMITS[plan].price === 'object'
+        ? PLAN_LIMITS[plan].price[period]
+        : PLAN_LIMITS[plan].price;
+
+    const receiptData: SubscriptionReceipt = {
+      customerEmail: user?.email ?? '',
+      customerName: user?.name ?? user?.email?.split('@')[0] ?? '',
+      planName: plan,
+      amount,
+      currency: 'eur',
+      billingPeriod: period,
+      paymentDate: new Date().toISOString(),
+    };
+    localStorage.setItem('pending_subscription_receipt', JSON.stringify(receiptData));
+
+    window.location.href = paymentLink;
   };
 
   const getPriceDisplay = (plan: SubscriptionPlan): string => {
     if (plan === 'free') {
-      return '€00 / per maand';
+      return '€0 / p/maand';
     }
-
-    if (plan === 'proplus') {
-      // Pro Plus always shows "Totaal Leden" regardless of period
-      const price = PLAN_LIMITS[plan].price;
-      const amount = typeof price === 'object' ? price.monthly : price;
-      return `€${amount} / Totaal Leden`;
-    }
-
     const price = PLAN_LIMITS[plan].price;
-    if (typeof price === 'object') {
-      const amount = price[period];
-      return period === 'monthly' ? `€${amount} / Per maand` : `€${amount} / Per jaar`;
-    }
-    return `€${price} / per maand`;
+    const amount = typeof price === 'object' ? price[period] : price;
+    return period === 'monthly' ? `€${amount} / p/maand` : `€${amount} / p/jaar`;
   };
 
   const subscriptionPlans: Array<{
@@ -213,7 +188,6 @@ export default function SubscriptionPage() {
             isDark={plan.isDark}
 
             isCurrentPlan={currentPlan === plan.plan}
-            isLoading={checkoutMutation.isPending}
             onClick={() => handleSelectPlan(plan.plan)}
             disabled={currentPlan === plan.plan}
 

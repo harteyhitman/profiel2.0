@@ -212,7 +212,7 @@ function GuestQuestionnaireContent() {
       <div className={styles.header}>
         <h1 className={styles.title}>Gastvragenlijst</h1>
         <p className={styles.subtitle}>
-          Vul de vragenlijst in op uitnodiging van je kerk. Kies per vraag de stelling die het beste bij je past (schuif 0–6, 3 = neutraal).
+          Vul de vragenlijst in op uitnodiging van je kerk. Kies per vraag de stelling die het beste bij je past (schuif 0–5, 3 = neutraal).
         </p>
       </div>
 

@@ -120,7 +120,7 @@ export default function AgreementSlider({ value, onChange }: AgreementSliderProp
         </div>
 
         <div className={styles.sliderEndLabels}>
-          <span className={styles.endLabel}>5: Helemaal stelling 1</span>
+          <span className={styles.endLabel}>Helemaal stelling 1</span>
           <span className={styles.endLabel}>Helemaal stelling 2</span>
         </div>
       </div>

@@ -29,10 +29,16 @@ export const teamsApi = {
   /**
    * Create a new team
    * POST /api/teams
+   * Handles both { id, name, ... } and { team: { id, name, ... } } response shapes.
    */
   create: async (data: CreateTeamRequest): Promise<Team> => {
-    const response = await axiosInstance.post<Team>('/teams', data);
-    return response.data;
+    const response = await axiosInstance.post<Team | { team: Team }>('/teams', data);
+    const body = response.data;
+    const team = body && typeof body === 'object' && 'team' in body ? (body as { team: Team }).team : (body as Team);
+    if (!team || (team as any).id == null) {
+      throw new Error('API returned an invalid team response');
+    }
+    return team;
   },
 
   /**

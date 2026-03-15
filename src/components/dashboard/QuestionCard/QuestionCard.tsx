@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import AgreementSlider from '@/components/dashboard/AgreementSlider/AgreementSlider';
 import styles from './QuestionCard.module.scss';
 

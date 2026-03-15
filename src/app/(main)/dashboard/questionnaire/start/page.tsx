@@ -158,7 +158,7 @@ export default function QuestionnaireStartPage() {
       <div className={styles.titleSection}>
         <h1 className={styles.title}>Bedieningenprofiel vragenlijst</h1>
         <p className={styles.subtitle}>
-          Kies per vraag de stelling die het beste bij je past (schuif 0–6, 3 = neutraal).
+          Kies per vraag de stelling die het beste bij je past (schuif 0–5, 3 = neutraal).
         </p>
       </div>
 
